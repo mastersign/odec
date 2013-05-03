@@ -12,6 +12,8 @@ ODEC - Specification
 + Change Log
 + The Generic Process
 + The Meta-Model
++ Technical Implementation
++ References
 
 ## Introduction
 
