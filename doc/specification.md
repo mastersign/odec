@@ -148,3 +148,18 @@ the entity values up to the container.
 
 [fig:example-process-graph]: figures/example-process-graph.png
 [fig:structure]: figures/structure.png
+[fig:structure-simplified]: figures/structure-simplified.png
+[fig:framework]: figures/framework.png
+[fig:trust-hierarchy]: figures/trust-hierarchy.png
+[fig:history]: figures/history.png
+[fig:index]: figures/index.png
+[fig:detailed-container]: figures/detailed-container.png
+[fig:detailed-edition]: figures/detailed-edition.png
+[fig:detailed-entity-header]: figures/detailed-entity-header.png
+[fig:detailed-history]: figures/detailed-history.png
+[fig:detailed-history-item]: figures/detailed-history-item.png
+[fig:detailed-index]: figures/detailed-index.png
+[fig:detailed-index-item]: figures/detailed-index-item.png
+[fig:detailed-owner]: figures/detailed-owner.png
+[fig:detailed-value]: figures/detailed-value.png
+[fig:detailed-value-reference]: figures/detailed-value-reference.png
