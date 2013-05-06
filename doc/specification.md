@@ -42,7 +42,7 @@ finally the technical aspects of the specification are described.
 
 The ODEC is based on a process oriented concept. Because the most kind of 
 digital evidence is processed somehow, manually or automatically, before 
-it reaches the form used for presentation, digital evidence it not simply 
+it reaches the form used for presentation, digital evidence is not simply 
 seen as binary data, but as a chain of transformed data. Therefore, the data 
 of the digital evidence is stored as intermediate and final results in a 
 data-flow with *data sources* and *transformation steps*. In this context,
