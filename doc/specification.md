@@ -94,7 +94,7 @@ development settings. The JPEG image and the thumbnail are used as entity values
 in a new entity extending the container. Finally some EXIF information is 
 extracted from the JPEG file and stored as a XMP file in a third entity.
 
-<a id="fig_example-process-graph"></a>
+<a name="fig_example-process-graph"></a>
 ![Example Process][fig:example-process-graph]
 
 *Figure 1: Example process graph with a work-flow for images from a digital camera*
@@ -107,7 +107,7 @@ level. An overview to the meta-model is shown in [Figure 2](#fig_structure).
 In the following section, the meta-model is described bottom-up, beginning with 
 the entity values up to the container.
 
-<a id="fig_structure"></a>
+<a name="fig_structure"></a>
 ![ODEC Meta-Model][fig:structure]
 
 *Figure 2: The meta-model of a container*
