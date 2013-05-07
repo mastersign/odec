@@ -1,10 +1,10 @@
 ODEC - Specification
 ====================
 
-* Author: Tobias Kiertscher <dev@mastersign.de>
+* Author: Tobias Kiertscher <tobias@kiertscher.net>
 * Revision: 0.1
 * State: draft
-* Last change: 2013-05-06
+* Last change: 2013-05-07
 
 ## Overview
 
@@ -114,21 +114,185 @@ the entity values up to the container.
 
 ### Value and Provenance Parameter
 
+<a name="fig_detailed-value"></a>
+![Value][fig:detailed-value]
+
+*Figure 3: Structure of a value or provenance parameter set*
+
+A value is the element which contains the actual data in the process. 
+It is identified by a name. The integrity and authenticity is verified by a 
+signature, created by the owner which governed the production of the value.
+If the value does not contain the processed data itself, but a set of 
+parameters, used to configure a transformation step or entity source, it is 
+called provenance parameter set.
+
 ### Value Reference
+
+<a name="fig_detailed-value-reference"></a>
+![Value reference][fig:detailed-value-reference]
+
+*Figure 4: Structure of a value reference*
+
+A value reference is the way to reference a value inside of the container 
+structure. It contains a couple of meta-data for the referenced value. 
+At first it contains an identifier to address a description of the value 
+data type. This data type description should be sufficient for correct 
+interpretation of the value data. Optional the data type description can 
+provide a way to validate the value data. If the associated edition does not 
+reference a profile, the value type can be omitted. Further the size of the
+value data is included in the value reference. The size describes the number 
+of octets contained in the data value. This information can be useful to 
+optimize the way to process the value data, e.g. if large values should be 
+handled differently than small ones. 
+
+A value can appear in different ways inside of the container. It can be stored 
+plain, without any manipulations, or it can be stored in an encrypted way. 
+A third alternative is to not include it in the container at all, 
+which is useful if some kind of raw or intermediate data should be excluded 
+because of the value size, privacy or security reasons.
+The way a value does appear in the container is stored as *appearance* in the 
+value reference. To secure the link to the value, a copy of the value signature 
+is included in the value reference.
 
 ### Entity Header
 
+<a name="fig_detailed-entity-header"></a>
+![Entity header][fig:detailed-entity-header]
+
+*Figure 5: Structure of an entity header*
+
+As described in the section "The Generic Process", the entity is a group of one 
+or more entity values and optional a provenance parameter set. The entity header
+contains all data necessary to describe the entity. The entity is identified 
+with an ID, unique inside the container. It can optionally be marked with a 
+label for easier recognition. 
+
+Potentially, an entity type is associated with the entity, to tell which values 
+are allowed or required. More on entity types can be found in section 
+"The Framework". Potentially a provenance is associated with the entity and in 
+case the provenance used some input entities to produce the described entity, 
+these input entities are referenced by their IDs as predecessors. 
+If the associated edition does not reference a profile the entity type and the
+provenance can be omitted. 
+
+All values of the entity are referenced by a value reference and if the 
+provenance was parameterized in some way, the provenance parameter set is 
+referenced by a value reference too. The entity header is protected by a 
+signature, created by the owner which has governed the production of the entity.
+The signature of the entity header covers all value references and with them 
+copies of the value signatures. Therefore, the signature of the entity header 
+is simply called entity signature.
+
 ### Index and Index Item
+
+<a name="fig_index"></a>
+![Index and index item][fig:index]
+
+*Figure 6: Structure of a container index and index items*
+
+All entities in a container are listed by the index. The index is a collection 
+of index items. Because every container is initialized with at least one entity,
+the index contains at least one index item too. An index item contains a 
+reference to an entity, identified by ID and optionally by label, and a list 
+with the IDs of its successors. A successor to the current entity is an entity,
+produced by a provenance under use of the current entity as input. 
+
+To preserve the trust between the index and the entities, a copy of the entity 
+signature is included in an index item. The index itself is protected by the 
+index signature.
 
 ### Owner
 
+<a name="fig_detailed-owner"></a>
+![Owner][fig:detailed-owner]
+
+*Figure 7: Structure of an owner*
+
+As described in section "The Owner", the owner is an institute and/or person 
+responsible for the initialization or extension of a container. The owner is 
+identified by an institute name, an operator name, and an email address. 
+The email address can also be used to contact the owner. Additionally, contact 
+information as postal address can be given. Optional, the owner can be 
+associated with a role, e.g. to support role-based access control. Every owner 
+needs a certificate, which can be part of a PKI.
+
 ### Edition
+
+<a name="fig_detailed-edition"></a>
+![Edition][fig:detailed-edition]
+
+*Figure 8: Structure of a container edition*
+
+As described in section "The Container", every time a container is initialized 
+or modified an edition is formed. A container has a *current edition* and, if it 
+was modified, one or more past editions. An edition is identified by a global 
+unique identifier. The edition is protected by a signature, created by the owner
+of the signature. The signature of the current edition is called 
+*master signature*.
+
+The edition contains some meta-data:
+* A reference to the software, used to create or extend the container
+* Optional a reference to an associated container profile including a version 
+  number, see section "The Framework"
+* The owner, responsible for the edition
+* A time stamp of the moment, the edition was formed
+* A list with IDs of all entities, added to the container while forming the 
+  edition
+* A list with IDs of all entities, removed from the container while forming the 
+  edition
+* Optional some copyright information can be attached to the edition, to control
+  the legal usage of the produced data.
+* Optional some comments can be attached to the edition.
+
+To create a trusted link to the content of the container, an edition contains a 
+copy of the index signature and a copy of the history signature (the history 
+will be discussed in section "History and History Item").
+
+An edition is optionally equipped with a salt which, if present, is included 
+in the computation of the master signature. If the container gets extended, 
+and the former edition is pushed on to the history stack, the salt can be 
+removed from the former edition. Thereby the possibility of removing the new
+edition and restoring the former edition from the history stack can be 
+prevented, because the old master signature cannot be reinstated without the 
+lost salt of the former edition. This entails the following implications:
+
+1. Restoring a history edition can only be prevented if it was equipped with a 
+   salt in the first place.
+2. Even if some of the editions are safe from restoring, if an earlier edition 
+   on the history stack is not safe (because it never had a salt, or its salt 
+   was not removed), it can be restored by removing all later editions.
+3. The salt of an edition can only be removed in the moment it gets pushed on 
+   to the history stack. Removing the salt of a history edition later on, can 
+   lead to inconsistent signatures of following editions.
+
+The edition salt is also called *reinstatement prevention salt* or *RPS*.
 
 ### History and History Item
 
+<a name="fig_history"></a>
+![History and history item][fig:history]
+
+*Figure 9: Structure of a history and history items*
+
+The history of a container is a stack with history items. A history item 
+contains a past edition. If the container is modified, a new history item, 
+containing the former current edition, is pushed on to the history stack. 
+The history is protected by a signature, created by the owner of the current 
+edition.
+
 ### Container
 
+<a name="fig_detailed-container"></a>
+![Container][fig:detailed-container]
+
+*Figure 10: Structure of a container*
+
+A container is formed by a current edition, a container history and an entity 
+index, including all referenced entities. The master signature of the whole 
+container is the signature of the current edition.
+
 ## The Framework
+
 
 ## Technical Implementation
 
