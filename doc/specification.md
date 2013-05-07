@@ -169,11 +169,11 @@ label for easier recognition.
 
 Potentially, an entity type is associated with the entity, to tell which values 
 are allowed or required. More on entity types can be found in section 
-"The Framework". Potentially a provenance is associated with the entity and in 
-case the provenance used some input entities to produce the described entity, 
-these input entities are referenced by their IDs as predecessors. 
-If the associated edition does not reference a profile the entity type and the
-provenance can be omitted. 
+"The Framework". Potentially a provenance description is included in the entity 
+header and in case the provenance used some input entities to produce the 
+described entity, these input entities are referenced by their IDs as 
+predecessors. If the associated edition does not reference a profile, the entity
+type and the provenance description can be omitted.
 
 All values of the entity are referenced by a value reference and if the 
 provenance was parameterized in some way, the provenance parameter set is 
@@ -293,6 +293,55 @@ container is the signature of the current edition.
 
 ## The Framework
 
+In this section, a short description is given, how to map an evidence processing
+work-flow to the generic process, described in section "The Generic Process".
+
+To map an evidence processing work-flow to the generic process, the process 
+steps need to be classified in two classes: 
+
+* Process steps, which take no input data, but produce output data 
+  (e.g. a measuring device or forensic software), 
+* and process steps, which take input data and produce output data 
+  (e.g. some kind of pre-processing or feature extraction).
+
+The first class is mapped to entity sources and the second class is mapped to 
+the transformations. Both classes of process steps can be parameterized and 
+their parameter set is encoded in an octet stream. Data in the process is 
+defined as a group of values and every value is encoded in an octet stream. 
+A group of semantic associated values is mapped to an entity.
+
+To define the mapping of an evidence processing work-flow to the generic 
+process, three catalogs need to be defined. One for data types, one for entity 
+types and one for provenance interfaces (see the left part in 
+[Figure 11](#fig_framework)). All items in the three catalogs are identified 
+by global unique identifiers.
+
+<a name="fig_framework"></a>
+![Framework][fig:framework]
+
+*Figure 11: Framework for profiling the container format with a process model*
+
+The data types are used to specify the encoding of entity values and provenance 
+parameter sets into octet streams. The entity types define the format for all 
+entities in the process by specifying the required and optional values including
+their data types. The description of a provenance interface must list the entity
+types of input entities and the entity type of the output entity.
+
+The description of the actual provenance, implementing the provenance interface
+from the provenance interface catalog, is not given in the container profile, 
+but in the container itself.
+
+E.g., if multiple cameras are used in the process to produce color images, 
+then a data type definition for the image file format is needed in the data type
+catalog (e.g. `JPEG_File`), an entity type definition in the entity type catalog
+is needed, referencing the data type for one of its values 
+(e.g. `Capture_Result` with `image.jpg` as `JPEG_File`) and one provenance 
+interface description in the provenance interface catalog is needed 
+(e.g. `Capture_Device`) taking no input entities and producing an output entity 
+of the entity type `Capture_Result`. If a container is formed with an image from
+one of the cameras, the used camera represents the actual provenance and need to
+be described thoroughly with the provenance description in the entity header,
+e.g. with vendor, model name and serial number.
 
 ## Technical Implementation
 
