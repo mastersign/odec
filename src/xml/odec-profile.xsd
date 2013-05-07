@@ -1,0 +1,562 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema id="catalog"
+           targetNamespace="http://www.mastersign.de/odec/profile/"
+           elementFormDefault="qualified"
+           xmlns="http://www.mastersign.de/odec/profile/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+  <!-- ===== The Root Element ===== -->
+
+  <xs:element name="Profile">
+    <xs:annotation>
+      <xs:documentation>
+        The container profile describes the process steps and interfaces for an automated forensic analysis.
+        Therfore it contains three catalogs:
+        - The data types for entity values and provenance parameter sets,
+        - the entity types with optional and required values
+        - and the entity provenance interfaces with input and output entities and optional parameter sets.
+        A profile is identified by a name and a version.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="Name" minOccurs="1" maxOccurs="1" />
+        <xs:element ref="Version" minOccurs="1" maxOccurs="1" />
+        <xs:element ref="Description" minOccurs="0" maxOccurs="1" />
+        <xs:element ref="DataTypeCatalog" minOccurs="1" maxOccurs="1" />
+        <xs:element ref="EntityTypeCatalog" minOccurs="1" maxOccurs="1" />
+        <xs:element ref="ProvenanceInterfaceCatalog" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ===== Catalogs ===== -->
+
+  <xs:element name="DataTypeCatalog">
+    <xs:annotation>
+      <xs:documentation>
+        The data type catalog is a collection of format descriptions for values in a forensic container.
+        It is part of the process specific container profile.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DataType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="EntityTypeCatalog">
+    <xs:annotation>
+      <xs:documentation>
+        The entity type catalog is a collection of type descriptions for entities in a forensic container.
+        It is part of the process specific container profile.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="EntityType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="ProvenanceInterfaceCatalog">
+    <xs:annotation>
+      <xs:documentation>
+        The provenance interface catalog is a collection of descriptions of interfaces for data sources
+        or transformation algorithms.
+        The provenance interface catalog is part of the process specific container profile.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="ProvenanceInterface" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <!-- ====== Data Type Definitions ====== -->
+
+  <xs:complexType abstract="true" name="FORMAT_DEFINITION">
+    <xs:annotation>
+      <xs:documentation>
+        The abstract base type for data type definitions.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:complexType>
+
+  <xs:complexType abstract="true" name="TEXTFILE_DEFINITION">
+    <xs:annotation>
+      <xs:documentation>
+        The base type for all data type definitions based on text files.
+        Optional the encoding of the text can be given.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Encoding" type="xs:string" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:element name="CustomDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a custom data type.
+        The type can be described in natural language in the outer Description element or with any XML inside the CustomDefinition element.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="FORMAT_DEFINITION">
+          <xs:sequence>
+            <xs:any minOccurs="0" />
+          </xs:sequence>
+          <xs:anyAttribute />
+
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="TextDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for plain text files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TEXTFILE_DEFINITION" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="WinIniDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for Windows-INI text files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TEXTFILE_DEFINITION" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="CsvDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for comma separated text files.
+        The CSV definition consists of a number of column definitions and
+        optional an encoding for the text.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TEXTFILE_DEFINITION">
+
+          <xs:sequence>
+            <xs:element name="Columns" minOccurs="1" maxOccurs="1">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Column" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element ref="Name" minOccurs="1" maxOccurs="1" />
+                        <xs:element name="Type" type="COLUMN_TYPE" minOccurs="1" maxOccurs="1" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="COLUMN_TYPE">
+    <xs:annotation>
+      <xs:documentation>
+        This enumeration lists all types,
+        supported for column specification in a CSV type definition.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UByte" />
+      <xs:enumeration value="SByte" />
+      <xs:enumeration value="UInt16" />
+      <xs:enumeration value="SInt16" />
+      <xs:enumeration value="UInt32" />
+      <xs:enumeration value="SInt32" />
+      <xs:enumeration value="UInt64" />
+      <xs:enumeration value="SInt64" />
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Double" />
+      <xs:enumeration value="String" />
+      <xs:enumeration value="Boolean" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="XmlDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for XML files.
+        Optional a XMLSchema for validation can be specified with an URI.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="TEXTFILE_DEFINITION">
+
+          <xs:sequence>
+            <xs:element name="XmlSchema" type="xs:anyURI" minOccurs="0" maxOccurs="1" />
+          </xs:sequence>
+
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="PictureDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for picture files.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="FORMAT_DEFINITION">
+
+          <xs:sequence>
+            <xs:element name="PictureType" type="PICTURE_TYPE" minOccurs="1" maxOccurs="1" />
+          </xs:sequence>
+
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="PICTURE_TYPE">
+    <xs:annotation>
+      <xs:documentation>
+        This enumeration lists all picture formats.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="JPEG" />
+      <xs:enumeration value="PNG" />
+      <xs:enumeration value="BMP" />
+      <xs:enumeration value="GIF" />
+      <xs:enumeration value="TIFF" />
+      <xs:enumeration value="SVG" />
+      <xs:enumeration value="EPS" />
+      <xs:enumeration value="WMF" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="ArrayDefinition">
+    <xs:annotation>
+      <xs:documentation>
+        This definition describes a data type for binary files, containing arrays of numeric values.
+        The binary file has two parts: the header and the body.
+        The header contains the size of the array, for each dimension one numeric value in the format, specified by HeaderType.
+        The body contains the values of the array, every elementary value in the format, specified by ElementType.
+        Example: Dimensions=2, HeaderType=UInt16, ElementType=Single.
+        The header is 4 bytes long. The first two bytes contain the number of columns, the second two bytes contain the number of rows: e.g. 0x00, 0x02, 0x00, 0x03 -> 2 columns and 3 rows.
+        The body is 2 * 3 * 4 bytes (Single -> 4 bytes per value) -> 24 bytes long and contains 6 32bit floating point values.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="FORMAT_DEFINITION">
+
+          <xs:sequence>
+            <xs:element name="Dimensions" type="xs:int" minOccurs="1" maxOccurs="1" />
+            <xs:element name="HeaderType" type="NUMERIC_TYPE" minOccurs="1" maxOccurs="1" />
+            <xs:element name="ElementType" type="NUMERIC_TYPE" minOccurs="1" maxOccurs="1" />
+          </xs:sequence>
+
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="NUMERIC_TYPE">
+    <xs:annotation>
+      <xs:documentation>
+        This enumeration lists all numeric data types,
+        supported for an array type definition.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="UByte" />
+      <xs:enumeration value="SByte" />
+      <xs:enumeration value="UInt16" />
+      <xs:enumeration value="SInt16" />
+      <xs:enumeration value="UInt32" />
+      <xs:enumeration value="SInt32" />
+      <xs:enumeration value="UInt64" />
+      <xs:enumeration value="SInt64" />
+      <xs:enumeration value="Single" />
+      <xs:enumeration value="Double" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <!-- ===== Catalog Items ===== -->
+
+  <xs:complexType abstract="true" name="CATALOG_ITEM">
+    <xs:annotation>
+      <xs:documentation>
+        The abstract base type for catalog items.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="Name" minOccurs="1" maxOccurs="1" />
+      <xs:element ref="Description" minOccurs="0" maxOccurs="1" />
+    </xs:sequence>
+    <xs:attribute name="guid" type="GUID" use="required" />
+  </xs:complexType>
+
+  <xs:element name="DataType">
+    <xs:annotation>
+      <xs:documentation>
+        A data type is a file format description which is identified by a global unified identifier.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="CATALOG_ITEM">
+          <xs:sequence>
+
+            <xs:element name="MimeType" type="xs:string" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  The optional MimeType element contains the MIME-Type of the data type.
+                  A JPEG picture for example does have the MIME-Type 'image/jpeg'.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+
+            <xs:element name="Format" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The format definition for the data type.</xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:choice minOccurs="1" maxOccurs="1">
+                  <xs:element ref="CustomDefinition" />
+                  <xs:element ref="TextDefinition" />
+                  <xs:element ref="WinIniDefinition" />
+                  <xs:element ref="CsvDefinition" />
+                  <xs:element ref="XmlDefinition" />
+                  <xs:element ref="ArrayDefinition" />
+                  <xs:element ref="PictureDefinition" />
+                </xs:choice>
+              </xs:complexType>
+            </xs:element>
+
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="EntityType">
+    <xs:annotation>
+      <xs:documentation>
+        An entity type specifies a group of entity values with their data type and usage.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="CATALOG_ITEM">
+          <xs:sequence>
+
+            <xs:element name="Values" minOccurs="1" maxOccurs="1">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Value" minOccurs="1" maxOccurs="unbounded">
+                    <xs:annotation>
+                      <xs:documentation>
+                        The description of an entity value.
+                      </xs:documentation>
+                    </xs:annotation>
+                    <xs:complexType>
+                      <xs:sequence>
+                        <xs:element ref="Name" minOccurs="1" maxOccurs="1" />
+                        <xs:element ref="Description" minOccurs="0" maxOccurs="1" />
+                        <xs:element name="DataTypeRef" type="GUID" minOccurs="1" maxOccurs="1" />
+                        <xs:element name="Usage" type="USAGE" minOccurs="1" maxOccurs="1" />
+                      </xs:sequence>
+                    </xs:complexType>
+                  </xs:element>
+                </xs:sequence>
+                <xs:attribute name="severity" type="SEVERITY" use="optional" default="strict" />
+              </xs:complexType>
+            </xs:element>
+
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="USAGE">
+    <xs:annotation>
+      <xs:documentation>
+        This enumeration lists the possible usages for an entity value.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="required" />
+      <xs:enumeration value="optional" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="SEVERITY">
+    <xs:annotation>
+      <xs:documentation>
+        This enumeration lists the possible severity settings for an entity type.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="strict" />
+      <xs:enumeration value="open" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="ProvenanceInterface">
+    <xs:annotation>
+      <xs:documentation>
+        The description of the entity provenance interface.
+        Every entity provenance is defined by a set of
+        input entity types and a set of output entity types. For data sources the set
+        of input entity types must be empty.
+        Optional a data type for a provenance parameter set can be specified.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="CATALOG_ITEM">
+          <xs:sequence>
+
+            <xs:element name="Input" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  A set of entity types, building the input part of the provenance interface.
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EntityTypeRef" type="GUID" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+
+            <xs:element name="Output" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  An entity type, building the output part of the provenance interface.
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="EntityTypeRef" type="GUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+
+            <xs:element name="ParameterSet" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  The format specification for an optional provenance parameter set.
+                </xs:documentation>
+              </xs:annotation>
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="Name" minOccurs="1" maxOccurs="1" />
+                  <xs:element ref="Description" minOccurs="0" maxOccurs="1" />
+                  <xs:element name="DataTypeRef" type="GUID" minOccurs="1" maxOccurs="1" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Name" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        A short name for human recognition.
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:element name="Version" type="xs:string">
+    <xs:annotation>
+      <xs:documentation>
+        A version identifier. E.g. '2.1b', or 'release_2011-01-01'
+      </xs:documentation>
+    </xs:annotation>
+  </xs:element>
+
+  <xs:element name="Description">
+    <xs:annotation>
+      <xs:documentation>
+        An unstructured text in natural language, describing the catalog item.
+      </xs:documentation>
+    </xs:annotation>
+
+    <xs:complexType mixed="true">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Headline" type="xs:string" />
+        <xs:element name="Par" type="xs:string" />
+        <xs:element name="Strong" type="xs:string" />
+        <xs:element name="Code" type="xs:string" />
+        <xs:element ref="List" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="LIST_TYPE">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="unordered" />
+      <xs:enumeration value="ordered"/>
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:element name="List">
+    <xs:annotation>
+      <xs:documentation>
+        A unordered list for documentation in Description elements.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Item" minOccurs="0" maxOccurs="unbounded" type="xs:string">
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="type" type="LIST_TYPE" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+  <xs:simpleType name="GUID">
+    <xs:annotation>
+      <xs:documentation>
+        This is the format of a GUID. E.g. '89db6c9c-beb2-4f4a-8353-1fed483d3854'.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}" />
+    </xs:restriction>
+  </xs:simpleType>
+
+</xs:schema>

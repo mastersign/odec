@@ -1,0 +1,560 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<xs:schema targetNamespace="http://www.mastersign.de/odec/container/"
+           elementFormDefault="qualified"
+           xmlns="http://www.mastersign.de/odec/container/"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:sig="http://www.w3.org/2000/09/xmldsig#">
+
+  <xs:import namespace="http://www.w3.org/2000/09/xmldsig#" />
+
+  <xs:simpleType name="GUID">
+    <xs:annotation>
+      <xs:documentation>
+        This is the format of a GUID. E.g. '89db6c9c-beb2-4f4a-8353-1fed483d3854'.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\{?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}?" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="SIGNATUREWRAPPER">
+    <xs:annotation>
+      <xs:documentation>
+        This element contains a copy of the signature element from a &quot;xyz.xml.sig&quot; file.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="sig:Signature" minOccurs="1" maxOccurs="1" />
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="POSTALADDRESS">
+    <xs:annotation>
+      <xs:documentation>This type defines an international postal address.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Address" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The primary address line. E.g. streetname and house number.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Address2" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional secondary address line. E.g. apartment.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Address3" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional tertiary address line.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PostalCode" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional postal code. This element is used in the majority of countries.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="City" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The name of the city.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="State" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional name of the state or province.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Country" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The name of the country.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="OWNER">
+    <xs:annotation>
+      <xs:documentation>This type defines a human participating in the forensic process equiped with a X.509 certificate.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Institute" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The affiliation of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Operator" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>THe name of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Role" type="xs:string" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional role of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Email" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An email address of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="PostalAddress" type="POSTALADDRESS" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>An optional postal address of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="X509Certificate" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The PEM encoded X.509 certificate of the person.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:simpleType name="ENTITYID">
+    <xs:annotation>
+      <xs:documentation>
+        The numeric ID of an entity.
+        An entity ID is an integer between 0 and 99999.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:int">
+      <xs:minInclusive value="0" />
+      <xs:maxInclusive value="99999" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:simpleType name="IDLIST">
+    <xs:annotation>
+      <xs:documentation>A white space separated lsit of entity IDs.</xs:documentation>
+    </xs:annotation>
+    <xs:list itemType="ENTITYID" />
+  </xs:simpleType>
+
+  <xs:simpleType name="VALUEAPPEARANCE">
+    <xs:annotation>
+      <xs:documentation>The possible appearances of an entity value.</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="plain" />
+      <xs:enumeration value="encrypted" />
+      <xs:enumeration value="suppressed" />
+    </xs:restriction>
+  </xs:simpleType>
+
+  <xs:complexType name="VALUEREFERENCE">
+    <xs:annotation>
+      <xs:documentation>A reference to a value inside of an entity the container.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The name of the value.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Type" type="GUID" minOccurs="0" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>If a profile is used, this element contains the GUID of the data type for the entity value.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Size" type="xs:long" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The size of the value in bytes.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="Appearance" type="VALUEAPPEARANCE" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The appearance of the value, which can be 'plain', 'encrypted' or 'suppressed'.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ValueSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The XML signature of the values data.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="SOFTWARECOMPONENT">
+    <xs:annotation>
+      <xs:documentation>The description of a software component.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Producer" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The name for the producer of the described software.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ProductName" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The name of the software product used as part of the provenance.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ProductVersion" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>The version of the software product.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="PROVENANCEDESCRIPTION">
+    <xs:annotation>
+      <xs:documentation>
+        The description of a provenance is a combination of an arbitrary number of components.
+        There are three different types of provenance components:
+        A manual procedure, a software component, and a hardware component.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:choice minOccurs="1" maxOccurs="unbounded">
+      <xs:element name="ManualProcedure">
+        <xs:annotation>
+          <xs:documentation>
+            A manual procedure as provenance component describes the part of a provenance
+            executed by a human.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Institute" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The affiliation of the executive person.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Operator" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The name of the executive person.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Role" type="xs:string" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>An optional role of the executive person.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Email" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>An email address of the executive person.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Procedure" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>A description of the procedure executed by the person.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SoftwareComponent">
+        <xs:annotation>
+          <xs:documentation>A software component as part of a provenance.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="MainComponent" type="SOFTWARECOMPONENT" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The main component describes the the software component as a whole.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="SubComponent" type="SOFTWARECOMPONENT" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>
+                  Sub components (e.g. external software libraries) are deployed with the main component
+                  but may be produced by a different producer and with an individual product version.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="HardwareComponent">
+        <xs:annotation>
+          <xs:documentation>A hardware component as part of a provenance.</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="Producer" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The manufacturer of the hardware.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ProductName" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The name of the hardware product.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="ProductVersion" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  The version of the hardware design including the version of a firmware if used.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="SerialNumber" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>The serial number of the hardware.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="Configuration" type="xs:string" minOccurs="0" maxOccurs="1">
+              <xs:annotation>
+                <xs:documentation>
+                  If the hardware can be assembled in different configurations
+                  this element is used to give the name of the used configuration.
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+
+  <xs:element name="Edition">
+    <xs:annotation>
+      <xs:documentation>
+        The edition describes a current or former state of the container.
+        This element is typically stored
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Guid" type="GUID" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The GUID of the edition.
+              In case the edition is the current edition this ID identifies the container.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Salt" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              An optional salt which can be used to expand the editon signature with removable data.
+              If the edition is moved to the history, the salt can be removed to securely invalidate
+              the edition signature and prevent a later reinstation of this edition as current edition.
+              This element is also called 'Reinstation Prevention Salt' RPS.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Software" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The name of the software used to initialize or extend the container.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Profile" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>
+              The name of the container profile.
+              The container profile can be used to check the contents of the container.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Version" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The version of the container profile.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Timestamp" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Timestamp after ISO 8601 of the moment of the initialization or extension of the container.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Owner" type="OWNER" minOccurs="1" maxOccurs="1" >
+          <xs:annotation>
+            <xs:documentation>The person responsible for the content of the entities added with this edition.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Copyright" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>An optional element for a copyright or licence notice.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Comments" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>An optional element for additional comments about this edition.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="AddedEntities" type="IDLIST" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A list with IDs of all entites added to the container in this edition.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="RemovedEntities" type="IDLIST" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A list with all entites removed from the container in this edition.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="HistorySignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A copy of the XML signature of the history element.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="IndexSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A copy of the XML signature of the index element.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="History">
+    <xs:annotation>
+      <xs:documentation>
+        The history contains all former editions of the container.
+        It is typically stored in an XML file named 'history.xml' in the root of the container.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HistoryItem" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>
+              This elements contains the history edition and the XML signature of the history edition.
+            </xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element ref="Edition" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>The history edition.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="PastMasterSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>
+                    The past master signature is the XML signature of the history edition.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Index">
+    <xs:annotation>
+      <xs:documentation>
+        The index is a list of all entities in the container.
+        It is typically stored in an XML file named 'index.xml' in the root of the container.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="LastId" minOccurs="1" maxOccurs="1" type="ENTITYID">
+          <xs:annotation>
+            <xs:documentation>
+              The ID number of the entity added last to the container.
+              It is used by incrementation to build the ID number for the next entity.
+            </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="IndexItem" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>A reference to an entity.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Id" type="ENTITYID" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>The ID number of the referenced entity.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Label" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>The optional label of the entity.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="Successors" minOccurs="1" maxOccurs="1" type="IDLIST">
+                <xs:annotation>
+                  <xs:documentation>
+                    A list with entity IDs of all entities which are produced by a provenance 
+                    using this entity as input.
+                  </xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="EntitySignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>A copy of the XML signature of the entity header.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+  <xs:element name="Entity">
+    <xs:annotation>
+      <xs:documentation>
+        The entity element represents the head of an entity describing its identity and contents.
+        It is typically stored in an XML file named 'entity.xml' inside the directory of the described entity.
+      </xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Id" type="ENTITYID" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The ID number of the entity. The ID is a sequence number between 1 and 99999.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Label" type="xs:string" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>An optional character string supporting better identification of an entity inside of the container.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Predecessors" type="IDLIST" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A list of entity IDs which were used as input for the provenance producing this entity.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Type" type="GUID" minOccurs="0" maxOccurs="1" >
+          <xs:annotation>
+            <xs:documentation>This optional GUID references the type of the entity in the entity type catalog of a container profile.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Provenance" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A description of the provenance producing this entity.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Guid" type="GUID" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>This GUID references the provenance interface in the provenance interface catalog of a container profile.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+              <xs:element name="ProvenanceDescription" type="PROVENANCEDESCRIPTION" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                  <xs:documentation>This element describes the actual provenance.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ParameterSet" type="VALUEREFERENCE" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>A reference to the optional provenance parameter set.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="Values" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>The list with references to all values stored in this entity.</xs:documentation>
+          </xs:annotation>
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Value" type="VALUEREFERENCE" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>A reference to a value stored in this entity.</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>
