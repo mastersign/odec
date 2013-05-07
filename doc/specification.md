@@ -345,6 +345,433 @@ e.g. with vendor, model name and serial number.
 
 ## Technical Implementation
 
+In this section the technical implementation of the meta-model is specified. 
+The result of the technical implementation is a generic evidence container, 
+which can be used in various processes. Even if it is not strictly necessary, 
+it is very useful to create a profile for the generic container (see section
+"The Framework"). This way, the correct usage of the container in a process can 
+be verified.
+
+In the following subsections, the physical structure of the container is 
+specified. The physical structure forms the shape of the container model in 
+concrete data structures and consists of three layers.
+
+* The first layer is the storage mechanism, used to persist to data.
+* The second layer is the implementation of all elements from the meta-model 
+  with concrete data structures. 
+* And the third layer describes the characteristics of the security mechanisms
+  like cryptographic hashes and signatures.
+
+### Storage in Directory and ZipFile
+
+This technical implementation provides two ways to persist the content of a 
+container. The first way is to use a directory in a common file system like
+Ext3, FAT32 or NTFS. The second way is to use a ZipFile. In both ways, the 
+elements of the container are stored in a two level tree (see 
+[Figure 12](#fig_file-structure)). In the first level, all elements beside the entities and 
+their children are stored. In the second level, the entities are stored.
+Each entity is stored in its individual sub directory.
+
+In case of using a ZipFile as a container storage, the ZIP64 extension is used
+to store large entity values.
+
+<a name="fig_file-structure"></a>
+![File Structure][fig:file-structure]
+
+*Figure 12: 2-Level storage structure*
+
+### Implementation of the Meta-Model
+
+In this subsection all elements of the meta-model are mapped to a concrete data 
+structure. Most of the elements in the model are mapped to XML. Some elements 
+are mapped to a XML file and others are mapped to XML elements inside of a XML 
+file. The XML elements are defined by a XML Schema
+`odec-container.xsd`, which can be used for automated validation. 
+The XML Schema is targeting the XML namespace 
+`http://www.mastersign.de/odec/container/`.
+
+In the following code snippets the prefix `xs` is used for the XML namespace of
+the XML schema `http://www.w3.org/2001/XMLSchema`.
+
+The following elements are mapped to storage files (see 
+[Figure 12](#fig_file-structure)):
+
+* Current edition: `/edition.xml` (with an `Edition` element as document root)
+* Current edition signature (master signature): `/edition.xml.sig` \*
+* Container history: `/history.xml` (with a `History` element as document root)
+* Container history signature: `/history.xml.sig` \*
+* Entity index: `/index.xml` (with an `Index` element as document root)
+* Entity index signature: `/index.xml.sig` \*
+* Entity header: `/<entity-ID>/entity.xml` (with an `Entity` element as document root)
+* Entity signature: `/<entity-ID>/entity.xml.sig` \*
+* Provenance parameter set and entity value: `/<entity-ID>/<name>`
+* Provenance parameter set and entity value signature: `/<entity-ID>/<name>.sig` \*
+
+\* For description of signature files see section "Security Mechanisms".
+
+#### Values and Provenance Parameter Sets
+
+Values and provenance parameter sets are stored inside the sub-directory of an 
+entity in individual storage files. Every value or provenance parameter must be
+serialized to an octet stream to be stored in a storage file. The file name of 
+the storage file corresponds to the name of the value and provenance parameter 
+set respectively.
+
+The integrity and authenticity of values and provenance parameter sets is 
+ensured by signature files (see section "Security Mechanisms").
+
+#### Entity and Entity Header
+
+Every entity is stored in a sub-directory (level 2) in the container. 
+The name of the sub-directory corresponds to the ID of the entity. The ID of 
+an entity must be unique inside the container and is build by a running integer
+number starting at zero. For the naming of the sub-directories, the entity ID 
+is encoded in five decimal places with leading zeroes. As a result, the 
+maximum number of entities in a container is 100.000.
+
+The entity header is encoded in a XML document `entity.xml`, inside the 
+sub-directory of the entity, with an `Entity` element as document root. 
+The schema of the `Entity` element is specified by the following XML schema 
+snippet:
+
+    <xs:element name="Entity">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="Id" type="ENTITYID" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Label" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Predecessors" type="IDLIST" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Type" type="GUID" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Provenance" minOccurs="1" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Guid" type="GUID" minOccurs="0" maxOccurs="1" />
+                <xs:element name="ProvenanceDescription" type="PROVENANCEDESCRIPTION" minOccurs="0" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ParameterSet" type="VALUEREFERENCE" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Values" minOccurs="1" maxOccurs="1">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Value" type="VALUEREFERENCE" minOccurs="0" maxOccurs="unbounded" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+
+The primitive type `ENTITYID` is just an alias for the predefined XML type int.
+The type `IDLIST` defines a white-space-separated list of `ENTITID`s. For the 
+specification of the primitive type `GUID` see the complete XML schema 
+`odec-container.xsd`. 
+
+The complex type `PROVENANCEDESCRIPTION` defines a description for a provenance.
+It contains three different types of provenance components: a manual procedure, 
+a software component and a hardware component. A provenance can be a combination
+of these three.
+
+    <xs:complexType name="PROVENANCEDESCRIPTION">
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+        <xs:element name="ManualProcedure">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Institute" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="Operator" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="Role" type="xs:string" minOccurs="0" maxOccurs="1" />
+              <xs:element name="Email" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="Procedure" type="xs:string" minOccurs="1" maxOccurs="1" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SoftwareComponent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MainComponent" type="SOFTWARECOMPONENT" minOccurs="1" maxOccurs="1" />
+              <xs:element name="SubComponent" type="SOFTWARECOMPONENT" minOccurs="0" maxOccurs="unbounded" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="HardwareComponent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Producer" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="ProductName" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="ProductVersion" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="SerialNumber" type="xs:string" minOccurs="1" maxOccurs="1" />
+              <xs:element name="Configuration" type="xs:string" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+
+A software component can be a combination of one main component and a various 
+number of sub-components. They are defined by the complex type 
+`SOFTWARECOMPONENT`.
+
+    <xs:complexType name="SOFTWARECOMPONENT">
+      <xs:sequence>
+        <xs:element name="Producer" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="ProductName" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="ProductVersion" type="xs:string" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+
+If a software component is used to process evidence in a forensic process the 
+producer of the software should name a number of supported platforms and must 
+verify deterministic and equivalent behavior of the software for all supported 
+platforms including operating systems and hardware. Further, the producer should
+keep a product history associating a product name and version number with all 
+deployed files including a copy of every deployed file.
+
+The provenance parameter set and the entity values are referenced in the entity
+by a XML structure, specified by the complex type `VALUEREFERENCE`.
+
+The type `VALUEREFERENCE` is defined by the following XML schema snippet:
+
+    <xs:complexType name="VALUEREFERENCE">
+      <xs:sequence>
+        <xs:element name="Name" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Type" type="GUID" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Size" type="xs:long" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Appearance" type="VALUEAPPEARANCE" minOccurs="1" maxOccurs="1" />
+        <xs:element name="ValueSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+
+The appearance of a value is defined by a primitive type called 
+`VALUEAPPEARANCE`, which is an enumeration of the following strings: 
+`plain`, `encrypted`, `suppressed`. The value reference contains a copy of the 
+value signature, which is wrapped in an element called `ValueSignature`. 
+This element is specified by the type `SIGNATUREWRAPPER`.
+
+The integrity and authenticity of an entity header including all value and 
+provenance parameter set signatures is ensured by a signature file 
+`entity.xml.sig` inside the sub-directory of the entity. For further information
+about signature files see section "Security Mechanisms".
+
+#### Entity Index
+
+The entity index is encoded in a XML document with an `Index` element as 
+document root and stored in the storage file `/index.xml`.
+
+    <xs:element name="Index">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="LastId" minOccurs="1" maxOccurs="1" type="ENTITYID" />
+          <xs:element name="IndexItem" minOccurs="1" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Id" type="ENTITYID" minOccurs="1" maxOccurs="1" />
+                <xs:element name="Label" type="xs:string" minOccurs="0" maxOccurs="1" />
+                <xs:element name="Successors" minOccurs="1" maxOccurs="1" type="IDLIST" />
+                <xs:element name="EntitySignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+
+The `Index` element has at first one `LastId` element containing the last used 
+entity ID to support the running integer number for the entity ID. 
+At second it has any number but at least one of `IndexItem` elements as 
+children. An `IndexItem` element contains the ID of the referenced entity, 
+a list with successor IDs and a copy of the entity signature in the 
+`EntitySignature` element.
+
+The integrity and authenticity of the index including the entity signature 
+copies is ensured by the signature file `/index.xml.sig`. For further 
+information about signature files see section "Security Mechanisms".
+
+#### Current Edition
+
+The current edition is encoded in a XML document with an `Edition` element as 
+document root and stored in the storage file `/edition.xml`. 
+The Edition element is specified by the following XML schema snippet:
+
+    <xs:element name="Edition">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="Guid" type="GUID" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Salt" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Software" type="xs:string" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Profile" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Version" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Timestamp" type="xs:dateTime" minOccurs="1" maxOccurs="1" />
+          <xs:element name="Owner" type="OWNER" minOccurs="1" maxOccurs="1"  />
+          <xs:element name="Copyright" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="Comments" type="xs:string" minOccurs="0" maxOccurs="1" />
+          <xs:element name="AddedEntities" type="IDLIST" minOccurs="1" maxOccurs="1" />
+          <xs:element name="RemovedEntities" type="IDLIST" minOccurs="1" maxOccurs="1" />
+          <xs:element name="HistorySignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1" />
+          <xs:element name="IndexSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+
+Every edition is identified by a global unique identifier stored in the element
+`Guid`. For the specification of the primitive type `GUID` see the complete 
+XML schema `odec-container.xsd`. The `Timestamp` element contains the moment 
+of creation of the edition. It is encoded following the predefined XML type 
+`dateTime` (ISO 8601).
+
+The salt of the edition is stored in the element `Salt`. The salt can be any 
+kind of string but to avoid problems with non ASCII characters and white spaces 
+it is strongly recommended to use a random octet stream encoded with the BASE64 
+scheme.
+
+The element `Software` contains a character string identifying the exact version
+of the software component responsible for forming the container. The optional 
+elements `Profile` and `Version` can be used to link the container to a 
+container profile with data type, entity type and provenance definitions. 
+Therefore, the `Profile` element contains the name of the profile and the 
+`Version` element contains a character string allowing the distinction of 
+different versions of the profile. The usage of a profile is strictly 
+recommended to allow automated validation of the container content.
+
+The elements `Copyright` and `Comments` are optional. The elements 
+`AddedEntities` and `RemovedEntites` are referencing all entities, which are 
+added to or removed from the container. According to the primitive type 
+`IDLIST`, the IDs of the referenced entities are concatenated as a 
+white-space-separated list.
+
+To chain the trust for the integrity and authenticity of the container history 
+and the entity index to the current edition, a copy of the history signature 
+and a copy of the index signature are embedded into the current edition while 
+using the complex type `SIGNATUREWRAPPER`. For detailed information about 
+signatures see section "Security Mechanisms".
+
+The `Owner` element is specified by the complex type `OWNER`, which is defined 
+by the following XML schema snippet:
+
+    <xs:complexType name="OWNER">
+      <xs:sequence>
+        <xs:element name="Institute" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Operator" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="Role" type="xs:string" minOccurs="0" maxOccurs="1" />
+        <xs:element name="Email" type="xs:string" minOccurs="1" maxOccurs="1" />
+        <xs:element name="PostalAddress" type="POSTALADDRESS" minOccurs="0" maxOccurs="1" />
+        <xs:element name="X509Certificate" type="xs:string" minOccurs="1" maxOccurs="1" />
+      </xs:sequence>
+    </xs:complexType>
+
+The owner is described by an institute name, an operator, and an email for 
+contact. Optional a role and a postal address can be given. For the 
+specification of the complex type `POSTALADDRESS` see the complete XML schema 
+`odec-container.xsd`. Further the X.509 certificate of the owner is embedded 
+PEM encoded.
+
+To ensure the integrity and authenticity of the current edition including the 
+signatures of history and index, a signature file `/edition.xml.sig` is stored 
+in the container. This signature file represents the *master signature* of the 
+container. For further information about signature files see section 
+"Security Mechanisms".
+
+#### Container History
+
+The history of the container is encoded in a XML document with a `History` 
+element as document root and stored in the storage file `/history.xml`. 
+The `History` element is specified by the following XML schema snippet:
+
+    <xs:element name="History">
+      <xs:complexType>
+        <xs:sequence>
+          <xs:element name="HistoryItem" minOccurs="0" maxOccurs="unbounded">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element ref="Edition" minOccurs="1" maxOccurs="1" />
+                <xs:element name="PastMasterSignature" type="SIGNATUREWRAPPER" minOccurs="1" maxOccurs="1" />
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:element>
+
+The `History` element has any number of `HistoryItem` elements as children. 
+A `HistoryItem` element contains the complete `Edition` element describing a 
+past edition and the past editions signature embedded in the 
+`PastMasterSignature` element. 
+
+The integrity and authenticity of the container history is ensured by the 
+signature file `/history.xml.sig`. For further information about signature 
+files see section "Security Mechanisms".
+
+### Security Mechanisms
+
+The security of storage files in the container and in fact the security of the 
+whole container is ensured in two steps: At first with a cryptographic hash 
+(or digest) to ensure the integrity, and at second with a signature to ensure 
+the authenticity. To simplify the validation of the container, one generic 
+approach is reused over the whole container. The granularity of the security 
+protection corresponds to the granularity of the storage files in the container.
+Or in other words, every storage file is secured with a signed cryptographic
+hash.
+
+For that purpose, signature files are used. A signature file is a file placed 
+beside the signed file and named after the signed file with a postfix of `.sig`
+attached. The signature file of an entity header e.g. `/00001/entity.xml`, 
+is placed inside the sub-directory of the entity and is named accordingly to 
+the rule, described above: `/00001/entity.xml.sig`.
+
+The content of the signature file is a core XML signature according to the W3C 
+standard `http://www.w3.org/TR/xmldsig-core/`. The root of the XML signature 
+file is the `Signature` element from the XML namespace 
+`http://www.w3.org/2000/09/xmldsig#`. Some restrictions are applied to the XML
+signature:
+
+* Only one `Reference` element is allowed in the `SignedInfo` element
+* The `Reference` element must use the child element `URI`
+* The content of the `URI` element in the `Reference` element must be a relative
+  path to the signed storage file (only the name of the signed file)
+* The X.509 certificate of the signing owner is not included in a `KeyInfo`
+  element
+
+The following algorithms are currently supported as digest methods:
+
+* MD5 `http://www.w3.org/2001/04/xmldsig-more#md5`
+* SHA-1 `http://www.w3.org/2000/09/xmldsig#sha1`
+* SHA-256 `http://www.w3.org/2001/04/xmlenc#sha256`
+* SHA-384 `http://www.w3.org/2001/04/xmldsig-more#sha384`
+* SHA-512 `http://www.w3.org/2001/04/xmlenc#sha512`
+* RIPEMD-160 `X-RipeMD-160`
+* RIPEMD-256 `X-RipeMD-256`
+* RIPEMD-320 `X-RipeMD-320`
+* WHIRLPOOL `http://www.w3.org/2007/05/xmldsig-more#whirlpool`
+
+The following canonicalization algorithms for XML are currently supported:
+
+* C14N without comments `http://www.w3.org/TR/2001/REC-xml-c14n-20010315`
+
+The following signature algorithms are currently supported:
+
+* RSA with SHA-1 `http://www.w3.org/2000/09/xmldsig#rsa-sha1`
+
+If a signature file is signing one of the XML files, representing the container 
+structure (`edition.xml`, `history.xml`, `index.xml` and `entity.xml`), 
+the signed XML document is canonicalized with the C14N algorithm (without 
+regarding comments in the document) before calculating the digest. This way, 
+irrelevant changes in these documents (e.g. inserting comments or changing 
+XML attribute order) do not destroy the integrity and authenticity.
+
+If a signature file is signing a provenance parameter set or an entity file, 
+no canonicalization takes place, despite the fact, that some of these values 
+are XML documents as well.
+
+To embed a copy of a signature inside other XML documents, the 
+`SIGNATUREWRAPPER` type is defined in the XML schema for the container 
+`odec-container.xsd`. Essentially a XML element of the type `SIGNATUREWRAPPER` 
+contains a `Signature` child element from the XML namespace 
+`http://www.w3.org/2000/09/xmldsig#`.
+
+To create the salt of an edition, a cryptographic random generator must be used.
+Otherwise, reinstating a history edition with removed salt is potentially 
+possible. Especially the use of a pseudo random generator initialized with a 
+time stamp is considered a serious security thread. This is because the edition 
+contains a time stamp which can be used as a starting point for a brute force 
+attack to rebuild the salt.
 
 ## References
 
@@ -366,6 +793,7 @@ e.g. with vendor, model name and serial number.
 [fig:trust-hierarchy]: figures/trust-hierarchy.png
 [fig:history]: figures/history.png
 [fig:index]: figures/index.png
+[fig:file-structure]: figures/file-structure.png
 [fig:detailed-container]: figures/detailed-container.png
 [fig:detailed-edition]: figures/detailed-edition.png
 [fig:detailed-entity-header]: figures/detailed-entity-header.png
