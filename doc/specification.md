@@ -8,42 +8,44 @@ ODEC - Specification
 
 ## Overview
 
-+ Introduction
-+ Change Log
-+ The Generic Process
-  + The Owner
-  + The Container
-  + Example Process
-+ The Meta-Model
-  + Value and Provenance Parameter
-  + Value Reference
-  + Entity Header
-  + Index and Index Item
-  + Owner
-  + Edition
-  + History and History Item
-  + Container
-+ The Framework
-+ Technical Implementation
-  + Implementation of the Meta-Model
-  + Implementation of Profiles
-+ References
++ [Introduction](#introduction)
++ [Change Log](#change-log)
++ [The Generic Process](#the-generic-process)
+  + [The Owner](#the-owner)
+  + [The Container](#the-container)
+  + [Example Process](#example-process)
++ [The Meta-Model](#the-meta-model)
+  + [Value and Provenance Parameter](#value-and-provenance-parameter)
+  + [Value Reference](#value-reference)
+  + [Entity Header](#entity-header)
+  + [Index and Index Item](#index-and-index-item)
+  + [Owner](#owner)
+  + [Edition](#edition)
+  + [History and History Item](#history-and-history-item)
+  + [Container](#container)
++ [The Framework](#the-framework)
++ [Technical Implementation](#technical-implementation)
+  + [Implementation of the Meta-Model](#implementation-of-the-meta-model)
+  + [Implementation of Profiles](#implementation-of-profiles)
++ [References](#references)
 
 ## Introduction
 
 This document contains the specification for an open digital evidence container 
 based on [KVL2011][].
 
-It splits up into the following chapters: In "The Generic Process", the concept
+It splits up into the following chapters: 
+In [The Generic Process](#the-generic-process), the concept
 of a processing chain for digital evidence is explained. While laying out the
 generic process, a number of important terms are introduced. 
-In "The Meta-Model", the structure of a container is described. This structure 
-is basically independent from a technical implementation of the container, 
-instead it describes the semantic items of a container and their relations.
-In "The Framework", the tailoring of the generic process into an actual evidence
-work-flow is described. Thereby the profiling of a generic container into a
-specific container format is explained. In "Technical Implementation" the 
-technical implementation of the meta-model is described. Finally in "Profiles"
+In [The Meta-Model](#the-meta-model), the structure of a container is described.
+This structure is basically independent from a technical implementation of the 
+container, instead it describes the semantic items of a container and their 
+relations. In [The Framework](#the-framework), the tailoring of the generic 
+process into an actual evidence work-flow is described. Thereby the profiling of
+a generic container into a specific container format is explained. In 
+[Technical Implementation](#technical-implementation) the technical 
+implementation of the meta-model is described. Finally in [Profiles](#profiles)
 the the way of defining a container profile is explained.
 
 ## Change Log
@@ -175,19 +177,19 @@ is included in the value reference.
 
 *Figure 5: Structure of an entity header*
 
-As described in the chapter "The Generic Process", the entity is a group of one 
-or more entity values and optional a provenance parameter set. The entity header
-contains all data necessary to describe the entity. The entity is identified 
-with an ID, unique inside the container. It can optionally be marked with a 
-label for easier recognition. 
+As described in the chapter [The Generic Process](#the-generic-process), 
+the entity is a group of one or more entity values and optional a provenance 
+parameter set. The entity header contains all data necessary to describe the 
+entity. The entity is identified with an ID, unique inside the container. 
+It can optionally be marked with a label for easier recognition. 
 
 Potentially, an entity type is associated with the entity, to tell which values 
 are allowed or required. More on entity types can be found in chapter 
-"The Framework". Potentially a provenance description is included in the entity 
-header and in case the provenance used some input entities to produce the 
-described entity, these input entities are referenced by their IDs as 
-predecessors. If the associated edition does not reference a profile, the entity
-type and the provenance description can be omitted.
+[The Framework](#the-framework). Potentially a provenance description is 
+included in the entity header and in case the provenance used some input 
+entities to produce the described entity, these input entities are referenced by
+their IDs as predecessors. If the associated edition does not reference a 
+profile, the entity type and the provenance description can be omitted.
 
 All values of the entity are referenced by a value reference and if the 
 provenance was parameterized in some way, the provenance parameter set is 
@@ -222,11 +224,11 @@ index signature.
 
 *Figure 7: Structure of an owner*
 
-As described in section "The Owner", the owner is an institute and/or person 
-responsible for the initialization or extension of a container. The owner is 
-identified by an institute name, an operator name, and an email address. 
-The email address can also be used to contact the owner. Additionally, contact 
-information as postal address can be given. Optional, the owner can be 
+As described in section [The Owner](#the-owner), the owner is an institute 
+and/or person responsible for the initialization or extension of a container. 
+The owner is identified by an institute name, an operator name, and an email 
+address. The email address can also be used to contact the owner. Additionally, 
+contact information as postal address can be given. Optional, the owner can be 
 associated with a role, e.g. to support role-based access control. Every owner 
 needs a certificate, which can be part of a PKI.
 
@@ -237,12 +239,12 @@ needs a certificate, which can be part of a PKI.
 
 *Figure 8: Structure of a container edition*
 
-As described in section "The Container", every time a container is initialized 
-or modified an edition is formed. A container has a *current edition* and, if it 
-was modified, one or more past editions. An edition is identified by a global 
-unique identifier. The edition is protected by a signature, created by the owner
-of the signature. The signature of the current edition is called 
-*master signature*.
+As described in section [The Container](#the-container), every time a container 
+is initialized or modified an edition is formed. A container has a 
+*current edition* and, if it was modified, one or more past editions. An edition
+is identified by a global unique identifier. The edition is protected by a 
+signature, created by the owner of the signature. The signature of the current 
+edition is called *master signature*.
 
 The edition contains some meta-data:
 * A reference to the software, used to create or extend the container
@@ -260,7 +262,8 @@ The edition contains some meta-data:
 
 To create a trusted link to the content of the container, an edition contains a 
 copy of the index signature and a copy of the history signature (the history 
-will be discussed in section "History and History Item").
+will be discussed in section 
+[History and History Item](#history-and-history-item)).
 
 An edition is optionally equipped with a salt which, if present, is included 
 in the computation of the master signature. If the container gets extended, 
@@ -308,7 +311,8 @@ container is the signature of the current edition.
 ## The Framework
 
 In this chapter, a short description is given, how to map an evidence processing
-work-flow to the generic process, described in chapter "The Generic Process".
+work-flow to the generic process, described in chapter 
+[The Generic Process](#the-generic-process).
 
 To map an evidence processing work-flow to the generic process, the process 
 steps need to be classified in two classes: 
@@ -425,7 +429,8 @@ The following elements are mapped to storage files (see
 * Provenance parameter set and entity value signature: `/<entity-ID>/<name>.sig`
   \*
 
-\* For description of signature files see sub-section "Security Mechanisms".
+\* For description of signature files see sub-section 
+[Security Mechanisms](#security-mechanisms).
 
 ##### Values and Provenance Parameter Sets
 
@@ -436,7 +441,8 @@ the storage file corresponds to the name of the value and provenance parameter
 set respectively.
 
 The integrity and authenticity of values and provenance parameter sets is 
-ensured by signature files (see sub-section "Security Mechanisms").
+ensured by signature files (see sub-section 
+[Security Mechanisms](#security-mechanisms)).
 
 ##### Entity and Entity Header
 
@@ -567,7 +573,8 @@ This element is specified by the type `SIGNATUREWRAPPER`.
 The integrity and authenticity of an entity header including all value and 
 provenance parameter set signatures is ensured by a signature file 
 `entity.xml.sig` inside the sub-directory of the entity. For further information
-about signature files see sub-section "Security Mechanisms".
+about signature files see sub-section 
+[Security Mechanisms](#security-mechanisms).
 
 ##### Entity Index
 
@@ -601,7 +608,8 @@ a list with successor IDs and a copy of the entity signature in the
 
 The integrity and authenticity of the index including the entity signature 
 copies is ensured by the signature file `/index.xml.sig`. For further 
-information about signature files see sub-section "Security Mechanisms".
+information about signature files see sub-section 
+[Security Mechanisms](#security-mechanisms).
 
 ##### Current Edition
 
@@ -659,7 +667,7 @@ To chain the trust for the integrity and authenticity of the container history
 and the entity index to the current edition, a copy of the history signature 
 and a copy of the index signature are embedded into the current edition while 
 using the complex type `SIGNATUREWRAPPER`. For detailed information about 
-signatures see sub-section "Security Mechanisms".
+signatures see sub-section [Security Mechanisms](#security-mechanisms).
 
 The `Owner` element is specified by the complex type `OWNER`, which is defined 
 by the following XML schema snippet:
@@ -685,7 +693,7 @@ To ensure the integrity and authenticity of the current edition including the
 signatures of history and index, a signature file `/edition.xml.sig` is stored 
 in the container. This signature file represents the *master signature* of the 
 container. For further information about signature files see section 
-"Security Mechanisms".
+[Security Mechanisms](#security-mechanisms).
 
 ##### Container History
 
@@ -715,7 +723,7 @@ past edition and the past editions signature embedded in the
 
 The integrity and authenticity of the container history is ensured by the 
 signature file `/history.xml.sig`. For further information about signature 
-files see sub-section "Security Mechanisms".
+files see sub-section [Security Mechanisms](#security-mechanisms).
 
 #### Security Mechanisms
 
