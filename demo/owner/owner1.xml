@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Owner 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:noNamespaceSchemaLocation="../../descriptions.xsd">
+  
+  <Institute>Institute One</Institute>
+  <Operator>Operator A</Operator>
+  <Email>operator.a@one.com</Email>
+  <CertificateFile>server1.crt</CertificateFile>
+  <PrivateKeyFile>server1.key</PrivateKeyFile>
+</Owner>

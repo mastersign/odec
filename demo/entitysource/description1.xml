@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entity
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../descriptions.xsd">
+
+  <Type>ca97fc05-c040-0000-0002-000000000001</Type>
+  <Provenance>
+    <Guid>ca97fc05-c040-0000-0003-000000000001</Guid>
+  </Provenance>
+  <ParameterSet>
+    <Name>config.ini</Name>
+    <Type>ca97fc05-c040-0000-0001-000000000002</Type>
+    <SourceFile>democonfig.ini</SourceFile>
+  </ParameterSet>
+  <Value>
+    <Name>basis.txt</Name>
+    <Type>ca97fc05-c040-0000-0001-000000000001</Type>
+    <SourceFile>demotext.txt</SourceFile>
+  </Value>
+</Entity>

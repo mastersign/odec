@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Entity
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../descriptions.xsd">
+
+  <Type>ca97fc05-c040-0000-0002-000000000002</Type>
+  <Provenance>
+    <Guid>ca97fc05-c040-0000-0003-000000000002</Guid>
+  </Provenance>
+  <Value>
+    <Name>result.gif</Name>
+    <Type>ca97fc05-c040-0000-0001-000000000003</Type>
+    <SourceFile>FP_image.gif</SourceFile>
+  </Value>
+</Entity>

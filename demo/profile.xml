@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Profile xmlns="http://www.mastersign.de/odec/profile/">
+  <Name>Demo Profile</Name>
+  <Version>1.0</Version>
+  <Description>This profile demonstrates profiling the container format for a simple process.</Description>
+  
+  <DataTypeCatalog>
+    
+    <DataType guid="ca97fc05-c040-0000-0001-000000000001">
+      <Name>Plain Text</Name>
+      <Description>This data type describes a unstructured text file.</Description>
+      <MimeType>text/plain</MimeType>
+      <Format>
+        <TextDefinition/>
+      </Format>
+    </DataType>
+    
+    <DataType guid="ca97fc05-c040-0000-0001-000000000002">
+      <Name>Configuration</Name>
+      <Description>This data type describes simple configuration files in the Windows-INI format.</Description>
+      <MimeType>text/plain</MimeType>
+      <Format>
+        <TextDefinition/>
+      </Format>
+    </DataType>
+    
+    <DataType guid="ca97fc05-c040-0000-0001-000000000003">
+      <Name>Diagram</Name>
+      <Description>This data type describes diagrams in GIF format.</Description>
+      <MimeType>image/gif</MimeType>
+      <Format>
+        <PictureDefinition>
+          <PictureType>GIF</PictureType>
+        </PictureDefinition>
+      </Format>
+    </DataType>
+    
+  </DataTypeCatalog>
+  
+  <EntityTypeCatalog>
+    
+    <EntityType guid="ca97fc05-c040-0000-0002-000000000001">
+      <Name>Base Entity</Name>
+      <Description>This entity type is the starting point for the process.</Description>
+      <Values>
+        <Value>
+          <Name>basis.txt</Name>
+          <Description>This value contains the basic data for the process.</Description>
+          <DataTypeRef>ca97fc05-c040-0000-0001-000000000001</DataTypeRef>
+          <Usage>required</Usage>
+        </Value>
+      </Values>
+    </EntityType>
+    
+    <EntityType guid="ca97fc05-c040-0000-0002-000000000002">
+      <Name>Process Result</Name>
+      <Description>This entity type represents a result of the process.</Description>
+      <Values>
+        <Value>
+          <Name>result.gif</Name>
+          <Description>This value contains a diagram representing a result of the process.</Description>
+          <DataTypeRef>ca97fc05-c040-0000-0001-000000000003</DataTypeRef>
+          <Usage>required</Usage>
+        </Value>
+        <Value>
+          <Name>comments.txt</Name>
+          <Description>This value contains optional comments, gathered while the process.</Description>
+          <DataTypeRef>ca97fc05-c040-0000-0001-000000000001</DataTypeRef>
+          <Usage>optional</Usage>
+        </Value>
+      </Values>
+    </EntityType>
+    
+  </EntityTypeCatalog>
+  
+  <ProvenanceInterfaceCatalog>
+    
+    <ProvenanceInterface guid="ca97fc05-c040-0000-0003-000000000001">
+      <Name>Text Producer</Name>
+      <Description>This entity source produces some kind of text.</Description>
+      <Input />
+      <Output>
+        <EntityTypeRef>ca97fc05-c040-0000-0002-000000000001</EntityTypeRef>
+      </Output>
+      <ParameterSet>
+        <Name>config.ini</Name>
+        <Description>This parameter set, contains the configuration of the text producer.</Description>
+        <DataTypeRef>ca97fc05-c040-0000-0001-000000000002</DataTypeRef>
+      </ParameterSet>
+    </ProvenanceInterface>
+    
+    <ProvenanceInterface guid="ca97fc05-c040-0000-0003-000000000002">
+      <Name>Diagram Painter</Name>
+      <Description>This transformation algorithm takes some text and paints a diagram.</Description>
+      <Input>
+        <EntityTypeRef>ca97fc05-c040-0000-0002-000000000001</EntityTypeRef>
+      </Input>
+      <Output>
+        <EntityTypeRef>ca97fc05-c040-0000-0002-000000000002</EntityTypeRef>
+      </Output>
+    </ProvenanceInterface>
+    
+  </ProvenanceInterfaceCatalog>
+  
+</Profile>

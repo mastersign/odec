@@ -1,0 +1,1 @@
+@ ..\..\bin\clr\Debug\odec.exe %*
