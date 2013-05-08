@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Profile xmlns="http://www.mastersign.de/odec/profile/">
+  <Name>Demo Profile</Name>
+  <Version>1.0</Version>
+  <Description>
+    Demo Profile Description Line 1.
+    Demo Profile Description Line 2.
+  </Description>
+  <DataTypeCatalog>
+    <DataType guid="0f4ea8cf-2b32-41f2-9726-670fd9788ca4">
+      <Name>TextFile</Name>
+      <Description>Text Type 1 Description</Description>
+      <MimeType>text/plain</MimeType>
+      <Format>
+        <TextDefinition />
+      </Format>
+    </DataType>
+    <DataType guid="365ba399-a5be-452a-b24c-e81e60e8c95a">
+      <Name>Statistics</Name>
+      <MimeType>text/xml</MimeType>
+      <Format>
+        <XmlDefinition>
+          <XmlSchema>./StaticSchmema.xsd</XmlSchema>
+        </XmlDefinition>
+      </Format>
+    </DataType>
+    <DataType guid="f7d18ec1-6386-4165-bc39-9dd06cef2280">
+      <Name>Array-2D</Name>
+      <Format>
+        <ArrayDefinition>
+          <Dimensions>2</Dimensions>
+          <HeaderType>SInt32</HeaderType>
+          <ElementType>Single</ElementType>
+        </ArrayDefinition>
+      </Format>
+    </DataType>
+  </DataTypeCatalog>
+  <EntityTypeCatalog>
+    <EntityType guid="5de4dbe3-8f6a-4c32-a15d-af95105f9fe8">
+      <Name>Image</Name>
+      <Description>Description of basis entity.</Description>
+      <Values>
+        <Value>
+          <Name>array.bin</Name>
+          <Description>Description of array value.</Description>
+          <DataTypeRef>f7d18ec1-6386-4165-bc39-9dd06cef2280</DataTypeRef>
+          <Usage>required</Usage>
+        </Value>
+        <Value>
+          <Name>info.txt</Name>
+          <Description>Description of info value.</Description>
+          <DataTypeRef>0f4ea8cf-2b32-41f2-9726-670fd9788ca4</DataTypeRef>
+          <Usage>optional</Usage>
+        </Value>
+      </Values>
+    </EntityType>
+    <EntityType guid="215fdab4-84ba-474d-94f8-b5811e0f6b5c">
+      <Name>AnalyzeResults</Name>
+      <Values>
+        <Value>
+          <Name>statistics.xml</Name>
+          <DataTypeRef>365ba399-a5be-452a-b24c-e81e60e8c95a</DataTypeRef>
+          <Usage>required</Usage>
+        </Value>
+      </Values>
+    </EntityType>
+  </EntityTypeCatalog>
+  <ProvenanceInterfaceCatalog>
+    <ProvenanceInterface guid="5f9b3532-42c4-437e-a07d-3e776f3a4a72">
+      <Name>ImageSource</Name>
+      <Description>Description of the image source.</Description>
+      <Input />
+      <Output>
+        <EntityTypeRef>5de4dbe3-8f6a-4c32-a15d-af95105f9fe8</EntityTypeRef>
+      </Output>
+    </ProvenanceInterface>
+    <ProvenanceInterface guid="f16ba3cc-604f-454a-b0e5-07049bf300f4">
+      <Name>ImageAnalyzer</Name>
+      <Input>
+        <EntityTypeRef>5de4dbe3-8f6a-4c32-a15d-af95105f9fe8</EntityTypeRef>        
+      </Input>
+      <Output>
+        <EntityTypeRef>215fdab4-84ba-474d-94f8-b5811e0f6b5c</EntityTypeRef>
+      </Output>
+    </ProvenanceInterface>
+    <ProvenanceInterface guid="e42f2df4-0b4c-49b3-890b-ad71d0a2544a">
+      <Name>ImageOptimizer</Name>
+      <Input>
+        <EntityTypeRef>5de4dbe3-8f6a-4c32-a15d-af95105f9fe8</EntityTypeRef>
+        <EntityTypeRef>215fdab4-84ba-474d-94f8-b5811e0f6b5c</EntityTypeRef>
+      </Input>
+      <Output>
+        <EntityTypeRef>5de4dbe3-8f6a-4c32-a15d-af95105f9fe8</EntityTypeRef>
+      </Output>
+    </ProvenanceInterface>
+  </ProvenanceInterfaceCatalog>
+</Profile>

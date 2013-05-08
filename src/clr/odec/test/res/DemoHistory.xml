@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<History xmlns="http://www.mastersign.de/odec/container/">
+  <HistoryItem>
+    <Edition>
+      <Guid>d782d9ee-dddd-4a57-89dd-c631e5a1aca3</Guid>
+      <Software>Test Software 0</Software>
+      <Timestamp>
+        1997-08-21T15:22:18.0000000
+      </Timestamp>
+      <Owner>
+        <Institute>Test institute 0</Institute>
+        <Operator>Mr. Smith-0</Operator>
+        <Email>test@server-0.com</Email>
+        <X509Certificate>01234567890</X509Certificate>
+      </Owner>
+      <Copyright>Test © Copyright 0</Copyright>
+      <Comments>
+        Test comments
+        with multiple
+        lines 0.
+      </Comments>
+    </Edition>
+    <PastMasterSignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          mXrNZ5eCChrySrrmyn648Nq/8CKOFQKYP9zf8biSkZRHK9OSrJaRGU0xNysq0ZG2rCA92lT7bpVAWFeum0aeI4Os+pRGmPKmzMhFk9OHTA7NqVEWa1g/43g7F87a0F0xPfOzMhLU09YTnpXHvgas57FM3i9a+drDh30Z+U6Kskk=
+        </SignatureValue>
+      </Signature>
+    </PastMasterSignature>
+  </HistoryItem>
+  <HistoryItem>
+    <Edition>
+      <Guid>d782d9ee-dddd-4a57-89dd-c631e5a1aca3</Guid>
+      <Software>Test Software 1</Software>
+      <Timestamp>
+        1997-08-21T15:22:18.0010000
+      </Timestamp>
+      <Owner>
+        <Institute>Test institute 1</Institute>
+        <Operator>Mr. Smith-1</Operator>
+        <Email>test@server-1.com</Email>
+        <X509Certificate>01234567891</X509Certificate>
+      </Owner>
+      <Copyright>Test © Copyright 1</Copyright>
+      <Comments>
+        Test comments
+        with multiple
+        lines 1.
+      </Comments>
+    </Edition>
+    <PastMasterSignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          mXrNZ5eCChrySrrmyn648Nq/8CKOFQKYP9zf8biSkZRHK9OSrJaRGU0xNysq0ZG2rCA92lT7bpVAWFeum0aeI4Os+pRGmPKmzMhFk9OHTA7NqVEWa1g/43g7F87a0F0xPfOzMhLU09YTnpXHvgas57FM3i9a+drDh30Z+U6Kskk=
+        </SignatureValue>
+      </Signature>
+    </PastMasterSignature>
+  </HistoryItem>
+  <HistoryItem>
+    <Edition>
+      <Guid>d782d9ee-dddd-4a57-89dd-c631e5a1aca3</Guid>
+      <Software>Test Software 2</Software>
+      <Timestamp>
+        1997-08-21T15:22:18.0020000
+      </Timestamp>
+      <Owner>
+        <Institute>Test institute 2</Institute>
+        <Operator>Mr. Smith-2</Operator>
+        <Email>test@server-2.com</Email>
+        <X509Certificate>01234567892</X509Certificate>
+      </Owner>
+      <Copyright>Test © Copyright 2</Copyright>
+      <Comments>
+        Test comments
+        with multiple
+        lines 2.
+      </Comments>
+    </Edition>
+    <PastMasterSignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          mXrNZ5eCChrySrrmyn648Nq/8CKOFQKYP9zf8biSkZRHK9OSrJaRGU0xNysq0ZG2rCA92lT7bpVAWFeum0aeI4Os+pRGmPKmzMhFk9OHTA7NqVEWa1g/43g7F87a0F0xPfOzMhLU09YTnpXHvgas57FM3i9a+drDh30Z+U6Kskk=
+        </SignatureValue>
+      </Signature>
+    </PastMasterSignature>
+  </HistoryItem>
+  <HistoryItem>
+    <Edition>
+      <Guid>d782d9ee-dddd-4a57-89dd-c631e5a1aca3</Guid>
+      <Software>Test Software 3</Software>
+      <Timestamp>
+        1997-08-21T15:22:18.0030000
+      </Timestamp>
+      <Owner>
+        <Institute>Test institute 3</Institute>
+        <Operator>Mr. Smith-3</Operator>
+        <Email>test@server-3.com</Email>
+        <X509Certificate>01234567893</X509Certificate>
+      </Owner>
+      <Copyright>Test © Copyright 3</Copyright>
+      <Comments>
+        Test comments
+        with multiple
+        lines 3.
+      </Comments>
+    </Edition>
+    <PastMasterSignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          mXrNZ5eCChrySrrmyn648Nq/8CKOFQKYP9zf8biSkZRHK9OSrJaRGU0xNysq0ZG2rCA92lT7bpVAWFeum0aeI4Os+pRGmPKmzMhFk9OHTA7NqVEWa1g/43g7F87a0F0xPfOzMhLU09YTnpXHvgas57FM3i9a+drDh30Z+U6Kskk=
+        </SignatureValue>
+      </Signature>
+    </PastMasterSignature>
+  </HistoryItem>
+</History>

@@ -1,0 +1,92 @@
+Certificate:
+    Data:
+        Version: 3 (0x2)
+        Serial Number: 1 (0x1)
+        Signature Algorithm: md5WithRSAEncryption
+        Issuer: C=US, ST=Province, L=City, O=Test Organization, OU=Unit, CN=www.test-server.com/emailAddress=admin@test-server.com
+        Validity
+            Not Before: May  8 12:41:56 2013 GMT
+            Not After : May  6 12:41:56 2023 GMT
+        Subject: C=US, ST=Province, O=Test Organization, OU=Test, CN=test.test-server.com/emailAddress=test@text-server.com
+        Subject Public Key Info:
+            Public Key Algorithm: rsaEncryption
+            RSA Public Key: (2048 bit)
+                Modulus (2048 bit):
+                    00:b5:ae:4d:fa:4f:98:8c:ef:b6:81:38:a6:05:f4:
+                    c9:ed:af:9a:28:77:f4:18:e1:4e:ca:0c:5f:17:69:
+                    83:cf:87:25:6c:fe:4b:89:5e:82:53:5a:ac:d6:0f:
+                    41:87:f1:cf:a4:24:b1:38:25:67:11:c6:c8:50:b3:
+                    52:b5:16:6c:d0:b5:e7:77:14:f6:58:6d:5f:40:3a:
+                    7d:c5:b5:58:d6:46:61:fa:c3:98:eb:ff:0d:b3:93:
+                    fb:e2:07:62:7f:cd:00:a4:5d:0f:62:52:8d:f3:3a:
+                    fa:a1:37:81:05:56:05:ea:0a:59:00:99:f6:4d:8e:
+                    77:74:8c:82:0f:73:1d:17:e6:b1:86:f2:92:b8:04:
+                    37:05:84:71:26:2f:29:e4:22:56:6c:f4:3d:03:f2:
+                    49:7e:33:9b:9b:dd:47:2b:04:a4:6a:e7:6f:92:51:
+                    e4:fc:64:a0:a7:7e:61:b4:e0:42:b6:73:80:2d:f1:
+                    53:4d:fa:1a:39:c3:3b:ee:32:93:db:9c:33:d8:5e:
+                    02:71:48:1d:c3:9f:57:e0:fd:d7:2c:80:db:9e:a8:
+                    0c:2e:00:f5:d3:ec:5c:6d:61:7a:af:fa:6f:4f:9a:
+                    49:98:46:8d:ae:67:25:2e:da:f1:19:86:1d:14:6d:
+                    2d:0d:15:eb:06:ea:49:05:51:ca:00:b5:cc:e6:ec:
+                    d1:2b
+                Exponent: 65537 (0x10001)
+        X509v3 extensions:
+            X509v3 Basic Constraints: 
+                CA:FALSE
+            Netscape Cert Type: 
+                SSL Server
+            Netscape Comment: 
+                OpenSSL Generated Server Certificate
+            X509v3 Subject Key Identifier: 
+                23:ED:55:1E:21:11:5C:AA:AB:CF:27:C6:EA:09:6D:63:9B:F8:CD:20
+            X509v3 Authority Key Identifier: 
+                keyid:3C:46:55:95:C8:86:98:E0:ED:CA:F3:3E:7A:6B:E4:99:48:18:4A:7B
+                DirName:/C=US/ST=Province/L=City/O=Test Organization/OU=Unit/CN=www.test-server.com/emailAddress=admin@test-server.com
+                serial:E6:36:A3:36:46:EF:F3:52
+
+    Signature Algorithm: md5WithRSAEncryption
+        44:15:9b:28:f9:f8:a8:60:ae:01:fa:88:65:19:68:a3:78:99:
+        76:2b:e2:82:6e:c2:c8:f7:e9:f3:5b:92:79:56:60:9f:bd:29:
+        ef:ff:38:8e:04:82:24:9d:38:14:49:86:1f:0d:c2:6c:5b:43:
+        9c:0f:60:20:fd:91:54:fe:d0:d9:2f:5b:44:f0:38:51:3f:27:
+        43:29:e8:79:72:ac:e7:85:aa:b9:ee:c6:7f:be:28:0d:5f:35:
+        ea:32:f6:71:a6:8d:3f:e1:81:95:f9:0f:7f:50:a9:45:53:e6:
+        48:5e:bf:59:78:3c:99:60:45:3a:a4:77:2b:ea:73:66:de:9b:
+        5f:f0:c8:81:bf:bf:b8:61:6c:e6:2c:ef:fe:c6:fb:9a:e0:74:
+        e2:4b:5a:66:a4:f8:c7:82:b0:32:1c:70:13:24:40:e4:05:13:
+        ee:01:87:dd:d5:50:4c:f5:e5:0f:35:c0:ca:be:d2:97:c8:e1:
+        2d:c1:fb:57:6e:1d:45:4a:d7:e3:5a:32:0f:fe:92:e4:1b:38:
+        b5:8a:50:20:bd:00:02:4e:7b:50:55:e6:77:f2:ff:a2:9d:90:
+        ec:3d:ee:78:80:ba:4d:a8:70:32:5e:cc:68:b2:f5:b3:13:54:
+        ba:ec:4f:86:08:3f:a2:88:ac:e3:e8:0b:48:46:47:74:54:7f:
+        73:89:d7:14
+-----BEGIN CERTIFICATE-----
+MIIE+DCCA+CgAwIBAgIBATANBgkqhkiG9w0BAQQFADCBnjELMAkGA1UEBhMCVVMx
+ETAPBgNVBAgTCFByb3ZpbmNlMQ0wCwYDVQQHEwRDaXR5MRowGAYDVQQKExFUZXN0
+IE9yZ2FuaXphdGlvbjENMAsGA1UECxMEVW5pdDEcMBoGA1UEAxMTd3d3LnRlc3Qt
+c2VydmVyLmNvbTEkMCIGCSqGSIb3DQEJARYVYWRtaW5AdGVzdC1zZXJ2ZXIuY29t
+MB4XDTEzMDUwODEyNDE1NloXDTIzMDUwNjEyNDE1NlowgY8xCzAJBgNVBAYTAlVT
+MREwDwYDVQQIEwhQcm92aW5jZTEaMBgGA1UEChMRVGVzdCBPcmdhbml6YXRpb24x
+DTALBgNVBAsTBFRlc3QxHTAbBgNVBAMTFHRlc3QudGVzdC1zZXJ2ZXIuY29tMSMw
+IQYJKoZIhvcNAQkBFhR0ZXN0QHRleHQtc2VydmVyLmNvbTCCASIwDQYJKoZIhvcN
+AQEBBQADggEPADCCAQoCggEBALWuTfpPmIzvtoE4pgX0ye2vmih39BjhTsoMXxdp
+g8+HJWz+S4leglNarNYPQYfxz6QksTglZxHGyFCzUrUWbNC153cU9lhtX0A6fcW1
+WNZGYfrDmOv/DbOT++IHYn/NAKRdD2JSjfM6+qE3gQVWBeoKWQCZ9k2Od3SMgg9z
+HRfmsYbykrgENwWEcSYvKeQiVmz0PQPySX4zm5vdRysEpGrnb5JR5PxkoKd+YbTg
+QrZzgC3xU036GjnDO+4yk9ucM9heAnFIHcOfV+D91yyA256oDC4A9dPsXG1heq/6
+b0+aSZhGja5nJS7a8RmGHRRtLQ0V6wbqSQVRygC1zObs0SsCAwEAAaOCAUwwggFI
+MAkGA1UdEwQCMAAwEQYJYIZIAYb4QgEBBAQDAgZAMDMGCWCGSAGG+EIBDQQmFiRP
+cGVuU1NMIEdlbmVyYXRlZCBTZXJ2ZXIgQ2VydGlmaWNhdGUwHQYDVR0OBBYEFCPt
+VR4hEVyqq88nxuoJbWOb+M0gMIHTBgNVHSMEgcswgciAFDxGVZXIhpjg7crzPnpr
+5JlIGEp7oYGkpIGhMIGeMQswCQYDVQQGEwJVUzERMA8GA1UECBMIUHJvdmluY2Ux
+DTALBgNVBAcTBENpdHkxGjAYBgNVBAoTEVRlc3QgT3JnYW5pemF0aW9uMQ0wCwYD
+VQQLEwRVbml0MRwwGgYDVQQDExN3d3cudGVzdC1zZXJ2ZXIuY29tMSQwIgYJKoZI
+hvcNAQkBFhVhZG1pbkB0ZXN0LXNlcnZlci5jb22CCQDmNqM2Ru/zUjANBgkqhkiG
+9w0BAQQFAAOCAQEARBWbKPn4qGCuAfqIZRloo3iZdivigm7CyPfp81uSeVZgn70p
+7/84jgSCJJ04FEmGHw3CbFtDnA9gIP2RVP7Q2S9bRPA4UT8nQynoeXKs54Wque7G
+f74oDV816jL2caaNP+GBlfkPf1CpRVPmSF6/WXg8mWBFOqR3K+pzZt6bX/DIgb+/
+uGFs5izv/sb7muB04ktaZqT4x4KwMhxwEyRA5AUT7gGH3dVQTPXlDzXAyr7Sl8jh
+LcH7V24dRUrX41oyD/6S5Bs4tYpQIL0AAk57UFXmd/L/op2Q7D3ueIC6TahwMl7M
+aLL1sxNUuuxPhgg/oois4+gLSEZHdFR/c4nXFA==
+-----END CERTIFICATE-----

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Root>
+  <DemoSignature xmlns:s="http://www.w3.org/2000/09/xmldsig#">
+    <s:Signature>
+      <s:SignedInfo>
+        <s:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+        <s:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#dsa-sha1" />
+        <s:Reference URI="DemoFile.xml">
+          <s:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+          <s:DigestValue>
+            AAECAwQFBgcICQoLDA0ODw==
+          </s:DigestValue>
+        </s:Reference>
+      </s:SignedInfo>
+      <s:SignatureValue>
+        AAECAwQFBgcICQoLDA0ODw==
+      </s:SignatureValue>
+    </s:Signature>
+  </DemoSignature>
+</Root>

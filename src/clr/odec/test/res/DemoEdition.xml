@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Edition xmlns="http://www.mastersign.de/odec/container/">
+  <Guid>d782d9ee-dddd-4a57-89dd-c631e5a1aca3</Guid>
+  <Software>Test Software 1</Software>
+  <Timestamp>
+    1997-08-21T15:22:18.0010000
+  </Timestamp>
+  <Owner>
+    <Institute>Test institute 1</Institute>
+    <Operator>Mr. Smith-1</Operator>
+    <Email>test@server-1.com</Email>
+    <X509Certificate>01234567891</X509Certificate>
+  </Owner>
+  <Copyright>Test © Copyright 1</Copyright>
+  <Comments>
+    Test comments
+    with multiple
+    lines 1.
+  </Comments>
+</Edition>

@@ -44,6 +44,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -52,10 +53,170 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="cli\Program.cs" />
+    <Compile Include="CompatibilityFlags.cs" />
+    <Compile Include="Container.cs" />
+    <Compile Include="Container.static.cs" />
+    <Compile Include="ContainerException.cs" />
+    <Compile Include="ContainerValidationEventArgs.cs" />
+    <Compile Include="crypto\AlgorithmIdentifier.cs" />
+    <Compile Include="crypto\BclC14NCanonicalizer.cs" />
+    <Compile Include="crypto\BclCryptoFactory.cs" />
+    <Compile Include="crypto\BclHashProvider.cs" />
+    <Compile Include="crypto\BclKeyHelper.cs" />
+    <Compile Include="crypto\BclRandomGenerator.cs" />
+    <Compile Include="crypto\BclRSAProvider.cs" />
+    <Compile Include="crypto\BouncyCastleCryptoFactory.cs" />
+    <Compile Include="crypto\BouncyCastleHashProvider.cs" />
+    <Compile Include="crypto\BouncyCastleKeyHelper.cs" />
+    <Compile Include="crypto\BouncyCastlePasswordFinder.cs" />
+    <Compile Include="crypto\BouncyCastleRandomGenerator.cs" />
+    <Compile Include="crypto\BouncyCastleRSAProvider.cs" />
+    <Compile Include="crypto\CertificateInfo.cs" />
+    <Compile Include="crypto\CertificateValidationRules.cs" />
+    <Compile Include="crypto\CertificationAuthorityDirectory.cs" />
+    <Compile Include="crypto\Configuration.cs" />
+    <Compile Include="crypto\ICryptoFactory.cs" />
+    <Compile Include="crypto\IHashBuilder.cs" />
+    <Compile Include="crypto\IHashProvider.cs" />
+    <Compile Include="crypto\IPasswordSource.cs" />
+    <Compile Include="crypto\IRandomGenerator.cs" />
+    <Compile Include="crypto\IRSAProvider.cs" />
+    <Compile Include="crypto\IXmlCanonicalizer.cs" />
+    <Compile Include="crypto\test\BclHashProviderTest.cs" />
+    <Compile Include="crypto\test\BclKeyHelperTest.cs" />
+    <Compile Include="crypto\test\BclRandomGeneratorTest.cs" />
+    <Compile Include="crypto\test\BclRSAProviderTest.cs" />
+    <Compile Include="crypto\test\BouncyCastleHashProviderTest.cs" />
+    <Compile Include="crypto\test\BouncyCastleKeyHelperTest.cs" />
+    <Compile Include="crypto\test\BouncyCastleRandomGeneratorTest.cs" />
+    <Compile Include="crypto\test\BouncyCastleRSAProviderTest.cs" />
+    <Compile Include="crypto\test\CompatibilityTest.cs" />
+    <Compile Include="crypto\test\IHashProviderTest.cs" />
+    <Compile Include="crypto\test\IRandomGeneratorTest.cs" />
+    <Compile Include="Entity.cs" />
+    <Compile Include="InitializationSettings.cs" />
+    <Compile Include="model\IXmlStorable.cs" />
+    <Compile Include="model\IXmlStorable2.cs" />
+    <Compile Include="model\Model.cs" />
+    <Compile Include="model\EditionElement.cs" />
+    <Compile Include="model\EditionSaltState.cs" />
+    <Compile Include="model\EntityElement.cs" />
+    <Compile Include="model\HistoryElement.cs" />
+    <Compile Include="model\HistoryItemElement.cs" />
+    <Compile Include="model\IndexElement.cs" />
+    <Compile Include="model\IndexItemElement.cs" />
+    <Compile Include="model\Owner.cs" />
+    <Compile Include="model\ProvenanceElement.cs" />
+    <Compile Include="model\SignatureWrapper.cs" />
+    <Compile Include="model\test\EditionElementTest.cs" />
+    <Compile Include="model\test\EntityElementTest.cs" />
+    <Compile Include="model\test\HistoryElementTest.cs" />
+    <Compile Include="model\test\HistoryItemElementTest.cs" />
+    <Compile Include="model\test\IndexElementTest.cs" />
+    <Compile Include="model\test\IndexItemElementTest.cs" />
+    <Compile Include="model\test\OwnerTest.cs" />
+    <Compile Include="model\test\ProvenanceElementTest.cs" />
+    <Compile Include="model\test\SignatureWrapperTest.cs" />
+    <Compile Include="model\test\ValueReferenceTest.cs" />
+    <Compile Include="model\ValueAppearance.cs" />
+    <Compile Include="model\ValueReference.cs" />
+    <Compile Include="ProcessPhase.cs" />
+    <Compile Include="process\CatalogBase.cs" />
+    <Compile Include="process\CatalogItem.cs" />
+    <Compile Include="process\DataType.cs" />
+    <Compile Include="process\DataTypeCatalog.cs" />
+    <Compile Include="process\EntityType.cs" />
+    <Compile Include="process\EntityTypeCatalog.cs" />
+    <Compile Include="process\Profile.cs" />
+    <Compile Include="process\ProvenanceInterface.cs" />
+    <Compile Include="process\ProvenanceInterfaceCatalog.cs" />
+    <Compile Include="process\test\ProfileTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="report\ContainerReport.cs" />
+    <Compile Include="report\ValidationMessageCollection.cs" />
+    <Compile Include="storage\DirectoryStorage.cs" />
+    <Compile Include="storage\IStorage.cs" />
+    <Compile Include="storage\MimeLookup.cs" />
+    <Compile Include="storage\StorageException.cs" />
+    <Compile Include="storage\test\DirectoryStorageTest.cs" />
+    <Compile Include="storage\test\TestIStorage.cs" />
+    <Compile Include="storage\test\ZipStorageTest.cs" />
+    <Compile Include="storage\ZipStorage.cs" />
+    <Compile Include="utils\StreamUtils.cs" />
+    <Compile Include="test\ContainerTest.cs" />
+    <Compile Include="model\test\ModelTest.cs" />
+    <Compile Include="test\res\DemoFileHashes.cs" />
+    <Compile Include="test\TestHelper.cs" />
+    <Compile Include="test\TestHelperTest.cs" />
+    <Compile Include="test\UtilsTest.cs" />
+    <Compile Include="test\XmlUtilsTest.cs" />
+    <Compile Include="TransformationSettings.cs" />
+    <Compile Include="utils\ObjectUtils.cs" />
+    <Compile Include="ValidationHandler.cs" />
+    <Compile Include="ValidationMessageClass.cs" />
+    <Compile Include="ValidationSeverity.cs" />
+    <Compile Include="Value.cs" />
+    <Compile Include="utils\XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="test\res\ca.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test\res\Test.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test\res\Test.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test\res\Test2.crt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test\res\Test2.key">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="test\res\DemoEdition.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test\res\DemoFile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test\res\DemoHistory.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test\res\DemoIndex.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test\res\DemoProfile.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="test\res\SignatureWrapperTest.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

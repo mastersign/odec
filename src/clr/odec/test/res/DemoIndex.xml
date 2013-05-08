@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Index xmlns="http://www.mastersign.de/odec/container/">
+  <LastId>4</LastId>
+  <IndexItem>
+    <Id>1</Id>
+    <Successors></Successors>
+    <EntitySignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          g4YRe2f8tqxTq+w6UfIHEIpaayk85ZuV2azaywEv2pdWEjoKHb8NqOlvQ5evSrUEf7r6LLCQFXs4NyCAP9YG6BYAhPuzRsnXHFL2UxZMkO5XwYnLXJ4aSqAkr0Cr+puA3ebXX2efcegdRdQHxnQbn/V7ftwUxjVFLV/6D0hLt2M=
+        </SignatureValue>
+      </Signature>
+    </EntitySignature>
+  </IndexItem>
+  <IndexItem>
+    <Id>2</Id>
+    <Successors>1</Successors>
+    <EntitySignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          g4YRe2f8tqxTq+w6UfIHEIpaayk85ZuV2azaywEv2pdWEjoKHb8NqOlvQ5evSrUEf7r6LLCQFXs4NyCAP9YG6BYAhPuzRsnXHFL2UxZMkO5XwYnLXJ4aSqAkr0Cr+puA3ebXX2efcegdRdQHxnQbn/V7ftwUxjVFLV/6D0hLt2M=
+        </SignatureValue>
+      </Signature>
+    </EntitySignature>
+  </IndexItem>
+  <IndexItem>
+    <Id>3</Id>
+    <Successors>1 2</Successors>
+    <EntitySignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          g4YRe2f8tqxTq+w6UfIHEIpaayk85ZuV2azaywEv2pdWEjoKHb8NqOlvQ5evSrUEf7r6LLCQFXs4NyCAP9YG6BYAhPuzRsnXHFL2UxZMkO5XwYnLXJ4aSqAkr0Cr+puA3ebXX2efcegdRdQHxnQbn/V7ftwUxjVFLV/6D0hLt2M=
+        </SignatureValue>
+      </Signature>
+    </EntitySignature>
+  </IndexItem>
+  <IndexItem>
+    <Id>4</Id>
+    <Successors>1 2 3</Successors>
+    <EntitySignature>
+      <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+          <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <Reference URI="DemoFile.xml">
+            <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <DigestValue>
+              Ej5LXQ/2o+r4k7cZ3Ptru0WA+ac=
+            </DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>
+          g4YRe2f8tqxTq+w6UfIHEIpaayk85ZuV2azaywEv2pdWEjoKHb8NqOlvQ5evSrUEf7r6LLCQFXs4NyCAP9YG6BYAhPuzRsnXHFL2UxZMkO5XwYnLXJ4aSqAkr0Cr+puA3ebXX2efcegdRdQHxnQbn/V7ftwUxjVFLV/6D0hLt2M=
+        </SignatureValue>
+      </Signature>
+    </EntitySignature>
+  </IndexItem>
+</Index>

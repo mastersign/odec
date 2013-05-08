@@ -1,0 +1,602 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ArgumentException_EmptyString" xml:space="preserve">
+    <value>Die übergebene Zeichenfolge ist leer.</value>
+  </data>
+  <data name="BclC14NCanonicalizer_Canonize_NotSupported_StreamAsOutput" xml:space="preserve">
+    <value>Die XML-Transformation in eine kanonische Form unterstützt Stream nicht als Ausgabe.</value>
+  </data>
+  <data name="BclC14NCanonicalizer_Canonize_NotSupported_XmlDocumentAsInput" xml:space="preserve">
+    <value>Die XML-Transformation in eine kanonische Form unterstützt XmlDocument nicht als Eingabe.</value>
+  </data>
+  <data name="BclKeyHelper_DecodePem_ArgumentException_TypeNotFound" xml:space="preserve">
+    <value>Der übergebene Typ wurde im Text nicht gefunden.</value>
+  </data>
+  <data name="BclKeyHelper_DecodeRSAPrivateKey_FormatException_ErrorParsingPrivateKey" xml:space="preserve">
+    <value>Beim Parsen des privaten Schlüssels ist ein Fehler aufgetreten.</value>
+  </data>
+  <data name="BouncyCastleKeyHelper_ExtractPem_NoPemData" xml:space="preserve">
+    <value>Die übergebene Zeichenfolge enthält keine PEM-kodierten Daten mit der ID {0}.</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Failed" xml:space="preserve">
+    <value>Die Signatur des Zertifikats ist ungültig: {0}
+{1}</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Success" xml:space="preserve">
+    <value>Die Signatur des Zertifikats ist gültig: {0}</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_CAFound" xml:space="preserve">
+    <value>Für das Zertifikat wurde eine Zertifizierungsstelle gefunden der vertraut wird: {0}</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoCAFound" xml:space="preserve">
+    <value>Für das Zeritifkat wurde keine Zertifizierungsstelle gefunden der vertraut wird: {0}</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoSelfSignedCertsAllowed" xml:space="preserve">
+    <value>Das Zertifikat ist selbst signiert. Die Validierungsregeln erlauben jedoch keine selbst signierten Zertifikate.</value>
+  </data>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_Success" xml:space="preserve">
+    <value>Das Zertifikat ist gültig und ihm wird vertraut: {0}</value>
+  </data>
+  <data name="CatalogBase_CopyTo_ArgumentException_MoreThanOneDimension" xml:space="preserve">
+    <value>Das übergebene Array hat mehr als eine Dimension.</value>
+  </data>
+  <data name="CatalogBase_CopyTo_ArgumentException_NotEnoughSpace" xml:space="preserve">
+    <value>In dem Array ist nicht ausreichend Platz für alle Elemente des Katalogs.</value>
+  </data>
+  <data name="CatalogItem_LoadFromXml_FormatException_InvalidGuid" xml:space="preserve">
+    <value>Die GUID in dem übergebenen XML-Element ist ungültig.</value>
+  </data>
+  <data name="CertificationAuthorityDirectory_GetSigningCertificate_NoCertificate" xml:space="preserve">
+    <value>Der übergebene RSA-Provider ist kein Zertifikat.</value>
+  </data>
+  <data name="CompatibilityFlags_None" xml:space="preserve">
+    <value>kein</value>
+  </data>
+  <data name="CompatibilityFlags_SupressStructureXMLCanonicalization" xml:space="preserve">
+    <value>XML-Struktur-Dateien nicht kanonisieren</value>
+  </data>
+  <data name="CompatibilityFlags_WriteXmlSignatureCanonicalized" xml:space="preserve">
+    <value>XML-Signaturen kanonisiert speichern</value>
+  </data>
+  <data name="Container_ArgumentException_EntityDoesNotExist" xml:space="preserve">
+    <value>Das angegebene Entity existiert nicht.</value>
+  </data>
+  <data name="Container_ArgumentNullException_LabelNotFound" xml:space="preserve">
+    <value>Das übergebene Label wurde im Index nicht gefunden.</value>
+  </data>
+  <data name="Container_CanReinstateHistoryEdition_ArgumentException_EditionNotFound" xml:space="preserve">
+    <value>Die angegebene Edition-ID wurde in der Container-History nicht gefunden.</value>
+  </data>
+  <data name="Container_CanReinstateHistoryEdition_InvalidOperation_WrongPhase" xml:space="preserve">
+    <value>Der Container muss sich in der Prozessphase 'Sealed' befinden, damit diese Operation erlaubt ist.</value>
+  </data>
+  <data name="Container_CanReinstateHistoryEdition_Reason_EntityRemoved" xml:space="preserve">
+    <value>Eine spätere Edition hat ein Entity entfernt, das benötigt wird, um die angegebene Edition als aktuelle Edition wiederherzustellen</value>
+  </data>
+  <data name="Container_CanReinstateHistoryEdition_Reason_SaltRemoved" xml:space="preserve">
+    <value>Das Salt der angegebenen Edition wurde entfernt um zu verhindern, dass sie als aktuelle Edition wiederhergestellt wird.</value>
+  </data>
+  <data name="Container_FinishInitialization_InvalidOperation_NoEntity" xml:space="preserve">
+    <value>Der Container muss mindestens ein Entity enthalten.</value>
+  </data>
+  <data name="Container_LoadAndValidate_ContainerHistoryFound" xml:space="preserve">
+    <value>Container-History '{0}' gefunden.</value>
+  </data>
+  <data name="Container_LoadAndValidate_ContainerHistoryMissing" xml:space="preserve">
+    <value>Container-History '{0}' fehlt.</value>
+  </data>
+  <data name="Container_LoadAndValidate_CurrentEditionFound" xml:space="preserve">
+    <value>Aktuelle Edition '{0}' gefunden.</value>
+  </data>
+  <data name="Container_LoadAndValidate_CurrentEditionIsMissing" xml:space="preserve">
+    <value>Aktuelle Edition '{0}' fehlt.</value>
+  </data>
+  <data name="Container_LoadAndValidate_EntityIndexFound" xml:space="preserve">
+    <value>Entity-Index '{0}' gefunden.</value>
+  </data>
+  <data name="Container_LoadAndValidate_EntityIndexMissing" xml:space="preserve">
+    <value>Entity-Index '{0}' fehlt.</value>
+  </data>
+  <data name="Container_LoadAndValidate_HistoryElementNotFound" xml:space="preserve">
+    <value>Das Container-History-Dokument enthält kein History-XML-Element.</value>
+  </data>
+  <data name="Container_LoadAndValidate_IndexElementNotFound" xml:space="preserve">
+    <value>Das Entity-Index-Dokument enthält kein Index-XML-Element.</value>
+  </data>
+  <data name="Container_LoadAndValidate_MasterSignatureCanNotBeVerified" xml:space="preserve">
+    <value>Die Haupt-Signatur kann nicht verifiziert werden.</value>
+  </data>
+  <data name="Container_LoadAndValidate_NoCertificateFound" xml:space="preserve">
+    <value>Kein Zertifikat in der aktuellen Edition gefunden. Validierung wird abgebrochen.</value>
+  </data>
+  <data name="Container_NewEntity_ArgumentException_PredecessorDoesNotExist" xml:space="preserve">
+    <value>Einer der angegebenen Vorgänger existert nicht.</value>
+  </data>
+  <data name="Container_NewEntity_InvalidOperation_WrongPhase" xml:space="preserve">
+    <value>Der Container muss in der Prozessphase 'Initialization' oder 'Transformation' sein, damit neue Entities hinzugefügt werden können.</value>
+  </data>
+  <data name="Container_NewEntity_LabelAllreadyInUse" xml:space="preserve">
+    <value>Das angegebene Label wird bereits verwendet.</value>
+  </data>
+  <data name="Container_NewEntity_MaximumNumberExceeded" xml:space="preserve">
+    <value>Die maximale Anzahl von Entities in einem Container wurde überschritten.</value>
+  </data>
+  <data name="Container_OpenContainer_ArgumentException_PathNotFound" xml:space="preserve">
+    <value>Der angegebene Pfad existiert nicht:
+{0}</value>
+  </data>
+  <data name="Container_Open_ContainerInvalid" xml:space="preserve">
+    <value>Container ist ungültig.</value>
+  </data>
+  <data name="Container_Open_ContainerIsValid" xml:space="preserve">
+    <value>Container ist gültig. (Signaturen der Entity-Werte wurden noch nicht geprüft.)</value>
+  </data>
+  <data name="Container_ReinstateHistoryEdition_ReinstatingEditionImpossible" xml:space="preserve">
+    <value>Wiederherstellung der angegebenen Edition als aktuelle Edition ist nicht möglich:
+{0}</value>
+  </data>
+  <data name="Container_RemoveEntity_InvalidOperation_WrongPhase" xml:space="preserve">
+    <value>Der Container muss sich in der Prozessphase 'Transformation', damit ein Entity entfernt werden kann.</value>
+  </data>
+  <data name="Container_TryLoadXml_ErrorReadingXMLDocument" xml:space="preserve">
+    <value>Fehler beim Lesen des XML-Dokumentes '{0}': '{1}'</value>
+  </data>
+  <data name="Container_ValidateDoubleSignature_CopyOfSignatureIsMissing" xml:space="preserve">
+    <value>Kopie der Signatur für '{0}' fehlt.</value>
+  </data>
+  <data name="Container_ValidateDoubleSignature_InvalidSignatureCopy" xml:space="preserve">
+    <value>Kopie der Signatur für '{0}' stimmt nicht mit Original überein.</value>
+  </data>
+  <data name="Container_ValidateDoubleSignature_SignatureIsMissing" xml:space="preserve">
+    <value>Signatur für '{0}' fehlt.</value>
+  </data>
+  <data name="Container_ValidateEntities_EntityHeaderFound" xml:space="preserve">
+    <value>Kopf der Entity {0:00000} gefunden.</value>
+  </data>
+  <data name="Container_ValidateEntities_EntityHeaderIsMissing" xml:space="preserve">
+    <value>Kopf der Entity {0:00000} fehlt.</value>
+  </data>
+  <data name="Container_ValidateEntities_EntityLabelDiffersFromIndexItem" xml:space="preserve">
+    <value>Label im Kopf des Entity unterscheidet sich vom Label im Index: '{0}' ungleich '{1}'.</value>
+  </data>
+  <data name="Container_ValidateXml_SchemaError" xml:space="preserve">
+    <value>Fehler beim Überprüfen des XML Schemas in '{0}': {1}</value>
+  </data>
+  <data name="Container_ValidateXml_XMLValid" xml:space="preserve">
+    <value>Validierung des XML-Dokumentes '{0}' war erfolgreich.</value>
+  </data>
+  <data name="Container_VerifyEntityValueSignatures_AllEntityValuesIntegerAndAuthentic" xml:space="preserve">
+    <value>Alle Entity-Werte sind unverändert und authentisch.</value>
+  </data>
+  <data name="Container_VerifyEntityValueSignatures_InvalidOperation_ContainerNotSealed" xml:space="preserve">
+    <value>Die Überprüfung der Integrität ist nur möglich, wenn sich der Container in der Prozessphase 'Sealed' befindet.</value>
+  </data>
+  <data name="DirectoryStorage_Name" xml:space="preserve">
+    <value>Dateisystemverzeichnis</value>
+  </data>
+  <data name="DirectoryStorage_Remove_StorageException_RemovingFailed" xml:space="preserve">
+    <value>Das Entfernen des Elements aus dem Speicher ist fehlgeschlagen.</value>
+  </data>
+  <data name="DirectoryStorage_Write_SourceFileNotFound" xml:space="preserve">
+    <value>Die angegebene Quelldatei existiert nicht.</value>
+  </data>
+  <data name="DirectoryStorage_Write_StorageException_WritingFailed" xml:space="preserve">
+    <value>Das Schreiben des Elements in den Speicher ist fehlgeschlagen.</value>
+  </data>
+  <data name="EditionElement_Validate_HistorySignatureInEdition" xml:space="preserve">
+    <value>History-Signatur in Edition '{0}'</value>
+  </data>
+  <data name="EditionElement_Validate_IdIsEmpty" xml:space="preserve">
+    <value>GUID der Edition '{0}' ist leer.</value>
+  </data>
+  <data name="EditionElement_Validate_IndexSignatureInEdition" xml:space="preserve">
+    <value>Index-Signatur in Edition '{0}'</value>
+  </data>
+  <data name="EditionElement_Validate_NoHistorySignature" xml:space="preserve">
+    <value>History-Signatur in Edition '{0}' fehlt.</value>
+  </data>
+  <data name="EditionElement_Validate_NoIndexSignature" xml:space="preserve">
+    <value>Index-Signatur in Edition '{0}' fehlt.</value>
+  </data>
+  <data name="EditionElement_Validate_NoOwner" xml:space="preserve">
+    <value>Edition '{0}' hat keinen Owner.</value>
+  </data>
+  <data name="EditionElement_Validate_SoftwareFieldIsEmpty" xml:space="preserve">
+    <value>Feld Software der Edition '{0}' ist leer.</value>
+  </data>
+  <data name="EntityElement_Validate_InvalidId" xml:space="preserve">
+    <value>Die Entity-ID ist kleiner oder gleich Null.</value>
+  </data>
+  <data name="EntityElement_Validate_InvalidProvenanceDescription" xml:space="preserve">
+    <value>Die Herkunftsbeschreibung im Kopf des Entity {0} ist ungültig.</value>
+  </data>
+  <data name="EntityElement_Validate_InvalidProvenanceParameterSetReference" xml:space="preserve">
+    <value>Herkunftsparametersatz '{0}' im Kopf des Entity {1} ist ungültig.</value>
+  </data>
+  <data name="EntityElement_Validate_InvalidValueReference" xml:space="preserve">
+    <value>Struktur der Wert-Referenz '{0}' im Kopf des Entity {1} ist ungültig.</value>
+  </data>
+  <data name="EntityElement_Validate_StructureIsValid" xml:space="preserve">
+    <value>Struktur des Kopfes von Entity {0} ist in Ordnung.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_DataTypeMismatch" xml:space="preserve">
+    <value>Der Datentyp des Wertes '{0}' im Entity '{1}' stimmt nicht mit der Angabe im Entity-Typ überein.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_ProvenanceMismatch" xml:space="preserve">
+    <value>Der Typ '{0}' des Entity '{1}' ist kein gültiges Erzeugnis der angegebenen Herkunft '{2}'.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_RequiredValueMissing" xml:space="preserve">
+    <value>Der erforderliche Wert '{0}' im Entity '{1}' vom Typ '{2}' fehlt.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_UnexpectedValue" xml:space="preserve">
+    <value>Der Wert '{0}' im Entity '{1}' ist nach dem Typ '{2}' nicht erlaubt.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_UnknownProvenance" xml:space="preserve">
+    <value>Die Herkunft '{0}' des Entity '{1}' ist unbekannt.</value>
+  </data>
+  <data name="EntityType_ValidateEntity_Valid" xml:space="preserve">
+    <value>Das Entity {0:00000} '{1}' entspricht seinem Typ '{2}'.</value>
+  </data>
+  <data name="Entity_AddValue_ArgumentException_NameAllreadyInUse" xml:space="preserve">
+    <value>Der angegebene Name '{0}' wird bereits verwendet.</value>
+  </data>
+  <data name="Entity_AddValue_InvalidOperation_NotOpenForChanges" xml:space="preserve">
+    <value>Entity ist geschlossen und kann nicht geändert werden.</value>
+  </data>
+  <data name="Entity_Close_InvalidOperation_EntityAllreadyClosed" xml:space="preserve">
+    <value>Das Entity ist bereits geschlossen.</value>
+  </data>
+  <data name="Entity_GetProvenanceParameterSet_NoProvenanceParameterSet" xml:space="preserve">
+    <value>Das Entity besitzt keinen Herkunftsparametersatz.</value>
+  </data>
+  <data name="Entity_GetValue_ArgumentException_NameNotFound" xml:space="preserve">
+    <value>Es wurde kein Wert mit dem Namen '{0}' gefunden.</value>
+  </data>
+  <data name="Entity_RemoveFromStorage_InvalidOperation_EntityNotClosedYet" xml:space="preserve">
+    <value>Das Entity ist noch nicht geschlossen.</value>
+  </data>
+  <data name="Entity_SetProvenanceParameterSet_ArgumentException_TypeIdInvalid" xml:space="preserve">
+    <value>Die angegebene Typen-ID ist ungültig.</value>
+  </data>
+  <data name="Entity_SetProvenanceParameterSet_InvalidOperation_ValueNameAllreadyInUse" xml:space="preserve">
+    <value>Der angegebene Name '{0}' wird bereits verwendet.</value>
+  </data>
+  <data name="Entity_SourceFileNotFound" xml:space="preserve">
+    <value>Die angegebene Quelldatei existiert nicht.</value>
+  </data>
+  <data name="Entity_ValidateStructure_StructureIsValid" xml:space="preserve">
+    <value>Die Struktur von Entity {0} ist in Ordnung.</value>
+  </data>
+  <data name="Entity_VerifyValueSignatures_AllValueSignaturesAuthentic" xml:space="preserve">
+    <value>Alle Werte im Entity {0} sind authentisch.</value>
+  </data>
+  <data name="HashBuilder_ArgumentNullException_Target" xml:space="preserve">
+    <value>Verwenden Sie Stream.Null, wenn die Daten verworfen werden sollen.</value>
+  </data>
+  <data name="HashProvider_CreateHashBuilder_ArgumentException_StreamIsNotWritable" xml:space="preserve">
+    <value>In den übergebenen Stream kann nicht geschrieben werden.</value>
+  </data>
+  <data name="HashProvider_NotSupported_HashAlgorithm" xml:space="preserve">
+    <value>Der angeforderte Prüfsummen-Algorithmus wird nicht unterstützt.</value>
+  </data>
+  <data name="HistoryElement_InvalidOperation_NoItems" xml:space="preserve">
+    <value>Die Container-History ist leer.</value>
+  </data>
+  <data name="HistoryElement_Validate_InvalidItem" xml:space="preserve">
+    <value>Der Container-History-Eintrag {0} ist ungültig.</value>
+  </data>
+  <data name="HistoryElement_Validate_StructureIsValid" xml:space="preserve">
+    <value>Struktur der Container-History ist in Ordnung.</value>
+  </data>
+  <data name="HistoryItemElement_Validate_EditionInHistoryItem" xml:space="preserve">
+    <value>Edition in History-Eintrag '{0}'</value>
+  </data>
+  <data name="HistoryItemElement_Validate_NoEdition" xml:space="preserve">
+    <value>Edition in History-Eintrag '{0}' fehlt.</value>
+  </data>
+  <data name="HistoryItemElement_Validate_NoPastMasterSignature" xml:space="preserve">
+    <value>Vorherige Haupt-Signatur im History-Eintrag '{0}' fehlt.</value>
+  </data>
+  <data name="HistoryItemElement_Validate_PastMasterSignatureInHistoryItem" xml:space="preserve">
+    <value>Vorherige Haupt-Signatur im History-Eintrag '{0}'</value>
+  </data>
+  <data name="HistoryItemElement_Validate_ValidStructure" xml:space="preserve">
+    <value>Struktur des History-Eintrags '{0}' ist in Ordnung.</value>
+  </data>
+  <data name="IndexElement_Add_ArgumentException_InvalidEntityReference" xml:space="preserve">
+    <value>Die ID der übergebenen Entity-Referenz ist ungültig.</value>
+  </data>
+  <data name="IndexElement_ArgumentException_EntityIdNotFound" xml:space="preserve">
+    <value>Der Index enthält keinen Eintrag mit der ID {0}.</value>
+  </data>
+  <data name="IndexElement_Validate_IndexIsEmpty" xml:space="preserve">
+    <value>Der Index ist leer.</value>
+  </data>
+  <data name="IndexElement_Validate_IndexItemIsInvalid" xml:space="preserve">
+    <value>Der Index-Eintrag '{0}' ist ungültig.</value>
+  </data>
+  <data name="IndexElement_Validate_MultipleUseOfLabel" xml:space="preserve">
+    <value>Das Label von Index-Eintrag '{0}' wird mehr als einmal verwendet.</value>
+  </data>
+  <data name="IndexElement_Validate_ValidStructure" xml:space="preserve">
+    <value>Struktur des Index ist in Ordnung.</value>
+  </data>
+  <data name="IndexItemElement_Validate_EntitySignatureInIndexItem" xml:space="preserve">
+    <value>Entity-Signatur im Index-Eintrag '{0}'</value>
+  </data>
+  <data name="IndexItemElement_Validate_InvalidId" xml:space="preserve">
+    <value>Eine ID in einem Index-Eintrag ist kleiner oder gleich Null.</value>
+  </data>
+  <data name="IndexItemElement_Validate_NoEntitySignature" xml:space="preserve">
+    <value>Die Entity-Signatur im Index-Eintrag '{0}' fehlt.</value>
+  </data>
+  <data name="IndexItemElement_Validate_ValidStructure" xml:space="preserve">
+    <value>Struktur des Index-Eintrags '{0}' ist in Ordnung.</value>
+  </data>
+  <data name="Owner_Validate_NoCertificate" xml:space="preserve">
+    <value>Owner-Zertifikat fehlt.</value>
+  </data>
+  <data name="Owner_Validate_NoEmail" xml:space="preserve">
+    <value>Email-Feld im Owner ist leer.</value>
+  </data>
+  <data name="Owner_Validate_NoInstitute" xml:space="preserve">
+    <value>Institute-Feld im Owner ist leer.</value>
+  </data>
+  <data name="Owner_Validate_NoOperator" xml:space="preserve">
+    <value>Operator-Feld im Owner ist leer.</value>
+  </data>
+  <data name="Owner_Validate_ValidStructure" xml:space="preserve">
+    <value>Struktur der Owner-Beschreibung '{0}' ist in Ordnung.</value>
+  </data>
+  <data name="Profile_LoadFromXml_FormatException_ProfileNotSchemaConform" xml:space="preserve">
+    <value>Das Profil entspricht nicht dem XML-Schema:
+{0}</value>
+  </data>
+  <data name="Profile_LoadFromXml_WrongNamespace" xml:space="preserve">
+    <value>Das übergebene XML-Element befindet sich nicht im erwarteten XML-Namensraum.</value>
+  </data>
+  <data name="Profile_LoadFromXml_WrongXmlElement" xml:space="preserve">
+    <value>Das übergebene XML-Element ist kein Profile-Element.</value>
+  </data>
+  <data name="Profile_ValidateContainer_ProfileMismatch" xml:space="preserve">
+    <value>Das Profil des Container '{0}' entspricht nicht dem zur Validierung verwendeten Profil '{1}'.</value>
+  </data>
+  <data name="Profile_ValidateContainer_ProfileVersionMismatch" xml:space="preserve">
+    <value>Die Profilversion im Container '{0}' entspricht nicht der zur Validierung verwendeten Profilversion '{1}'.</value>
+  </data>
+  <data name="Profile_ValidateEntity_UnkownEntityType" xml:space="preserve">
+    <value>Der Typ '{0}' des Entity '{1}' ist unbekannt.</value>
+  </data>
+  <data name="RSAProvider_NotSupported_NoCertificate" xml:space="preserve">
+    <value>Der Kryptographieanbieter hat keinen Zugriff auf ein Zertifikat.</value>
+  </data>
+  <data name="RSAProvider_NotSupported_NoPrivateKey" xml:space="preserve">
+    <value>Diese Instanz hat keinen Zugriff auf einen privaten Schlüssel.</value>
+  </data>
+  <data name="RSAProvider_ValidateCertificate_Failed" xml:space="preserve">
+    <value>Die Verifikation des Zertifikats von '{0}' ist fehlgeschlagen.
+{1}</value>
+  </data>
+  <data name="RSAProvider_ValidateCertificate_Succeeded" xml:space="preserve">
+    <value>Die Verifikation des Zertifikats von '{0}' war erfolgreich.</value>
+  </data>
+  <data name="SignatureWrapper_ArgumentException_SourceNotReadable" xml:space="preserve">
+    <value>Aus der Datenquelle kann nicht gelesen werden.</value>
+  </data>
+  <data name="SignatureWrapper_ReadFromXml_NoSignatureElement" xml:space="preserve">
+    <value>Das übergebene XML-Element enthält kein 'Signature'-Kindelement.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_MoreThanOneDataReference" xml:space="preserve">
+    <value>Signed info in the signature of '{0}' contains more than one data reference.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_NoDataReference" xml:space="preserve">
+    <value>Das SignedInfo-Element in der Signatur von '{0}' enthält keine Datenreferenz.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_NoSignature" xml:space="preserve">
+    <value>Signatur-Wrapper von '{0}' enthält keine Signatur.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_NoSignatureValue" xml:space="preserve">
+    <value>Signatur von '{0}' enthält keinen Signaturwert.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_NoSignedInfo" xml:space="preserve">
+    <value>Signatur von '{0}' enthält kein SignedInfo-Element.</value>
+  </data>
+  <data name="SignatureWrapper_ValidateStructure_ValidStructure" xml:space="preserve">
+    <value>Struktur der Signatur von '{0}' ist in Ordnung.</value>
+  </data>
+  <data name="SignatureWrapper_VerifyDigest_DataIsInteger" xml:space="preserve">
+    <value>Daten von '{0}' sind unverändert.</value>
+  </data>
+  <data name="SignatureWrapper_VerifyDigest_DataNotInteger" xml:space="preserve">
+    <value>Daten von '{0}' wurden verändert.</value>
+  </data>
+  <data name="SignatureWrapper_VerifyDigest_DigestAlgorithmNotSupported" xml:space="preserve">
+    <value>Der Prüfsummen-Algorithmus der in der XML-Signatur verwendet wurde, wird nicht unterstützt.</value>
+  </data>
+  <data name="SignatureWrapper_VerifyDigest_UriMismatch" xml:space="preserve">
+    <value>URI in Signature von '{0}' stimmt nicht mit der angebenen URI überein.</value>
+  </data>
+  <data name="SignatureWrapper_VerifySignature_CanonicalizerNotSupported" xml:space="preserve">
+    <value>Der Kanonisierer '{0}' der in der XML-Signatur '{1}' wird nicht unterstützt.</value>
+  </data>
+  <data name="SignatureWrapper_VerifySignature_SignatureAlgorithmNotSupported" xml:space="preserve">
+    <value>Der Signatur-Algorithmus '{0}' der in der XML-Signatur '{1}' wird nicht unterstützt.</value>
+  </data>
+  <data name="SignatureWrapper_VerifySignature_SignatureIsAuthentic" xml:space="preserve">
+    <value>Signatur von '{0}' ist authentisch.</value>
+  </data>
+  <data name="SignatureWrapper_VerifySignature_SignatureNotAuthentic" xml:space="preserve">
+    <value>Signature von '{0}' ist nicht authentisch.</value>
+  </data>
+  <data name="SignatureWrapper_WriteToXml_InvalidOperation_NoSignature" xml:space="preserve">
+    <value>Die Signatur fehlt.</value>
+  </data>
+  <data name="Storage_ArgumentException_EmptyPath" xml:space="preserve">
+    <value>Der übergebene Pfad ist leer.</value>
+  </data>
+  <data name="Storage_Read_OpeningFailed" xml:space="preserve">
+    <value>Öffnen des Speicherelements zum Lesen ist fehlgeschlagen.</value>
+  </data>
+  <data name="Storage_StorageFileNotFound" xml:space="preserve">
+    <value>Das über den relativen Pfad angegebene Speicherelement wurde nicht gefunden.</value>
+  </data>
+  <data name="Storage_Write_StreamNotReadable" xml:space="preserve">
+    <value>Aus dem übergebenen Stream kann nicht gelesen werden.</value>
+  </data>
+  <data name="Unlabeled" xml:space="preserve">
+    <value>Unbenannt</value>
+  </data>
+  <data name="Value_InvalidOperation_ValueNotStoredYet" xml:space="preserve">
+    <value>Der Wert wurde bisher nicht gespeichert.</value>
+  </data>
+  <data name="Value_Read_InvalidOperation_ValueAppearanceIsSuppressed" xml:space="preserve">
+    <value>Der Wert ist als 'suppressed' markiert.</value>
+  </data>
+  <data name="Value_ValidateStructure_SignatureMissing" xml:space="preserve">
+    <value>Signatur von '{0}' fehlt.</value>
+  </data>
+  <data name="Value_ValidateStructure_StructureIsValid" xml:space="preserve">
+    <value>Structure von '{0}' ist in Ordnung.</value>
+  </data>
+  <data name="Value_ValidateStructure_ValueFileMissing" xml:space="preserve">
+    <value>Speicherelement für den Wert '{0}' fehlt.</value>
+  </data>
+  <data name="Value_ValidateStructure_ValueFileNotExpected" xml:space="preserve">
+    <value>Speicherelement für den Wert '{0}' ist vorhanden obwohl der Wert als 'suppressed' markiert ist.</value>
+  </data>
+  <data name="Value_WriteAndSignValue_InvalidOperation_NoSourceFileGiven" xml:space="preserve">
+    <value>Es wurde keine Datei an den Konstruktor übergeben.</value>
+  </data>
+  <data name="Value_WriteAndSignValue_InvalidOperation_ValueAllreadyStored" xml:space="preserve">
+    <value>Der Wert wurde bereits gespeichert.</value>
+  </data>
+  <data name="XmlStorable_WriteToXml_ThisInstanceIsInvalid" xml:space="preserve">
+    <value>Die Instanz ist ungültig.</value>
+  </data>
+  <data name="XmlUtils_ReadParsedObject_ArgumentException_NameIsEmpty" xml:space="preserve">
+    <value>Der übergebene Name ist leer.</value>
+  </data>
+  <data name="ZipStorage_ArgumentException_InvalidPathCharacters" xml:space="preserve">
+    <value>Der angegebene Pfad enthält ungültige Zeichen.</value>
+  </data>
+  <data name="ZipStorage_Name" xml:space="preserve">
+    <value>ZIP-Datei</value>
+  </data>
+</root>
