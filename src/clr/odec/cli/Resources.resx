@@ -1,0 +1,285 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DescriptionSchema" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\xml\odec-descriptions.xsd;System.String, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="Warning_NoContainerPathGiven" xml:space="preserve">
+    <value>No container path given. Use '-c &lt;file/dir&gt;'.</value>
+  </data>
+  <data name="Warning_NoOwnerDescriptionFile" xml:space="preserve">
+    <value>No owner description file given. Use '-o &lt;owner file&gt;'.</value>
+  </data>
+  <data name="Warning_NoEntityDescriptionFile" xml:space="preserve">
+    <value>No entity descriptions given. Use '-e &lt;desciption file&gt;'.</value>
+  </data>
+  <data name="Warning_ContainerAllreadyExists" xml:space="preserve">
+    <value>The given container allready exists:
+{0}</value>
+  </data>
+  <data name="Error_ReadingCertificate" xml:space="preserve">
+    <value>Error while reading certificate:
+{0}</value>
+  </data>
+  <data name="Error_ReadingPrivateKey" xml:space="preserve">
+    <value>Error while reading private key:
+{0}</value>
+  </data>
+  <data name="Error_InitializingContainer" xml:space="preserve">
+    <value>Error while initializing the container:
+{0}</value>
+  </data>
+  <data name="Error_SealingContainer" xml:space="preserve">
+    <value>Error while sealing the container:
+{0}</value>
+  </data>
+  <data name="StorageTypeNotSupported" xml:space="preserve">
+    <value>The choosen storage type is not supported.</value>
+  </data>
+  <data name="CertificateFileNotFound" xml:space="preserve">
+    <value>The certificate file was not found.</value>
+  </data>
+  <data name="PrivateKeyNotFound" xml:space="preserve">
+    <value>The private key file was not found.</value>
+  </data>
+  <data name="Error_CreatingEntity" xml:space="preserve">
+    <value>Error while creating new entity.
+{0}</value>
+  </data>
+  <data name="Error_StoringEntity" xml:space="preserve">
+    <value>Error while storing a new entity.
+{0}</value>
+  </data>
+  <data name="Error_NameOfProvenanceParameterSetIsEmpty" xml:space="preserve">
+    <value>Name of provenance parameter set is empty.</value>
+  </data>
+  <data name="Error_NameOfValueIsEmpty" xml:space="preserve">
+    <value>Name of entity value is empty.</value>
+  </data>
+  <data name="Error_ProvenanceParameterSetSourceFileNotFound" xml:space="preserve">
+    <value>The given provenance parameter set source file does not exist.
+{0}</value>
+  </data>
+  <data name="Error_ValueSourceFileNotFound" xml:space="preserve">
+    <value>The given entity value source file does not exist.
+{0}</value>
+  </data>
+  <data name="Warning_NoProfileFile" xml:space="preserve">
+    <value>No profile file given. Use '-p &lt;profile file&gt;'.</value>
+  </data>
+  <data name="Warning_ConatinerNotFound" xml:space="preserve">
+    <value>The given container was not found:
+{0}</value>
+  </data>
+  <data name="Error_ProfileMismatch" xml:space="preserve">
+    <value>The given profile '{0}' does not match the container profile '{1}'.</value>
+  </data>
+  <data name="Error_ProfileVersionMismatch" xml:space="preserve">
+    <value>The given profile version '{0} does not match the container profile version '{1}'.</value>
+  </data>
+  <data name="Warning_NoTargetPath" xml:space="preserve">
+    <value>No target path given. Use '-t &lt;target file/dir&gt;'.</value>
+  </data>
+  <data name="Warning_TargetPathAllreadyExists" xml:space="preserve">
+    <value>The given target path allready exists:
+{0}</value>
+  </data>
+  <data name="Warning_InPlaceTransformationNotSupported" xml:space="preserve">
+    <value>In place transformation is not supported.</value>
+  </data>
+  <data name="Error_OpeningSourceContainer" xml:space="preserve">
+    <value>Error while opening the source container:
+{0}</value>
+  </data>
+  <data name="Warning_StorageTypeNotSupported" xml:space="preserve">
+    <value>The given target storage type is not supported.</value>
+  </data>
+  <data name="Error_CreatingTargetContainer" xml:space="preserve">
+    <value>Error while creating the target container:
+{0}</value>
+  </data>
+  <data name="Error_CopyingStorageFile" xml:space="preserve">
+    <value>Error while copying storage file '{0}':
+{1}</value>
+  </data>
+  <data name="Error_ValidationStep1Failed" xml:space="preserve">
+    <value>Validation step 1 failed. Container structure is invalid.</value>
+  </data>
+  <data name="Error_ValidationStep2Failed" xml:space="preserve">
+    <value>Validation step 2 failed. Value integrity damaged.</value>
+  </data>
+  <data name="Error_ValidationStep3Failed" xml:space="preserve">
+    <value>Validation step 3 failed. Owner certificate invalid.</value>
+  </data>
+  <data name="Error_ValidationStep4Failed" xml:space="preserve">
+    <value>Validation step 4 failed. Container is not conform to profile.</value>
+  </data>
+  <data name="Warning_FileNotFound" xml:space="preserve">
+    <value>The file does not exists:
+{0}</value>
+  </data>
+  <data name="Warning_InvalidMode" xml:space="preserve">
+    <value>The given value for the argument '-mode, -m &lt;working mode&gt;' is invalid.</value>
+  </data>
+  <data name="Warning_InvalidStorageType" xml:space="preserve">
+    <value>The given value for the argument '-storage, -s &lt;storage type&gt;' is invalid.</value>
+  </data>
+  <data name="XML_ParsingError" xml:space="preserve">
+    <value>Error while parsing the XML file '{0}':
+	{1}</value>
+  </data>
+  <data name="XML_FileNotFound" xml:space="preserve">
+    <value>The XML file '{0}' was not found:
+	{1}</value>
+  </data>
+  <data name="XML_ReadingError" xml:space="preserve">
+    <value>Error while reading the XML file '{0}':
+	{1}</value>
+  </data>
+  <data name="XML_FileAccessDenied" xml:space="preserve">
+    <value>Access denied for reading the XML file '{0}':
+	{1}</value>
+  </data>
+  <data name="XML_ValidationError" xml:space="preserve">
+    <value>Error while validation of XML file '{0}':{1}{2}</value>
+  </data>
+  <data name="XML_UnexpectedRootElement" xml:space="preserve">
+    <value>The XML file '{0}' does not contain the expected root element '{1}'.</value>
+  </data>
+  <data name="Warning_ReinstatingImpossible" xml:space="preserve">
+    <value>Reinstating the given edition as current edition is not possible.</value>
+  </data>
+  <data name="Error_UnexpectedReinstateError" xml:space="preserve">
+    <value>Unexpected error while reinstating history edition.</value>
+  </data>
+  <data name="Warning_NoValidTargetEditionId" xml:space="preserve">
+    <value>No valid target edition ID given.</value>
+  </data>
+  <data name="Warning_EditionIdNotFound" xml:space="preserve">
+    <value>The given edition ID was not found in the container history.</value>
+  </data>
+  <data name="Warning_PathNotFound" xml:space="preserve">
+    <value>The given path was not found:
+{0}</value>
+  </data>
+  <data name="PasswordSource_GetPassword_Prompt">
+    <value xml:space="preserve">Password: </value>
+  </data>
+</root>

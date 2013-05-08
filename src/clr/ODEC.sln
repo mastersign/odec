@@ -6,6 +6,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6274A99-36B0-475C-9406-0A0A632BA1A3}"
 	ProjectSection(SolutionItems) = preProject
 		..\xml\odec-container.xsd = ..\xml\odec-container.xsd
+		..\xml\odec-descriptions.xsd = ..\xml\odec-descriptions.xsd
 		..\xml\odec-profile.xsd = ..\xml\odec-profile.xsd
 	EndProjectSection
 EndProject

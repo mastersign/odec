@@ -52,7 +52,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="cli\PasswordSource.cs" />
+    <Compile Include="cli\Program.Create.cs" />
     <Compile Include="cli\Program.cs" />
+    <Compile Include="cli\Program.Extend.cs" />
+    <Compile Include="cli\Program.Inspect.cs" />
+    <Compile Include="cli\Program.Reinstate.cs" />
+    <Compile Include="cli\Program.Transform.cs" />
+    <Compile Include="cli\Program.Validate.cs" />
+    <Compile Include="cli\Resources.de-DE.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.de-DE.resx</DependentUpon>
+    </Compile>
+    <Compile Include="cli\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="cli\StartupInfo.cs" />
+    <Compile Include="cli\StorageType.cs" />
+    <Compile Include="cli\WorkingMode.cs" />
+    <Compile Include="cli\XmlHelper.cs" />
     <Compile Include="CompatibilityFlags.cs" />
     <Compile Include="Container.cs" />
     <Compile Include="Container.static.cs" />
@@ -169,6 +190,9 @@
     <Compile Include="utils\XmlUtils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="odec.license.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
     <None Include="test\res\ca.crt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -187,6 +211,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="cli\Resources.de-DE.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="cli\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -199,6 +232,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="odec.help.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="test\res\DemoEdition.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
