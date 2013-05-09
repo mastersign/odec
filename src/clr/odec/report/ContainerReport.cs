@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Xml;
-using de.mastersign.odec;
 using de.mastersign.odec.model;
 using de.mastersign.odec.process;
 using de.mastersign.odec.storage;
+using de.mastersign.odec.utils;
 
 namespace de.mastersign.odec.report
 {
@@ -119,7 +118,7 @@ namespace de.mastersign.odec.report
             w.WriteStartElement("ContainerReport", NS);
 
             w.WriteElementString("Source", NS, sourcePath);
-            w.WriteElementString("Timestamp", NS, DateTime.Now.ToString("O", CultureInfo.InvariantCulture));
+            w.WriteElementString("Timestamp", NS, DateTimeUtils.FormatDateTime(DateTime.Now));
             w.WriteElementString("Summary", NS, ContainsError ? "error" : "success");
 
             WriteValidationMessages(StructureValidationMessages, w);
@@ -181,7 +180,7 @@ namespace de.mastersign.odec.report
         {
             w.WriteStartElement("Edition", NS);
             w.WriteAttributeString("guid", e.Guid.ToString("D"));
-            w.WriteAttributeString("timestamp", e.Timestamp.ToString("O", CultureInfo.InvariantCulture));
+            w.WriteAttributeString("timestamp", DateTimeUtils.FormatDateTime(e.Timestamp));
             w.WriteElementString("Software", NS, e.Software);
             w.WriteElementString("Profile", NS, e.Profile);
             w.WriteElementString("Version", NS, e.Version);

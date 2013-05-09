@@ -266,7 +266,7 @@ namespace de.mastersign.odec.model
             Software = e.ReadElementString("c:Software", Software);
             Profile = e.ReadElementString("c:Profile", null);
             Version = e.ReadElementString("c:Version", null);
-            Timestamp = e.ReadParsedObject("c:Timestamp", Timestamp, DateTime.Parse);
+            Timestamp = e.ReadParsedObject("c:Timestamp", Timestamp, DateTimeUtils.ParseDateTime);
             Owner = e.ReadObject("c:Owner", Owner);
             Copyright = e.ReadElementString("c:Copyright", null);
             Comments = e.ReadElementString("c:Comments", null);
@@ -334,7 +334,7 @@ namespace de.mastersign.odec.model
                 }
             }
 
-            w.WriteElementString("Timestamp", Model.ContainerNamespace, Timestamp.ToString("O", CultureInfo.InvariantCulture));
+            w.WriteElementString("Timestamp", Model.ContainerNamespace, DateTimeUtils.FormatDateTime(Timestamp));
             w.WriteObject("Owner", Model.ContainerNamespace, Owner);
 
             if (Copyright != null)

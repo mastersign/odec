@@ -173,6 +173,7 @@
     <Compile Include="storage\test\TestIStorage.cs" />
     <Compile Include="storage\test\ZipStorageTest.cs" />
     <Compile Include="storage\ZipStorage.cs" />
+    <Compile Include="utils\DateTimeUtils.cs" />
     <Compile Include="utils\StreamUtils.cs" />
     <Compile Include="test\ContainerTest.cs" />
     <Compile Include="model\test\ModelTest.cs" />
