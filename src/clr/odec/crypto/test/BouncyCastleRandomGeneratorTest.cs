@@ -12,7 +12,7 @@ namespace de.mastersign.odec.crypto.test
         [Test]
         public void CreateRandomGeneratorTest()
         {
-            var rng = new BouncyCastleRandomGenerator();
+            new BouncyCastleRandomGenerator();
         }
 
         [Test]
