@@ -13,5 +13,5 @@ The concept of the ODEC is based on the following paper:
 
 A detailed specification of the container format and its process model can be found in [doc/specification.md](doc/specification.md).
 
-A brief manual for the command line interface of the Microsoft .NET / mono based reference implementation `odec.exe` can be found in [src/clr/odec.help.md](src/clr/odec.help.md).
+A brief manual for the command line interface of the Microsoft .NET / mono based reference implementation `odec.exe` can be found in [src/clr/odec/odec.help.md](src/clr/odec/odec.help.md).
 
