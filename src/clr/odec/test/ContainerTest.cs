@@ -12,13 +12,13 @@ namespace de.mastersign.odec.test
     [TestFixture]
     internal class ContainerTest : AssertionHelper
     {
-        [Test, Ignore]
+        [Test, Category("Workflow")]
         public void CompleteWorkflowDefault()
         {
             CompleteWorkflow(CompatibilityFlags.DefaultFlags);
         }
 
-        [Test, Ignore]
+        [Test, Category("Workflow")]
         public void CompleteWorkflowCompatibilityMode()
         {
             var cf = new CompatibilityFlags
