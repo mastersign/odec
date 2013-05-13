@@ -130,6 +130,7 @@ namespace de.mastersign.odec.cli
             }
             if (!DisplayValidationErrorsOnly || ea.Severity == ValidationSeverity.Error)
             {
+#if COLOR
                 switch (ea.Severity)
                 {
                     case ValidationSeverity.Success:
@@ -141,9 +142,12 @@ namespace de.mastersign.odec.cli
                         Console.BackgroundColor = ConsoleColor.Black;
                         break;
                 }
+#endif
                 Console.WriteLine("[{0}] {1}: {2}",
                     ea.Severity, ea.MessageClass, ea.Message);
+#if COLOR
                 Console.ResetColor();
+#endif
             }
         }
     }

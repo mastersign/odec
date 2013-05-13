@@ -97,18 +97,26 @@ namespace de.mastersign.odec.cli
 
         public static void WriteError(string messageFormat, params object[] args)
         {
+#if COLOR
             Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
+#endif
             Console.WriteLine("[Error] " + string.Format(messageFormat, args));
+#if COLOR
             Console.ResetColor();
+#endif
         }
 
         public static void WriteWarning(string messageFormat, params object[] args)
         {
+#if COLOR
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.BackgroundColor = ConsoleColor.Black;
+#endif
             Console.WriteLine("[Warning] " + string.Format(messageFormat, args));
+#if COLOR
             Console.ResetColor();
+#endif
         }
 
         public static void WriteInfo(string messageFormat, params object[] args)
@@ -118,10 +126,14 @@ namespace de.mastersign.odec.cli
 
         public static void WriteHelpHint()
         {
+#if COLOR
             Console.ForegroundColor = ConsoleColor.White;
             Console.BackgroundColor = ConsoleColor.Black;
+#endif
             Console.WriteLine("Use -? for help.");
+#if COLOR
             Console.ResetColor();
+#endif
         }
 
         #region Error Codes
