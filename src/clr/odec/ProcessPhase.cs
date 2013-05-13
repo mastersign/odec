@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using de.mastersign.odec.crypto;
 
 namespace de.mastersign.odec
 {
@@ -24,7 +23,7 @@ namespace de.mastersign.odec
         /// </summary>
         /// <remarks>
         /// A container is in the <see cref="Sealed"/> phase after calling
-        /// <see cref="Container.Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>, <see cref="Container.FinishInitialization"/>
+        /// <see cref="Container.Open(storage.IStorage,ValidationHandler)"/>, <see cref="Container.FinishInitialization"/>
         /// or <see cref="Container.FinishTransformation"/>.
         /// </remarks>
         Sealed,
@@ -35,7 +34,7 @@ namespace de.mastersign.odec
         /// </summary>
         /// <remarks>
         /// A container is in the <see cref="Initialization"/> phase after calling
-        /// <see cref="Container.Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>.
+        /// <see cref="Container.Create(storage.IStorage,model.EditionElement,InitializationSettings,crypto.IRSAProvider,crypto.IRSAProvider,CompatibilityFlags)"/>.
         /// </remarks>
         Initialization,
 
@@ -45,8 +44,8 @@ namespace de.mastersign.odec
         /// </summary>
         /// <remarks>
         /// A container is in the <see cref="Transformation"/> phase after calling
-        /// <see cref="Container.StartTransformation(de.mastersign.odec.model.EditionElement,TransformationSettings,IRSAProvider)"/>
-        /// or <see cref="Container.StartTransformation(de.mastersign.odec.model.EditionElement,TransformationSettings,IRSAProvider,IRSAProvider)"/>.
+        /// <see cref="Container.StartTransformation(model.EditionElement,TransformationSettings,crypto.IRSAProvider)"/>
+        /// or <see cref="Container.StartTransformation(model.EditionElement,TransformationSettings,crypto.IRSAProvider,crypto.IRSAProvider)"/>.
         /// </remarks>
         Transformation,
     }

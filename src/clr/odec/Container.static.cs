@@ -97,9 +97,8 @@ namespace de.mastersign.odec
         /// <param name="storage">The storage, containing the container data.</param>
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         /// <exception cref="ArgumentNullException">
         /// If <c>null</c> is given for <paramref name="storage"/>.
         /// </exception>
@@ -115,8 +114,8 @@ namespace de.mastersign.odec
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler,container.CompatibilityFlags)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         /// <exception cref="ArgumentNullException">
         /// If <c>null</c> is given for <paramref name="storage"/>.
         /// </exception>
@@ -144,10 +143,8 @@ namespace de.mastersign.odec
         /// <param name="fileName">The path of the ZIP file.</param>
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
         /// <exception cref="ArgumentNullException">
         /// If <c>null</c> is given for <paramref name="fileName"/>.
         /// </exception>
@@ -169,10 +166,8 @@ namespace de.mastersign.odec
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler,container.CompatibilityFlags)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
         /// <exception cref="ArgumentNullException">
         /// If <c>null</c> is given for <paramref name="fileName"/>.
         /// </exception>
@@ -195,10 +190,8 @@ namespace de.mastersign.odec
         /// <param name="directoryName">The path of the directory.</param>
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         public static Container OpenDirectory(string directoryName, ValidationHandler messageHandler)
         {
             return OpenDirectory(directoryName, messageHandler, CompatibilityFlags.DefaultFlags);
@@ -211,10 +204,8 @@ namespace de.mastersign.odec
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler,container.CompatibilityFlags)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         public static Container OpenDirectory(string directoryName, ValidationHandler messageHandler, CompatibilityFlags compatibilityFlags)
         {
             return Open(new DirectoryStorage(new DirectoryInfo(directoryName)),
@@ -227,10 +218,9 @@ namespace de.mastersign.odec
         /// <param name="path">The path of the directory or the ZIP file.</param>
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         public static Container OpenContainer(string path, ValidationHandler messageHandler)
         {
             if (File.Exists(path))
@@ -252,10 +242,9 @@ namespace de.mastersign.odec
         /// <param name="messageHandler">The message handler for validation messages.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler)"/>
-        /// <seealso cref="Open(container.storage.IStorage,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenDirectory(string,container.ValidationHandler,container.CompatibilityFlags)"/>
-        /// <seealso cref="OpenZip(string,container.ValidationHandler,container.CompatibilityFlags)"/>
+        /// <seealso cref="Open(IStorage,ValidationHandler)"/>
+        /// <seealso cref="OpenDirectory(string,ValidationHandler)"/>
+        /// <seealso cref="OpenZip(string,ValidationHandler)"/>
         public static Container OpenContainer(string path, ValidationHandler messageHandler, CompatibilityFlags compatibilityFlags)
         {
             if (File.Exists(path))
@@ -284,9 +273,8 @@ namespace de.mastersign.odec
         /// <param name="privateKey">A <see cref="IRSAProvider"/> with the private key.</param>
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
+        /// <seealso cref="CreateDirectory(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateZip(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container Create(IStorage storage,
             EditionElement initialEdition, InitializationSettings settings,
             IRSAProvider privateKey, IRSAProvider certificate)
@@ -308,9 +296,8 @@ namespace de.mastersign.odec
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
+        /// <seealso cref="CreateDirectory(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateZip(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container Create(IStorage storage, EditionElement initialEdition, InitializationSettings settings, IRSAProvider privateKey, IRSAProvider certificate, CompatibilityFlags compatibilityFlags)
         {
             var result = new Container(storage, compatibilityFlags);
@@ -333,10 +320,8 @@ namespace de.mastersign.odec
         /// <param name="privateKey">A <see cref="IRSAProvider"/> with the private key.</param>
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
+        /// <seealso cref="Create(IStorage,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateDirectory(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container CreateZip(string fileName,
             EditionElement initialEdition, InitializationSettings settings,
             IRSAProvider privateKey, IRSAProvider certificate)
@@ -359,10 +344,8 @@ namespace de.mastersign.odec
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
+        /// <seealso cref="Create(IStorage,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateDirectory(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container CreateZip(string fileName,
             EditionElement initialEdition, InitializationSettings settings,
             IRSAProvider privateKey, IRSAProvider certificate, CompatibilityFlags compatibilityFlags)
@@ -386,10 +369,8 @@ namespace de.mastersign.odec
         /// <param name="privateKey">A <see cref="IRSAProvider"/> with the private key.</param>
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,de.mastersign.odec.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,de.mastersign.odec.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
+        /// <seealso cref="Create(IStorage,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateZip(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container CreateDirectory(string directoryName,
             EditionElement initialEdition, InitializationSettings settings,
             IRSAProvider privateKey, IRSAProvider certificate)
@@ -413,10 +394,8 @@ namespace de.mastersign.odec
         /// <param name="certificate">A <see cref="IRSAProvider"/> with the X509 certificate.</param>
         /// <param name="compatibilityFlags">The compatibility flags for the container.</param>
         /// <returns>A <see cref="Container"/> object.</returns>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,de.mastersign.odec.crypto.IRSAProvider,de.mastersign.odec.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="Create(container.storage.IStorage,container.model.EditionElement,InitializationSettings,de.mastersign.odec.crypto.IRSAProvider,de.mastersign.odec.crypto.IRSAProvider)"/>
-        /// <seealso cref="CreateDirectory(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider,container.CompatibilityFlags)"/>
-        /// <seealso cref="CreateZip(string,container.model.EditionElement,InitializationSettings,container.crypto.IRSAProvider,container.crypto.IRSAProvider)"/>
+        /// <seealso cref="Create(IStorage,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
+        /// <seealso cref="CreateZip(string,EditionElement,InitializationSettings,IRSAProvider,IRSAProvider)"/>
         public static Container CreateDirectory(string directoryName,
             EditionElement initialEdition, 
             InitializationSettings settings,
