@@ -154,10 +154,16 @@ namespace de.mastersign.odec.test
                 new CertificateValidationRules {AllowSelfSignedCertificate = true},
                 Console.WriteLine));
 
+            // Dispose the container handle
+            container.Dispose();
+
             // Delete temporary random files
             File.Delete(tmpFile0);
             File.Delete(tmpFile1);
             File.Delete(tmpFile2);
+
+            // Delete test container
+            File.Delete(targetPath);
         }
     }
 }
