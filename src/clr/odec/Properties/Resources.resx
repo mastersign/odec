@@ -584,32 +584,35 @@
   <data name="Unlabeled" xml:space="preserve">
     <value>unlabeled</value>
   </data>
-  <data name="CertificationAuthorityDirectory_GetSigningCertificate_NoCertificate">
-    <value xml:space="preserve">The given RSA provider is not a certificate.</value>
+  <data name="CertificationAuthorityDirectory_GetSigningCertificate_NoCertificate" xml:space="preserve">
+    <value>The given RSA provider is not a certificate.</value>
   </data>
-  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Failed">
-    <value xml:space="preserve">The signature of the certificate is invalid: {0}
+  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Failed" xml:space="preserve">
+    <value>The signature of the certificate is invalid: {0}
 {1}</value>
   </data>
-  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Success">
-    <value xml:space="preserve">The signature of the certificate is valid: {0}</value>
+  <data name="BouncyCastleRSAProvider_CheckCertificateSignature_Success" xml:space="preserve">
+    <value>The signature of the certificate is valid: {0}</value>
   </data>
-  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoSelfSignedCertsAllowed">
-    <value xml:space="preserve">The certificate is self signed but the validation rules does not allow self signed certificates.</value>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoSelfSignedCertsAllowed" xml:space="preserve">
+    <value>The certificate is self signed but the validation rules does not allow self signed certificates.</value>
   </data>
-  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoCAFound">
-    <value xml:space="preserve">No trusted certification authority found for {0}</value>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_NoCAFound" xml:space="preserve">
+    <value>No trusted certification authority found for {0}</value>
   </data>
-  <data name="BouncyCastleRSAProvider_ValidateCertificate_Success">
-    <value xml:space="preserve">The certificate ist valid and trusted: {0}</value>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_Success" xml:space="preserve">
+    <value>The certificate ist valid and trusted: {0}</value>
   </data>
-  <data name="BouncyCastleRSAProvider_ValidateCertificate_CAFound">
-    <value xml:space="preserve">Trusted certification authority found {0}</value>
+  <data name="BouncyCastleRSAProvider_ValidateCertificate_CAFound" xml:space="preserve">
+    <value>Trusted certification authority found {0}</value>
   </data>
-  <data name="Container_NewEntity_MaximumNumberExceeded">
-    <value xml:space="preserve">The maximum number of entities in the container is exceeded.</value>
+  <data name="Container_NewEntity_MaximumNumberExceeded" xml:space="preserve">
+    <value>The maximum number of entities in the container is exceeded.</value>
   </data>
-  <data name="EntityElement_Validate_NoValues">
-    <value xml:space="preserve">The entity {0:00000} does not contain any values.</value>
+  <data name="EntityElement_Validate_NoValues" xml:space="preserve">
+    <value>The entity {0:00000} does not contain any values.</value>
+  </data>
+  <data name="XmlUtils_IsSchemaConform_XmlSchemaException" xml:space="preserve">
+    <value>XML Schema exception: </value>
   </data>
 </root>

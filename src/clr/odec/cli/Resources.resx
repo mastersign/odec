@@ -279,7 +279,7 @@
     <value>The given path was not found:
 {0}</value>
   </data>
-  <data name="PasswordSource_GetPassword_Prompt">
-    <value xml:space="preserve">Password: </value>
+  <data name="PasswordSource_GetPassword_Prompt" xml:space="preserve">
+    <value>Password: </value>
   </data>
 </root>

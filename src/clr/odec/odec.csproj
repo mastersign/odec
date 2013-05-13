@@ -215,6 +215,7 @@
     <EmbeddedResource Include="cli\Resources.de-DE.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.de-DE.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="cli\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

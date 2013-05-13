@@ -590,6 +590,9 @@
   <data name="XmlStorable_WriteToXml_ThisInstanceIsInvalid" xml:space="preserve">
     <value>Die Instanz ist ungültig.</value>
   </data>
+  <data name="XmlUtils_IsSchemaConform_XmlSchemaException" xml:space="preserve">
+    <value>XML-Schema Ausnahme: </value>
+  </data>
   <data name="XmlUtils_ReadParsedObject_ArgumentException_NameIsEmpty" xml:space="preserve">
     <value>Der übergebene Name ist leer.</value>
   </data>

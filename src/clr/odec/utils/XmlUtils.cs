@@ -101,12 +101,21 @@ namespace de.mastersign.odec.utils
             bool error = false;
             var sb = new StringBuilder();
 
-            doc.Validate(
-                (s, ea) =>
-                {
-                    error = true;
-                    WriteValidationError(sb, ea);
-                });
+            try
+            {
+                doc.Validate(
+                    (s, ea) =>
+                        {
+                            error = true;
+                            WriteValidationError(sb, ea);
+                        });
+            }
+            catch (XmlSchemaValidationException ex)
+            {
+                error = true;
+                sb.AppendLine(Resources.XmlUtils_IsSchemaConform_XmlSchemaException + ex.Message);
+            }
+
             errorMessage = error ? sb.ToString() : null;
             return !error;
         }

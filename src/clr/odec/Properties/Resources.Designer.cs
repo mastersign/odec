@@ -1548,6 +1548,15 @@ namespace de.mastersign.odec.Properties {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die XML Schema exception:  ähnelt.
+        /// </summary>
+        internal static string XmlUtils_IsSchemaConform_XmlSchemaException {
+            get {
+                return ResourceManager.GetString("XmlUtils_IsSchemaConform_XmlSchemaException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die The given name is empty. ähnelt.
         /// </summary>
         internal static string XmlUtils_ReadParsedObject_ArgumentException_NameIsEmpty {
