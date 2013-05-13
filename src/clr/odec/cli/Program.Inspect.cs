@@ -40,6 +40,15 @@ namespace de.mastersign.odec.cli
             Container container;
             var errC = OpenAndValidate(out container);
 
+            if (errC != OK)
+            {
+                if (container != null)
+                {
+                    container.Dispose();
+                }
+                return errC;
+            }
+
             Console.WriteLine("======================================================================");
             Console.WriteLine("Container Inspection");
             Console.WriteLine("======================================================================");
