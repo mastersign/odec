@@ -16,7 +16,6 @@ namespace de.mastersign.odec.model
         /// </summary>
         public const string XMLSIGD_NS = "http://www.w3.org/2000/09/xmldsig#";
 
-        private static XmlSchema xmldsigSchema;
         private static XmlSchema containerSchema;
         private static XmlSchema profileSchema;
 
@@ -81,7 +80,7 @@ namespace de.mastersign.odec.model
         private static void LoadSchemas()
         {
             schemaSet = new XmlSchemaSet();
-            xmldsigSchema = schemaSet.AddSchemaText(Resources.XmldsigCoreSchema, null);
+            schemaSet.AddSchemaText(Resources.XmldsigCoreSchema, null);
             containerSchema = schemaSet.AddSchemaText(Resources.ContainerSchema, null);
             profileSchema = schemaSet.AddSchemaText(Resources.ProfileSchema, null);
             schemaSet.Compile();
