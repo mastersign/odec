@@ -34,7 +34,9 @@ namespace de.mastersign.odec.test
             // Specify the ZIP file for the container
             var targetPath = Path.Combine(
                 Path.GetTempPath(),
-                "ContainerTestWorkflow_" + DateTime.Now.ToString("yyyyMMdd-HHmmss") + ".zip");
+                string.Format("ContainerTestWorkflow_{0}_{1}.zip", 
+                    DateTime.Now.ToString("yyyyMMdd-HHmmss"), 
+                    Path.GetFileNameWithoutExtension(Path.GetRandomFileName())));
 
             // Create some temporary random files for values
             var tmpFile0 = TestHelper.CreateTempRandomFile(256); // big file, used twice
