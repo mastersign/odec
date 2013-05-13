@@ -1,0 +1,9 @@
+﻿<NUnitProject>
+  <Settings activeconfig="Release" />
+  <Config name="Debug" binpathtype="Auto">
+    <assembly path="..\..\bin\clr\Debug\odec.exe" />
+  </Config>
+  <Config name="Release" binpathtype="Auto">
+    <assembly path="..\..\bin\clr\Release\odec.exe" />
+  </Config>
+</NUnitProject>
