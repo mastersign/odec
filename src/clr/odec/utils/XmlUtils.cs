@@ -98,7 +98,7 @@ namespace de.mastersign.odec.utils
         public static bool IsSchemaConform(this XmlDocument doc, out string errorMessage)
         {
             doc.Schemas = Model.Schema;
-            bool error = false;
+            var error = false;
             var sb = new StringBuilder();
 
             try
