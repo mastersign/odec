@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net;
 using System.Text;
 using System.Xml;
 using System.Xml.Schema;
+using Commons.Xml.Relaxng;
 using de.mastersign.odec.Properties;
 using de.mastersign.odec.model;
 
@@ -97,41 +99,31 @@ namespace de.mastersign.odec.utils
 
         public static bool IsSchemaConform(this XmlDocument doc, out string errorMessage)
         {
-            doc.Schemas = Model.Schema;
             var error = false;
             var sb = new StringBuilder();
 
-            try
-            {
-                doc.Validate(
-                    (s, ea) =>
-                        {
-                            error = true;
-                            WriteValidationError(sb, ea);
-                        });
-            }
-            catch (XmlSchemaValidationException ex)
-            {
-                error = true;
-                sb.AppendLine(Resources.XmlUtils_IsSchemaConform_XmlSchemaException + ex.Message);
-            }
+            var xmlText = doc.OuterXml;
+
+            error = IsSchemaConform(xmlText, sb, Model.ContainerSchema) &&
+                IsSchemaConform(xmlText, sb, Model.ProfileSchema) &&
+                IsSchemaConform(xmlText, sb, Model.XmlSignatureSchema);
 
             errorMessage = error ? sb.ToString() : null;
             return !error;
         }
 
-        private static void WriteValidationError(StringBuilder sb, ValidationEventArgs ea)
+        private static bool IsSchemaConform(string xmlText, StringBuilder messageBuffer, RelaxngPattern pattern)
         {
-            sb.AppendFormat("[{0}] {1}{2}",
-                            Enum.GetName(typeof(XmlSeverityType), ea.Severity),
-                            ea.Message,
-                            Environment.NewLine);
-            sb.AppendLine("----");
-            if (ea.Exception != null)
+            var error = false;
+            using (var r = new StringReader(xmlText))
+            using (var xr = XmlReader.Create(r))
+            using (var vr = new RelaxngValidatingReader(xr, pattern))
             {
-                sb.AppendLine(ea.ToString());
+                vr.InvalidNodeFound += (s, msg) => { messageBuffer.AppendLine(msg); error = true; return false; };
+                var tmpDoc = new XmlDocument();
+                tmpDoc.Load(vr);
             }
-            sb.AppendLine("----");
+            return error;
         }
 
         public class LoggingXmlResolver : XmlResolver

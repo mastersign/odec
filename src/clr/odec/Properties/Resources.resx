@@ -121,11 +121,20 @@
   <data name="ContainerSchema" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\..\xml\odec-container.xsd;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ContainerSchemaRelaxNg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\xml\odec-container.rng;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="ProfileSchema" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\..\xml\odec-profile.xsd;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="ProfileSchemaRelaxNg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\xml\odec-profile.rng;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="XmldsigCoreSchema" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\..\xml\xmldsig-core-schema.xsd;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
+  </data>
+  <data name="XmldsigCoreSchemaRelaxNg" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\..\..\xml\xmldsig-core-schema.rng;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="Container_LoadAndValidate_CurrentEditionFound" xml:space="preserve">
     <value>Current edition '{0}' found.</value>

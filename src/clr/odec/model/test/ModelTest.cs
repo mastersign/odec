@@ -8,7 +8,9 @@ namespace de.mastersign.odec.model.test
         [Test]
         public void SchemaTest()
         {
-            Expect(Model.Schema, !Null);
+            Expect(Model.ContainerSchema, !Null);
+            Expect(Model.ProfileSchema, !Null);
+            Expect(Model.XmlSignatureSchema, !Null);
         }
 
         [Test]

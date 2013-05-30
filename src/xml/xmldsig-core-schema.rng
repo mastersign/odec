@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Schema for XML Signatures
+    http://www.w3.org/2000/09/xmldsig#
+    $Revision: 1.1 $ on $Date: 2002/02/08 20:32:26 $ by $Author: reagle $
+
+    Copyright 2001 The Internet Society and W3C (Massachusetts Institute
+    of Technology, Institut National de Recherche en Informatique et en
+    Automatique, Keio University). All Rights Reserved.
+    http://www.w3.org/Consortium/Legal/
+
+    This document is governed by the W3C Software License [1] as described
+    in the FAQ [2].
+
+    [1] http://www.w3.org/Consortium/Legal/copyright-software-19980720
+    [2] http://www.w3.org/Consortium/Legal/IPR-FAQ-20000620.html#DTD
+
+    Transformed to RELAX NG with http://code.google.com/p/xsdtorngconverter/
+    Minimized by Tobias Kiertscher <dev@mastersign.de>
+    
+-->
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" 
+  ns="http://www.w3.org/2000/09/xmldsig#" 
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+
+  <!-- Start Signature -->
+
+  <rng:start>
+    <rng:choice>
+      <rng:ref name="Signature"/>
+    </rng:choice>
+  </rng:start>
+  
+  <rng:define name="Signature">
+    <rng:element name="Signature">
+      <rng:ref name="SignedInfo"/>
+      <rng:ref name="SignatureValue"/>
+      <rng:optional>
+        <rng:element name="KeyInfo">
+          <rng:zeroOrMore>
+            <rng:element>
+              <rng:anyName/>
+              <rng:text/>
+            </rng:element>
+          </rng:zeroOrMore>
+          <rng:optional>
+            <rng:attribute name="Id">
+              <rng:ref name="ID"/>
+            </rng:attribute>
+          </rng:optional>
+        </rng:element>
+      </rng:optional>
+      <rng:zeroOrMore>
+        <rng:element name="Object">
+          <rng:element>
+            <rng:anyName/>
+            <rng:text/>
+          </rng:element>
+
+          <rng:optional>
+            <rng:attribute name="Id">
+              <rng:ref name="ID"/>
+            </rng:attribute>
+          </rng:optional>
+          <rng:optional>
+            <rng:attribute name="MimeType">
+              <rng:ref name="string"/>
+            </rng:attribute>
+          </rng:optional>
+          <!-- add a grep facet -->
+          <rng:optional>
+            <rng:attribute name="Encoding">
+              <rng:ref name="string"/>
+            </rng:attribute>
+          </rng:optional>
+        </rng:element>
+      </rng:zeroOrMore>
+      <rng:optional>
+        <rng:attribute name="Id">
+          <rng:ref name="ID"/>
+        </rng:attribute>
+      </rng:optional>
+    </rng:element>
+  </rng:define>
+  
+  <rng:define name="SignatureValue">
+    <rng:element name="SignatureValue">
+      <rng:optional>
+        <rng:attribute name="Id">
+          <rng:ref name="ID"/>
+        </rng:attribute>
+      </rng:optional>
+    </rng:element>
+  </rng:define>
+
+  <!-- Start SignedInfo -->
+
+  <rng:define name="SignedInfo">
+    <rng:element name="SignedInfo">
+      
+      <rng:element name="CanonicalizationMethod">
+        <rng:zeroOrMore>
+          <rng:element>
+            <rng:anyName/>
+            <rng:text/>
+          </rng:element>
+        </rng:zeroOrMore>
+        <!-- (0,unbounded) elements from (1,1) namespace -->
+        <rng:attribute name="Algorithm">
+          <rng:ref name="string"/>
+        </rng:attribute>
+      </rng:element>
+
+      <rng:element name="SignatureMethod">
+        <rng:optional>
+          <rng:element name="HMACOutputLength">
+            <rng:ref name="integer"/>
+          </rng:element>
+        </rng:optional>
+        <rng:zeroOrMore>
+          <rng:element>
+            <rng:anyName/>
+            <rng:text/>
+          </rng:element>
+        </rng:zeroOrMore>
+        <!-- (0,unbounded) elements from (1,1) external namespace -->
+
+        <rng:attribute name="Algorithm">
+          <rng:ref name="string"/>
+        </rng:attribute>
+      </rng:element>
+      
+      <rng:oneOrMore>
+        <rng:element name="Reference">
+          
+          <rng:optional>
+            <rng:element name="Transforms">
+              <rng:oneOrMore>
+                <rng:element name="Transform">
+                  <rng:zeroOrMore>
+                    <rng:choice>
+                      <rng:element>
+                        <rng:anyName/>
+                        <rng:text/>
+                      </rng:element>
+                      <!-- (1,1) elements from (0,unbounded) namespaces -->
+                      <rng:element name="XPath">
+                        <rng:ref name="string"/>
+                      </rng:element>
+                    </rng:choice>
+                  </rng:zeroOrMore>
+                  <rng:attribute name="Algorithm">
+                    <rng:ref name="string"/>
+                  </rng:attribute>
+                </rng:element>
+              </rng:oneOrMore>
+            </rng:element>
+          </rng:optional>
+
+          <rng:element name="DigestMethod">
+            <rng:zeroOrMore>
+              <rng:element>
+                <rng:anyName/>
+                <rng:text/>
+              </rng:element>
+            </rng:zeroOrMore>
+            <rng:attribute name="Algorithm">
+              <rng:ref name="string"/>
+            </rng:attribute>
+          </rng:element>
+
+          <rng:element name="DigestValue">
+            <rng:ref name="base64Binary"/>
+          </rng:element>
+
+          <rng:optional>
+            <rng:attribute name="Id">
+              <rng:ref name="ID"/>
+            </rng:attribute>
+          </rng:optional>
+          <rng:optional>
+            <rng:attribute name="URI">
+              <rng:ref name="string"/>
+            </rng:attribute>
+          </rng:optional>
+          <rng:optional>
+            <rng:attribute name="Type">
+              <rng:ref name="string"/>
+            </rng:attribute>
+          </rng:optional>
+        </rng:element>
+      </rng:oneOrMore>
+
+      <rng:optional>
+        <rng:attribute name="Id">
+          <rng:ref name="ID"/>
+        </rng:attribute>
+      </rng:optional>
+      
+    </rng:element>
+  </rng:define>
+
+</rng:grammar>

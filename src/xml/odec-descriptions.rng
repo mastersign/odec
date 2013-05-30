@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" 
+  ns="" 
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+
+  <rng:start>
+    <rng:choice>
+      <rng:ref name="OWNER"/>
+      <rng:ref name="ENTITY"/>
+      <rng:ref name="PROVENANCE_DESCRIPTION"/>
+    </rng:choice>
+  </rng:start>
+
+  <!-- The element for the owner description. -->
+  <rng:define name="OWNER">
+    <rng:element name="Owner">
+
+      <rng:element name="Institute">
+        <rng:data type="string"/>
+      </rng:element>
+      
+      <rng:element name="Operator">
+        <rng:data type="string"/>
+      </rng:element>
+      
+      <rng:optional>
+        <rng:element name="Role">
+          <rng:data type="string"/>
+        </rng:element>
+      </rng:optional>
+      
+      <rng:element name="Email">
+        <rng:data type="string"/>
+      </rng:element>
+      
+      <rng:optional>
+        <rng:element name="PostalAddress">
+
+          <rng:element name="Address">
+            <rng:data type="string"/>
+          </rng:element>
+          
+          <rng:optional>
+            <rng:element name="Address2">
+              <rng:data type="string"/>
+            </rng:element>
+          </rng:optional>
+          
+          <rng:optional>
+            <rng:element name="Address3">
+              <rng:data type="string"/>
+            </rng:element>
+          </rng:optional>
+          
+          <rng:optional>
+            <rng:element name="PostalCode">
+              <rng:data type="string"/>
+            </rng:element>
+          </rng:optional>
+          
+          <rng:element name="City">
+            <rng:data type="string"/>
+          </rng:element>
+          
+          <rng:optional>
+            <rng:element name="State">
+              <rng:data type="string"/>
+            </rng:element>
+          </rng:optional>
+          
+          <rng:element name="Country">
+            <rng:data type="string"/>
+          </rng:element>
+
+        </rng:element>
+      </rng:optional>
+      
+      <rng:choice>
+        <rng:element name="CertificateFile">
+          <rng:data type="string"/>
+        </rng:element>
+        <rng:element name="Certificate">
+          <rng:data type="string"/>
+        </rng:element>
+      </rng:choice>
+      
+      <rng:choice>
+        <rng:element name="PrivateKeyFile">
+          <rng:data type="string"/>
+        </rng:element>
+        <rng:element name="PrivateKey">
+          <rng:data type="string"/>
+        </rng:element>
+      </rng:choice>
+
+    </rng:element>
+  </rng:define>
+
+  <!-- The element for the entity description. -->  
+  <rng:define name="ENTITY">
+    <rng:element name="Entity">
+
+      <rng:optional>
+        <rng:element name="Predecessors">
+          <rng:ref name="IDLIST"/>
+        </rng:element>
+      </rng:optional>
+      
+      <rng:optional>
+        <rng:element name="Label">
+          <rng:data type="string"/>
+        </rng:element>
+      </rng:optional>
+      
+      <rng:optional>
+        <rng:element name="Type">
+          <rng:ref name="GUID"/>
+        </rng:element>
+      </rng:optional>
+      
+      <rng:element name="Provenance">
+        <rng:optional>
+          <rng:element name="Guid">
+            <rng:ref name="GUID"/>
+          </rng:element>
+        </rng:optional>
+        <rng:optional>
+          <rng:element name="ProvenanceDescriptionFile">
+            <rng:data type="string"/>
+          </rng:element>
+        </rng:optional>
+      </rng:element>
+      
+      <rng:optional>
+        <rng:element name="ParameterSet">
+          <rng:ref name="VALUE"/>
+        </rng:element>
+      </rng:optional>
+      
+      <rng:oneOrMore>
+        <rng:element name="Value">
+          <rng:ref name="VALUE"/>
+        </rng:element>
+      </rng:oneOrMore>
+
+    </rng:element>
+  </rng:define>
+
+  <!--- The element definition for a provenance -->
+  <rng:define name="PROVENANCE_DESCRIPTION">
+    <rng:element name="ProvenanceDescription">
+
+      <rng:oneOrMore>
+        <rng:choice>
+          <rng:element name="ManualProcedure">
+
+            <rng:element name="Institute">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="Operator">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:optional>
+              <rng:element name="Role">
+                <rng:data type="string"/>
+              </rng:element>
+            </rng:optional>
+            <rng:element name="Email">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="Procedure">
+              <rng:data type="string"/>
+            </rng:element>
+
+          </rng:element>
+          <rng:element name="SoftwareComponent">
+
+            <rng:element name="MainComponent">
+              <rng:ref name="SOFTWARECOMPONENT"/>
+            </rng:element>
+            <rng:zeroOrMore>
+              <rng:element name="SubComponent">
+                <rng:ref name="SOFTWARECOMPONENT"/>
+              </rng:element>
+            </rng:zeroOrMore>
+
+          </rng:element>
+          <rng:element name="HardwareComponent">
+
+            <rng:element name="Producer">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="ProductName">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="ProductVersion">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:element name="SerialNumber">
+              <rng:data type="string"/>
+            </rng:element>
+            <rng:optional>
+              <rng:element name="Configuration">
+                <rng:data type="string"/>
+              </rng:element>
+            </rng:optional>
+
+          </rng:element>
+        </rng:choice>
+      </rng:oneOrMore>
+
+    </rng:element>
+  </rng:define>
+
+  <!--- The definition for a software component -->
+  <rng:define name="SOFTWARECOMPONENT">
+
+    <rng:element name="Producer">
+      <rng:data type="string"/>
+    </rng:element>
+    <rng:element name="ProductName">
+      <rng:data type="string"/>
+    </rng:element>
+    <rng:element name="ProductVersion">
+      <rng:data type="string"/>
+    </rng:element>
+
+  </rng:define>
+
+  <!-- The type definition for a GUID. -->
+  <rng:define name="GUID">
+    <a:documentation>
+      This is the format of a GUID. E.g. '89db6c9c-beb2-4f4a-8353-1fed483d3854'.
+    </a:documentation>
+    <rng:data type="string">
+      <rng:param name="pattern">\{?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}?</rng:param>
+    </rng:data>
+  </rng:define>
+
+  <!-- The type definition for an entity ID list. E.g. '2 3 5' -->
+  <rng:define name="IDLIST">
+    <rng:list>
+      <rng:data type="int"/>
+    </rng:list>
+  </rng:define>
+
+  <!-- The type definition for a value or parameter set description. -->
+  <rng:define name="VALUE">
+
+    <rng:element name="Name">
+      <rng:data type="string"/>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="Type">
+        <rng:ref name="GUID"/>
+      </rng:element>
+    </rng:optional>
+    <rng:optional>
+      <rng:element name="SourceFile">
+        <rng:data type="string"/>
+      </rng:element>
+    </rng:optional>
+    
+    <!-- TODO Encryption meta-data need to be specified. -->
+    <!--
+    <rng:optional>
+      <rng:element name="Encryption">
+        ...
+      </rng:element>
+    </rng:optional>
+    -->
+
+  </rng:define>
+
+</rng:grammar>

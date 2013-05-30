@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" 
+  ns="http://www.mastersign.de/odec/profile/" 
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+
+  <!-- ===== The Root Element ===== -->
+
+  <rng:start>
+    <rng:ref name="PROFILE"/>
+  </rng:start>
+
+  <rng:define name="PROFILE">
+    <rng:element name="Profile">
+      <a:documentation>
+        The container profile describes the process steps and interfaces for an automated forensic analysis.
+        Therfore it contains three catalogs:
+        - The data types for entity values and provenance parameter sets,
+        - the entity types with optional and required values
+        - and the entity provenance interfaces with input and output entities and optional parameter sets.
+        A profile is identified by a name and a version.
+      </a:documentation>
+      <rng:ref name="NAME"/>
+      <rng:ref name="VERSION"/>
+      <rng:optional>
+        <rng:ref name="DESCRIPTION"/>
+      </rng:optional>
+      <rng:ref name="DATA_TYPE_CATALOG"/>
+      <rng:ref name="ENTITY_TYPE_CATALOG"/>
+      <rng:ref name="PROVENANCE_INTERFACE_CATALOG"/>
+    </rng:element>
+  </rng:define>
+
+  <!-- ===== Catalogs ===== -->
+
+  <rng:define name="DATA_TYPE_CATALOG">
+    <rng:element name="DataTypeCatalog">
+      <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+        The data type catalog is a collection of format descriptions for values in a forensic container.
+        It is part of the process specific container profile.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:ref name="DATA_TYPE"/>
+      </rng:zeroOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="ENTITY_TYPE_CATALOG">
+    <rng:element name="EntityTypeCatalog">
+      <a:documentation>
+        The entity type catalog is a collection of type descriptions for entities in a forensic container.
+        It is part of the process specific container profile.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:ref name="ENTITY_TYPE"/>
+      </rng:zeroOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="PROVENANCE_INTERFACE_CATALOG">
+    <rng:element name="ProvenanceInterfaceCatalog">
+      <a:documentation>
+        The provenance interface catalog is a collection of descriptions of interfaces for data sources
+        or transformation algorithms.
+        The provenance interface catalog is part of the process specific container profile.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:ref name="PROVENANCE_INTERFACE"/>
+      </rng:zeroOrMore>
+    </rng:element>
+  </rng:define>
+
+  <!-- ====== Data Type Definitions ====== -->
+
+  <rng:define name="FORMAT_DEFINITION">
+    <a:documentation>
+      The abstract base type for data type definitions.
+    </a:documentation>
+  </rng:define>
+
+  <rng:define name="TEXTFILE_DEFINITION">
+    <a:documentation>
+      The base type for all data type definitions based on text files.
+      Optional the encoding of the text can be given.
+    </a:documentation>
+    <rng:optional>
+      <rng:element name="Encoding">
+        <rng:data type="string"/>
+      </rng:element>
+    </rng:optional>
+  </rng:define>
+
+  
+  <rng:define name="CUSTOM_DEF">
+    <rng:element name="CustomDefinition">
+      <a:documentation>
+        This definition describes a custom data type.
+        The type can be described in natural language in the outer Description element or with any XML inside the CustomDefinition element.
+      </a:documentation>
+      <rng:ref name="FORMAT_DEFINITION"/>
+      <rng:optional>
+        <rng:element>
+          <rng:anyName/>
+          <rng:text/>
+        </rng:element>
+      </rng:optional>
+      <rng:attribute>
+        <rng:anyName/>
+        <rng:text/>
+      </rng:attribute>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="TEXT_DEF">
+    <rng:element name="TextDefinition">
+      <a:documentation>
+        This definition describes a data type for plain text files.
+      </a:documentation>
+      <rng:ref name="TEXTFILE_DEFINITION"/>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="WIN_INI_DEF">
+    <rng:element name="WinIniDefinition">
+      <a:documentation>
+        This definition describes a data type for Windows-INI text files.
+      </a:documentation>
+      <rng:ref name="TEXTFILE_DEFINITION"/>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="CSV_DEF">
+    <rng:element name="CsvDefinition">
+      <a:documentation>
+        This definition describes a data type for comma separated text files.
+        The CSV definition consists of a number of column definitions and
+        optional an encoding for the text.
+      </a:documentation>
+      <rng:ref name="TEXTFILE_DEFINITION"/>
+      <rng:element name="Columns">
+        <rng:oneOrMore>
+          <rng:element name="Column">
+            <rng:ref name="NAME"/>
+            <rng:element name="Type">
+              <rng:ref name="COLUMN_TYPE"/>
+            </rng:element>
+          </rng:element>
+        </rng:oneOrMore>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="COLUMN_TYPE">
+    <a:documentation>
+      This enumeration lists all types,
+      supported for column specification in a CSV type definition.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>UByte</rng:value>
+      <rng:value>SByte</rng:value>
+      <rng:value>UInt16</rng:value>
+      <rng:value>SInt16</rng:value>
+      <rng:value>UInt32</rng:value>
+      <rng:value>SInt32</rng:value>
+      <rng:value>UInt64</rng:value>
+      <rng:value>SInt64</rng:value>
+      <rng:value>Single</rng:value>
+      <rng:value>Double</rng:value>
+      <rng:value>String</rng:value>
+      <rng:value>Boolean</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="XML_DEF">
+    <rng:element name="XmlDefinition">
+      <a:documentation>
+        This definition describes a data type for XML files.
+        Optional a XMLSchema for validation can be specified with an URI.
+      </a:documentation>
+      <rng:ref name="TEXTFILE_DEFINITION"/>
+      <rng:optional>
+        <rng:element name="XmlSchema">
+          <rng:data type="anyURI"/>
+        </rng:element>
+      </rng:optional>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="PICTURE_DEF">
+    <rng:element name="PictureDefinition">
+      <a:documentation>
+        This definition describes a data type for picture files.
+      </a:documentation>
+      <rng:ref name="FORMAT_DEFINITION"/>
+      <rng:element name="PictureType">
+        <rng:ref name="PICTURE_TYPE"/>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="PICTURE_TYPE">
+    <a:documentation>
+      This enumeration lists all picture formats.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>JPEG</rng:value>
+      <rng:value>PNG</rng:value>
+      <rng:value>BMP</rng:value>
+      <rng:value>GIF</rng:value>
+      <rng:value>TIFF</rng:value>
+      <rng:value>SVG</rng:value>
+      <rng:value>EPS</rng:value>
+      <rng:value>WMF</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="ARRAY_DEF">
+    <rng:element name="ArrayDefinition">
+      <a:documentation>
+        This definition describes a data type for binary files, containing arrays of numeric values.
+        The binary file has two parts: the header and the body.
+        The header contains the size of the array, for each dimension one numeric value in the format, specified by HeaderType.
+        The body contains the values of the array, every elementary value in the format, specified by ElementType.
+        Example: Dimensions=2, HeaderType=UInt16, ElementType=Single.
+        The header is 4 bytes long. The first two bytes contain the number of columns, the second two bytes contain the number of rows: e.g. 0x00, 0x02, 0x00, 0x03 -&gt; 2 columns and 3 rows.
+        The body is 2 * 3 * 4 bytes (Single -&gt; 4 bytes per value) -&gt; 24 bytes long and contains 6 32bit floating point values.
+      </a:documentation>
+      <rng:ref name="FORMAT_DEFINITION"/>
+      <rng:element name="Dimensions">
+        <rng:data type="int"/>
+      </rng:element>
+      <rng:element name="HeaderType">
+        <rng:ref name="NUMERIC_TYPE"/>
+      </rng:element>
+      <rng:element name="ElementType">
+        <rng:ref name="NUMERIC_TYPE"/>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="NUMERIC_TYPE">
+    <a:documentation>
+      This enumeration lists all numeric data types,
+      supported for an array type definition.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>UByte</rng:value>
+      <rng:value>SByte</rng:value>
+      <rng:value>UInt16</rng:value>
+      <rng:value>SInt16</rng:value>
+      <rng:value>UInt32</rng:value>
+      <rng:value>SInt32</rng:value>
+      <rng:value>UInt64</rng:value>
+      <rng:value>SInt64</rng:value>
+      <rng:value>Single</rng:value>
+      <rng:value>Double</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <!-- ===== Catalog Items ===== -->
+
+  <rng:define name="CATALOG_ITEM">
+    <a:documentation>
+      The abstract base type for catalog items.
+    </a:documentation>
+
+    <rng:ref name="NAME"/>
+    <rng:optional>
+      <rng:ref name="DESCRIPTION"/>
+    </rng:optional>
+
+    <rng:attribute name="guid">
+      <rng:ref name="GUID"/>
+    </rng:attribute>
+  </rng:define>
+
+  <rng:define name="DATA_TYPE">
+    <rng:element name="DataType">
+      <a:documentation>
+        A data type is a file format description which is identified by a global unified identifier.
+      </a:documentation>
+      <rng:ref name="CATALOG_ITEM"/>
+      <rng:optional>
+        <rng:element name="MimeType">
+          <rng:data type="string">
+            <a:documentation>
+              The optional MimeType element contains the MIME-Type of the data type.
+              A JPEG picture for example does have the MIME-Type 'image/jpeg'.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Format">
+        <a:documentation>
+          The format definition for the data type.
+        </a:documentation>
+        <rng:choice>
+          <rng:ref name="CUSTOM_DEF"/>
+          <rng:ref name="TEXT_DEF"/>
+          <rng:ref name="WIN_INI_DEF"/>
+          <rng:ref name="CSV_DEF"/>
+          <rng:ref name="XML_DEF"/>
+          <rng:ref name="ARRAY_DEF"/>
+          <rng:ref name="PICTURE_DEF"/>
+        </rng:choice>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="ENTITY_TYPE">
+    <rng:element name="EntityType">
+      <a:documentation>
+        An entity type specifies a group of entity values with their data type and usage.
+      </a:documentation>
+      <rng:ref name="CATALOG_ITEM"/>
+      <rng:element name="Values">
+        <rng:oneOrMore>
+          <rng:element name="Value">
+            <a:documentation>
+              The description of an entity value.
+            </a:documentation>
+            <rng:ref name="NAME"/>
+            <rng:optional>
+              <rng:ref name="DESCRIPTION"/>
+            </rng:optional>
+            <rng:element name="DataTypeRef">
+              <rng:ref name="GUID"/>
+            </rng:element>
+            <rng:element name="Usage">
+              <rng:ref name="USAGE"/>
+            </rng:element>
+          </rng:element>
+        </rng:oneOrMore>
+        <rng:optional>
+          <rng:attribute name="severity" a0:defaultValue="strict" xmlns:a0="http://relaxng.org/ns/compatibility/annotations/1.0">
+            <rng:ref name="SEVERITY"/>
+          </rng:attribute>
+        </rng:optional>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="USAGE">
+    <a:documentation>
+      This enumeration lists the possible usages for an entity value.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>required</rng:value>
+      <rng:value>optional</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="SEVERITY">
+    <a:documentation>
+      This enumeration lists the possible severity settings for an entity type.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>strict</rng:value>
+      <rng:value>open</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="PROVENANCE_INTERFACE">
+    <rng:element name="ProvenanceInterface">
+      <a:documentation>
+        The description of the entity provenance interface.
+        Every entity provenance is defined by a set of
+        input entity types and a set of output entity types. For data sources the set
+        of input entity types must be empty.
+        Optional a data type for a provenance parameter set can be specified.
+      </a:documentation>
+      <rng:ref name="CATALOG_ITEM"/>
+      <rng:element name="Input">
+        <a:documentation>
+          A set of entity types, building the input part of the provenance interface.
+        </a:documentation>
+        <rng:zeroOrMore>
+          <rng:element name="EntityTypeRef">
+            <rng:ref name="GUID"/>
+          </rng:element>
+        </rng:zeroOrMore>
+      </rng:element>
+      <rng:element name="Output">
+        <a:documentation>
+          An entity type, building the output part of the provenance interface.
+        </a:documentation>
+        <rng:element name="EntityTypeRef">
+          <rng:ref name="GUID"/>
+        </rng:element>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="ParameterSet">
+          <a:documentation>
+            The format specification for an optional provenance parameter set.
+          </a:documentation>
+          <rng:ref name="NAME"/>
+          <rng:optional>
+            <rng:ref name="DESCRIPTION"/>
+          </rng:optional>
+          <rng:element name="DataTypeRef">
+            <rng:ref name="GUID"/>
+          </rng:element>
+        </rng:element>
+      </rng:optional>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="NAME">
+    <rng:element name="Name">
+      <rng:data type="string">
+        <a:documentation>
+          A short name for human recognition.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="VERSION">
+    <rng:element name="Version">
+      <rng:data type="string">
+        <a:documentation>
+          A version identifier. E.g. '2.1b', or 'release_2011-01-01'
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="DESCRIPTION">
+    <rng:element name="Description">
+      <a:documentation>
+        An unstructured text in natural language, describing the catalog item.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:choice>
+          <rng:element name="Headline">
+            <rng:data type="string"/>
+          </rng:element>
+          <rng:element name="Par">
+            <rng:data type="string"/>
+          </rng:element>
+          <rng:element name="Strong">
+            <rng:data type="string"/>
+          </rng:element>
+          <rng:element name="Code">
+            <rng:data type="string"/>
+          </rng:element>
+          <rng:ref name="LIST"/>
+        </rng:choice>
+      </rng:zeroOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="LIST_TYPE">
+    <rng:choice>
+      <rng:value>unordered</rng:value>
+      <rng:value>ordered</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="LIST">
+    <rng:element name="List">
+      <a:documentation>
+        A unordered list for documentation in Description elements.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:element name="Item">
+          <rng:data type="string">
+          </rng:data>
+        </rng:element>
+      </rng:zeroOrMore>
+      <rng:attribute name="type">
+        <rng:ref name="LIST_TYPE"/>
+      </rng:attribute>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="GUID">
+    <a:documentation>
+      This is the format of a GUID. E.g. '89db6c9c-beb2-4f4a-8353-1fed483d3854'.
+    </a:documentation>
+    <rng:data type="string">
+      <rng:param name="pattern">[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}</rng:param>
+    </rng:data>
+  </rng:define>
+
+</rng:grammar>

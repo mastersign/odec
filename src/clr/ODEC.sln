@@ -5,9 +5,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "odec", "odec\odec.csproj", 
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B6274A99-36B0-475C-9406-0A0A632BA1A3}"
 	ProjectSection(SolutionItems) = preProject
+		..\xml\odec-container.rng = ..\xml\odec-container.rng
 		..\xml\odec-container.xsd = ..\xml\odec-container.xsd
+		..\xml\odec-descriptions.rng = ..\xml\odec-descriptions.rng
 		..\xml\odec-descriptions.xsd = ..\xml\odec-descriptions.xsd
+		..\xml\odec-profile.rng = ..\xml\odec-profile.rng
 		..\xml\odec-profile.xsd = ..\xml\odec-profile.xsd
+		..\xml\xmldsig-core-schema.rng = ..\xml\xmldsig-core-schema.rng
 	EndProjectSection
 EndProject
 Global

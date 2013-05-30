@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using System.Xml;
 using System.Xml.Schema;
+using Commons.Xml.Relaxng;
 using de.mastersign.odec.Properties;
 using de.mastersign.odec.utils;
 
@@ -16,20 +17,13 @@ namespace de.mastersign.odec.model
         /// </summary>
         public const string XMLSIGD_NS = "http://www.w3.org/2000/09/xmldsig#";
 
-        private static XmlSchema containerSchema;
-        private static XmlSchema profileSchema;
-
         /// <summary>
         /// Gets the target namespace of the container XML-Schema.
         /// </summary>
         /// <value>The container namespace.</value>
         public static string ContainerNamespace
         {
-            get
-            {
-                if (containerSchema == null) LoadSchemas();
-                return containerSchema.TargetNamespace;
-            }
+            get { return "http://www.mastersign.de/odec/container/"; }
         }
 
         /// <summary>
@@ -38,11 +32,7 @@ namespace de.mastersign.odec.model
         /// <value>The profile namespace.</value>
         public static string ProfileNamespace
         {
-            get
-            {
-                if (profileSchema == null) LoadSchemas();
-                return profileSchema.TargetNamespace;
-            }
+            get { return "http://www.mastersign.de/odec/profile/"; }
         }
 
         private static XmlResolver resolver;
@@ -62,41 +52,67 @@ namespace de.mastersign.odec.model
             }
         }
 
-        private static XmlSchemaSet schemaSet;
+        private static RelaxngPattern xmlSigSchema;
+        private static RelaxngPattern containerSchema;
+        private static RelaxngPattern profileSchema;
 
         /// <summary>
         /// Gets a compiled version of the container XML-Schema.
         /// </summary>
         /// <value>The schema.</value>
-        public static XmlSchemaSet Schema
+        public static RelaxngPattern ContainerSchema
         {
             get
             {
-                if (schemaSet == null) LoadSchemas();
-                return schemaSet;
+                if (containerSchema == null) LoadSchemas();
+                return containerSchema;
+            }
+        }
+
+        /// <summary>
+        /// Gets a compiled version of the profile XML-Schema.
+        /// </summary>
+        /// <value>The schema.</value>
+        public static RelaxngPattern ProfileSchema
+        {
+            get
+            {
+                if (profileSchema == null) LoadSchemas();
+                return profileSchema;
+            }
+        }
+
+        /// <summary>
+        /// Gets a compiled version of the XML signature Schema.
+        /// </summary>
+        /// <value>The schema.</value>
+        public static RelaxngPattern XmlSignatureSchema
+        {
+            get
+            {
+                if (xmlSigSchema == null) LoadSchemas();
+                return xmlSigSchema;
             }
         }
 
         private static void LoadSchemas()
         {
-            schemaSet = new XmlSchemaSet();
-            schemaSet.AddSchemaText(Resources.XmldsigCoreSchema, null);
-            containerSchema = schemaSet.AddSchemaText(Resources.ContainerSchema, null);
-            profileSchema = schemaSet.AddSchemaText(Resources.ProfileSchema, null);
-            schemaSet.Compile();
+            xmlSigSchema = LoadPattern(Resources.XmldsigCoreSchemaRelaxNg);
+            containerSchema = LoadPattern(Resources.ContainerSchemaRelaxNg);
+            profileSchema = LoadPattern(Resources.ProfileSchemaRelaxNg);
         }
 
-        private static XmlSchema AddSchemaText(this XmlSchemaSet set, string text, ValidationEventHandler handler)
+        private static RelaxngPattern LoadPattern(string text)
         {
             using (var r = new StringReader(text))
             {
-                XmlSchema s;
+                RelaxngPattern p;
                 using (var xr = XmlReader.Create(r))
                 {
-                    s = XmlSchema.Read(xr, handler);
+                    p = RelaxngPattern.Read(xr);
                 }
-                set.Add(s);
-                return s;
+                p.Compile();
+                return p;
             }
         }
 

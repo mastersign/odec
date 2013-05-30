@@ -1,0 +1,632 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rng:grammar xmlns:rng="http://relaxng.org/ns/structure/1.0" 
+  ns="http://www.mastersign.de/odec/container/" 
+  datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
+  xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+
+  <rng:include ns="http://www.w3.org/2000/09/xmldsig#"/>
+
+  <rng:start>
+    <rng:choice>
+      <rng:ref name="EDITION"/>
+      <rng:ref name="HISTORY"/>
+      <rng:ref name="INDEX"/>
+    </rng:choice>
+  </rng:start>
+
+  <rng:define name="GUID">
+    <a:documentation>
+      This is the format of a GUID. E.g. '89db6c9c-beb2-4f4a-8353-1fed483d3854'.
+    </a:documentation>
+    <rng:data type="string">
+      <rng:param name="pattern">\{?[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}\}?</rng:param>
+    </rng:data>
+  </rng:define>
+
+  <rng:define name="SIGNATUREWRAPPER">
+    <a:documentation>
+      This element contains a copy of the signature element from a "xyz.xml.sig" file.
+    </a:documentation>
+    <rng:ref name="Signature" ns="http://www.w3.org/2000/09/xmldsig#"/>
+  </rng:define>
+
+  <rng:define name="POSTALADDRESS">
+    <a:documentation>
+      This type defines an international postal address.
+    </a:documentation>
+    <rng:element name="Address">
+      <rng:data type="string">
+        <a:documentation>
+          The primary address line. E.g. streetname and house number.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="Address2">
+        <rng:data type="string">
+          <a:documentation>
+            An optional secondary address line. E.g. apartment.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+    </rng:optional>
+    <rng:optional>
+      <rng:element name="Address3">
+        <rng:data type="string">
+          <a:documentation>
+            An optional tertiary address line.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+    </rng:optional>
+    <rng:optional>
+      <rng:element name="PostalCode">
+        <rng:data type="string">
+          <a:documentation>
+            An optional postal code. This element is used in the majority of countries.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+    </rng:optional>
+    <rng:element name="City">
+      <rng:data type="string">
+        <a:documentation>
+          The name of the city.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="State">
+        <rng:data type="string">
+          <a:documentation>
+            An optional name of the state or province.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+    </rng:optional>
+    <rng:element name="Country">
+      <rng:data type="string">
+        <a:documentation>
+          The name of the country.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="OWNER">
+    <a:documentation>
+      This type defines a human participating in the forensic process equiped with a X.509 certificate.
+    </a:documentation>
+    <rng:element name="Institute">
+      <rng:data type="string">
+        <a:documentation>
+          The affiliation of the person.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:element name="Operator">
+      <rng:data type="string">
+        <a:documentation>
+          THe name of the person.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="Role">
+        <rng:data type="string">
+          <a:documentation>
+            An optional role of the person.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+    </rng:optional>
+    <rng:element name="Email">
+      <rng:data type="string">
+        <a:documentation>
+          An email address of the person.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="PostalAddress">
+        <rng:ref name="POSTALADDRESS"/>
+        <a:documentation>
+          An optional postal address of the person.
+        </a:documentation>
+      </rng:element>
+    </rng:optional>
+    <rng:element name="X509Certificate">
+      <rng:data type="string">
+        <a:documentation>
+          The PEM encoded X.509 certificate of the person.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="ENTITYID">
+    <a:documentation>
+      The numeric ID of an entity.
+      An entity ID is an integer between 0 and 99999.
+    </a:documentation>
+    <rng:data type="int">
+      <rng:param name="minInclusive">0</rng:param>
+      <rng:param name="maxInclusive">99999</rng:param>
+    </rng:data>
+  </rng:define>
+
+  <rng:define name="IDLIST">
+    <a:documentation>
+      A white space separated lsit of entity IDs.
+    </a:documentation>
+    <rng:list>
+      <rng:ref name="ENTITYID"/>
+    </rng:list>
+  </rng:define>
+
+  <rng:define name="VALUEAPPEARANCE">
+    <a:documentation>
+      The possible appearances of an entity value.
+    </a:documentation>
+    <rng:choice>
+      <rng:value>plain</rng:value>
+      <rng:value>encrypted</rng:value>
+      <rng:value>suppressed</rng:value>
+    </rng:choice>
+  </rng:define>
+
+  <rng:define name="VALUEREFERENCE">
+    <a:documentation>
+      A reference to a value inside of an entity the container.
+    </a:documentation>
+    <rng:element name="Name">
+      <rng:data type="string">
+        <a:documentation>
+          The name of the value.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:optional>
+      <rng:element name="Type">
+        <rng:ref name="GUID"/>
+        <a:documentation>
+          If a profile is used, this element contains the GUID of the data type for the entity value.
+        </a:documentation>
+      </rng:element>
+    </rng:optional>
+    <rng:element name="Size">
+      <rng:data type="long">
+        <a:documentation>
+          The size of the value in bytes.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:element name="Appearance">
+      <rng:ref name="VALUEAPPEARANCE"/>
+      <a:documentation>
+        The appearance of the value, which can be 'plain', 'encrypted' or 'suppressed'.
+      </a:documentation>
+    </rng:element>
+    <rng:element name="ValueSignature">
+      <rng:ref name="SIGNATUREWRAPPER"/>
+      <a:documentation>
+        The XML signature of the values data.
+      </a:documentation>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="SOFTWARECOMPONENT">
+    <a:documentation>
+      The description of a software component.
+    </a:documentation>
+    <rng:element name="Producer">
+      <rng:data type="string">
+        <a:documentation>
+          The name for the producer of the described software.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:element name="ProductName">
+      <rng:data type="string">
+        <a:documentation>
+          The name of the software product used as part of the provenance.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+    <rng:element name="ProductVersion">
+      <rng:data type="string">
+        <a:documentation>
+          The version of the software product.
+        </a:documentation>
+      </rng:data>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="PROVENANCEDESCRIPTION">
+    <a:documentation>
+      The description of a provenance is a combination of an arbitrary number of components.
+      There are three different types of provenance components:
+      A manual procedure, a software component, and a hardware component.
+    </a:documentation>
+    <rng:oneOrMore>
+      <rng:choice>
+        <rng:element name="ManualProcedure">
+          <a:documentation>
+            A manual procedure as provenance component describes the part of a provenance
+            executed by a human.
+          </a:documentation>
+          <rng:element name="Institute">
+            <rng:data type="string">
+              <a:documentation>
+                The affiliation of the executive person.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:element name="Operator">
+            <rng:data type="string">
+              <a:documentation>
+                The name of the executive person.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:optional>
+            <rng:element name="Role">
+              <rng:data type="string">
+                <a:documentation>
+                  An optional role of the executive person.
+                </a:documentation>
+              </rng:data>
+            </rng:element>
+          </rng:optional>
+          <rng:element name="Email">
+            <rng:data type="string">
+              <a:documentation>
+                An email address of the executive person.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:element name="Procedure">
+            <rng:data type="string">
+              <a:documentation>
+                A description of the procedure executed by the person.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+        </rng:element>
+        <rng:element name="SoftwareComponent">
+          <a:documentation>
+            A software component as part of a provenance.
+          </a:documentation>
+          <rng:element name="MainComponent">
+            <rng:ref name="SOFTWARECOMPONENT"/>
+            <a:documentation>
+              The main component describes the the software component as a whole.
+            </a:documentation>
+          </rng:element>
+          <rng:zeroOrMore>
+            <rng:element name="SubComponent">
+              <rng:ref name="SOFTWARECOMPONENT"/>
+              <a:documentation>
+                Sub components (e.g. external software libraries) are deployed with the main component
+                but may be produced by a different producer and with an individual product version.
+              </a:documentation>
+            </rng:element>
+          </rng:zeroOrMore>
+        </rng:element>
+        <rng:element name="HardwareComponent">
+          <a:documentation>
+            A hardware component as part of a provenance.
+          </a:documentation>
+          <rng:element name="Producer">
+            <rng:data type="string">
+              <a:documentation>
+                The manufacturer of the hardware.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:element name="ProductName">
+            <rng:data type="string">
+              <a:documentation>
+                The name of the hardware product.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:element name="ProductVersion">
+            <rng:data type="string">
+              <a:documentation>
+                The version of the hardware design including the version of a firmware if used.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:element name="SerialNumber">
+            <rng:data type="string">
+              <a:documentation>
+                The serial number of the hardware.
+              </a:documentation>
+            </rng:data>
+          </rng:element>
+          <rng:optional>
+            <rng:element name="Configuration">
+              <rng:data type="string">
+                <a:documentation>
+                  If the hardware can be assembled in different configurations
+                  this element is used to give the name of the used configuration.
+                </a:documentation>
+              </rng:data>
+            </rng:element>
+          </rng:optional>
+        </rng:element>
+      </rng:choice>
+    </rng:oneOrMore>
+  </rng:define>
+
+  <rng:define name="EDITION">
+    <rng:element name="Edition">
+      <a:documentation>
+        The edition describes a current or former state of the container.
+        This element is typically stored
+      </a:documentation>
+      <rng:element name="Guid">
+        <rng:ref name="GUID"/>
+        <a:documentation>
+          The GUID of the edition.
+          In case the edition is the current edition this ID identifies the container.
+        </a:documentation>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="Salt">
+          <rng:data type="string">
+            <a:documentation>
+              An optional salt which can be used to expand the editon signature with removable data.
+              If the edition is moved to the history, the salt can be removed to securely invalidate
+              the edition signature and prevent a later reinstation of this edition as current edition.
+              This element is also called 'Reinstation Prevention Salt' RPS.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Software">
+        <rng:data type="string">
+          <a:documentation>
+            The name of the software used to initialize or extend the container.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="Profile">
+          <rng:data type="string">
+            <a:documentation>
+              The name of the container profile.
+              The container profile can be used to check the contents of the container.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:optional>
+        <rng:element name="Version">
+          <rng:data type="string">
+            <a:documentation>
+              The version of the container profile.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Timestamp">
+        <rng:data type="dateTime">
+          <a:documentation>
+            Timestamp after ISO 8601 of the moment of the initialization or extension of the container.
+          </a:documentation>
+        </rng:data>
+      </rng:element>
+      <rng:element name="Owner">
+        <rng:ref name="OWNER"/>
+        <a:documentation>
+          The person responsible for the content of the entities added with this edition.
+        </a:documentation>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="Copyright">
+          <rng:data type="string">
+            <a:documentation>
+              An optional element for a copyright or licence notice.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:optional>
+        <rng:element name="Comments">
+          <rng:data type="string">
+            <a:documentation>
+              An optional element for additional comments about this edition.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="AddedEntities">
+        <rng:ref name="IDLIST"/>
+        <a:documentation>
+          A list with IDs of all entites added to the container in this edition.
+        </a:documentation>
+      </rng:element>
+      <rng:element name="RemovedEntities">
+        <rng:ref name="IDLIST"/>
+        <a:documentation>
+          A list with all entites removed from the container in this edition.
+        </a:documentation>
+      </rng:element>
+      <rng:element name="HistorySignature">
+        <rng:ref name="SIGNATUREWRAPPER"/>
+        <a:documentation>
+          A copy of the XML signature of the history element.
+        </a:documentation>
+      </rng:element>
+      <rng:element name="IndexSignature">
+        <rng:ref name="SIGNATUREWRAPPER"/>
+        <a:documentation>
+          A copy of the XML signature of the index element.
+        </a:documentation>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="HISTORY">
+    <rng:element name="History">
+      <a:documentation>
+        The history contains all former editions of the container.
+        It is typically stored in an XML file named 'history.xml' in the root of the container.
+      </a:documentation>
+      <rng:zeroOrMore>
+        <rng:element name="HistoryItem">
+          <a:documentation>
+            This elements contains the history edition and the XML signature of the history edition.
+          </a:documentation>
+          <rng:ref name="Edition"/>
+          <a:documentation>
+            The history edition.
+          </a:documentation>
+          <rng:element name="PastMasterSignature">
+            <rng:ref name="SIGNATUREWRAPPER"/>
+            <a:documentation>
+              The past master signature is the XML signature of the history edition.
+            </a:documentation>
+          </rng:element>
+        </rng:element>
+      </rng:zeroOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:define name="INDEX">
+    <rng:element name="Index">
+      <a:documentation>
+        The index is a list of all entities in the container.
+        It is typically stored in an XML file named 'index.xml' in the root of the container.
+      </a:documentation>
+      <rng:element name="LastId">
+        <rng:ref name="ENTITYID"/>
+        <a:documentation>
+          The ID number of the entity added last to the container.
+          It is used by incrementation to build the ID number for the next entity.
+        </a:documentation>
+      </rng:element>
+      <rng:oneOrMore>
+        <rng:element name="IndexItem">
+          <a:documentation>
+            A reference to an entity.
+          </a:documentation>
+          <rng:element name="Id">
+            <rng:ref name="ENTITYID"/>
+            <a:documentation>
+              The ID number of the referenced entity.
+            </a:documentation>
+          </rng:element>
+          <rng:optional>
+            <rng:element name="Label">
+              <rng:data type="string">
+                <a:documentation>
+                  The optional label of the entity.
+                </a:documentation>
+              </rng:data>
+            </rng:element>
+          </rng:optional>
+          <rng:element name="Successors">
+            <rng:ref name="IDLIST"/>
+            <a:documentation>
+              A list with entity IDs of all entities which are produced by a provenance
+              using this entity as input.
+            </a:documentation>
+          </rng:element>
+          <rng:element name="EntitySignature">
+            <rng:ref name="SIGNATUREWRAPPER"/>
+            <a:documentation>
+              A copy of the XML signature of the entity header.
+            </a:documentation>
+          </rng:element>
+        </rng:element>
+      </rng:oneOrMore>
+    </rng:element>
+  </rng:define>
+
+  <rng:start combine="choice">
+    <rng:ref name="Entity"/>
+  </rng:start>
+  <rng:define name="Entity">
+    <rng:element name="Entity">
+      <a:documentation>
+        The entity element represents the head of an entity describing its identity and contents.
+        It is typically stored in an XML file named 'entity.xml' inside the directory of the described entity.
+      </a:documentation>
+      <rng:element name="Id">
+        <rng:ref name="ENTITYID"/>
+        <a:documentation>
+          The ID number of the entity. The ID is a sequence number between 1 and 99999.
+        </a:documentation>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="Label">
+          <rng:data type="string">
+            <a:documentation>
+              An optional character string supporting better identification of an entity inside of the container.
+            </a:documentation>
+          </rng:data>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Predecessors">
+        <rng:ref name="IDLIST"/>
+        <a:documentation>
+          A list of entity IDs which were used as input for the provenance producing this entity.
+        </a:documentation>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="Type">
+          <rng:ref name="GUID"/>
+          <a:documentation>
+            This optional GUID references the type of the entity in the entity type catalog of a container profile.
+          </a:documentation>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Provenance">
+        <a:documentation>
+          A description of the provenance producing this entity.
+        </a:documentation>
+        <rng:optional>
+          <rng:element name="Guid">
+            <rng:ref name="GUID"/>
+            <a:documentation>
+              This GUID references the provenance interface in the provenance interface catalog of a container profile.
+            </a:documentation>
+          </rng:element>
+        </rng:optional>
+        <rng:optional>
+          <rng:element name="ProvenanceDescription">
+            <rng:ref name="PROVENANCEDESCRIPTION"/>
+            <a:documentation>
+              This element describes the actual provenance.
+            </a:documentation>
+          </rng:element>
+        </rng:optional>
+      </rng:element>
+      <rng:optional>
+        <rng:element name="ParameterSet">
+          <rng:ref name="VALUEREFERENCE"/>
+          <a:documentation>
+            A reference to the optional provenance parameter set.
+          </a:documentation>
+        </rng:element>
+      </rng:optional>
+      <rng:element name="Values">
+        <a:documentation>
+          The list with references to all values stored in this entity.
+        </a:documentation>
+        <rng:zeroOrMore>
+          <rng:element name="Value">
+            <rng:ref name="VALUEREFERENCE"/>
+            <a:documentation>
+              A reference to a value stored in this entity.
+            </a:documentation>
+          </rng:element>
+        </rng:zeroOrMore>
+      </rng:element>
+    </rng:element>
+  </rng:define>
+
+</rng:grammar>
