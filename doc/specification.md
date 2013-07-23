@@ -1,3 +1,7 @@
+% ODEC - Specification
+% Tobias Kiertscher
+% 2013-05-07
+
 ODEC - Specification
 ====================
 
@@ -8,26 +12,26 @@ ODEC - Specification
 
 ## Overview
 
-+ [Introduction](#introduction)
-+ [Change Log](#change-log)
-+ [The Generic Process](#the-generic-process)
-  + [The Owner](#the-owner)
-  + [The Container](#the-container)
-  + [Example Process](#example-process)
-+ [The Meta-Model](#the-meta-model)
-  + [Value and Provenance Parameter](#value-and-provenance-parameter)
-  + [Value Reference](#value-reference)
-  + [Entity Header](#entity-header)
-  + [Index and Index Item](#index-and-index-item)
-  + [Owner](#owner)
-  + [Edition](#edition)
-  + [History and History Item](#history-and-history-item)
-  + [Container](#container)
-+ [The Framework](#the-framework)
-+ [Technical Implementation](#technical-implementation)
-  + [Implementation of the Meta-Model](#implementation-of-the-meta-model)
-  + [Implementation of Profiles](#implementation-of-profiles)
-+ [References](#references)
+* [Introduction](#introduction)
+* [Change Log](#change-log)
+* [The Generic Process](#the-generic-process)
+    + [The Owner](#the-owner)
+    + [The Container](#the-container)
+    + [Example Process](#example-process)
+* [The Meta-Model](#the-meta-model)
+    + [Value and Provenance Parameter](#value-and-provenance-parameter)
+    + [Value Reference](#value-reference)
+    + [Entity Header](#entity-header)
+    + [Index and Index Item](#index-and-index-item)
+    + [Owner](#owner)
+    + [Edition](#edition)
+    + [History and History Item](#history-and-history-item)
+    + [Container](#container)
+* [The Framework](#the-framework)
+* [Technical Implementation](#technical-implementation)
+    + [Implementation of the Meta-Model](#implementation-of-the-meta-model)
+    + [Implementation of Profiles](#implementation-of-profiles)
+* [References](#references)
 
 ## Introduction
 
